@@ -74,6 +74,7 @@
         // 默认选中今天的日期
         if (defaultSelValue.length > 0) {
             _selectValue = defaultSelValue;
+        
         } else {
             _selectValue = [self toStringWithDate:[NSDate date]];
         }
@@ -98,7 +99,8 @@
         _datePicker.backgroundColor = [UIColor whiteColor];
         _datePicker.datePickerMode = _datePickerMode;
         // 设置该UIDatePicker的国际化Locale，以简体中文习惯显示日期，UIDatePicker控件默认使用iOS系统的国际化Locale
-        _datePicker.locale = [[NSLocale alloc]initWithLocaleIdentifier:@"en"];
+         NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
+        _datePicker.locale = [[NSLocale alloc]initWithLocaleIdentifier:language];
         // 设置时间范围
         if (_minDateStr) {
             NSDate *minDate = [self toDateWithDateString:_minDateStr];
@@ -108,8 +110,9 @@
             NSDate *maxDate = [self toDateWithDateString:_maxDateStr];
             _datePicker.maximumDate = maxDate;
         }
+         NSDate *showDe = [self toDateWithDateString:_selectValue];
         // 把当前时间赋值给 _datePicker
-        [_datePicker setDate:[NSDate date] animated:YES];
+        [_datePicker setDate:showDe animated:YES];
 //        [_datePicker setLocale:[NSLocale systemLocale]];
         // 设置时区
 //        [_datePicker setTimeZone:[NSTimeZone localTimeZone]];

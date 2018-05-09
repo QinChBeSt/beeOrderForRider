@@ -18,7 +18,10 @@
 #define UD_USERNAME @"USERNAME"
 #define UD_USERPHONE @"USERPHONE"
 #define UD_USERLOGO @"USERLOGO"
-#define UD_USERACTYPE @"USERACTYPE"
+#define UD_USERACTYPE @"USERState"
+#define UD_USERAccount @"USERAccount"
+#define UD_USERPassword @"USERPassword"
+#define UD_USERState @"USERState"
 
 #define JPushKey @""
 #define JPushIsProduction 0   //0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
@@ -28,9 +31,20 @@
 //#define BASEURL @"http://192.168.0.148:8080"
 #define IMGBaesURL @"http://118.24.100.177:8080/spmvc/apidocs/upload/"
 
+
+#define BaseYellow @"#FED631"
+#define BaseBackgroundGray @"E8E8E8"
+#define BaseTextGrayColor @"4F4F4F"
+
 //上传图片
 #define UpFileURL @"/files/up"
 
+//登录
+#define LoginURL @"/qsapi/qslog"
+//修改工作状态
+#define ChangeWorkStatesURL @"/qsapi/workStart"
+//获取历史订单
+#define GetHistoryURL @"/qsapi/hisorderlist"
 
 #define MainScreenScale [[UIScreen mainScreen]scale] //屏幕的分辨率 当结果为1时，显示的是普通屏幕，结果为2时，显示的是Retian屏幕
 // App Frame Height&Width
@@ -43,6 +57,8 @@
 #define SafeAreaStatsBarHeight ([[UIScreen mainScreen] bounds].size.height == 812.0 ? 44 : 20)
 #define SafeAreaTabbarHeight ([[UIScreen mainScreen] bounds].size.height == 812.0 ? 34 : 0)
 #define TabbarHeight ([[UIScreen mainScreen] bounds].size.height == 812.0 ? 49 : 49)
+#define LeftSideWidth SCREEN_WIDTH * 0.8
+
 
 #endif /* PrefixHeader_pch */
 #ifdef __OBJC__

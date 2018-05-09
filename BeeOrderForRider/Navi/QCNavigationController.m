@@ -19,10 +19,7 @@
     //    // 这句话很重要，可以到单独的控制器里去设置
     //    self.navigationBar.translucent = YES;
     [self.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17], NSForegroundColorAttributeName:[UIColor blackColor]}];
-
-}
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+    [self.navigationController.navigationBar setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {

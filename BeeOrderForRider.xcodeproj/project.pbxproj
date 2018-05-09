@@ -10,6 +10,8 @@
 		9D1BC65D20A0539800AB8F73 /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D1BC65C20A0539800AB8F73 /* HomeVC.m */; };
 		9D1BC66020A0573500AB8F73 /* LeftPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D1BC65F20A0573500AB8F73 /* LeftPageVC.m */; };
 		9D1BC66320A0593400AB8F73 /* QCAnimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D1BC66220A0593400AB8F73 /* QCAnimateViewController.m */; };
+		9DA801BD20A17D80009D30C7 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA801BC20A17D80009D30C7 /* LoginVC.m */; };
+		9DA801C020A18B66009D30C7 /* UserPhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA801BF20A18B66009D30C7 /* UserPhotoVC.m */; };
 		9DDF1AFC20A041D2008A7947 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1AFB20A041D2008A7947 /* AppDelegate.m */; };
 		9DDF1B0220A041D2008A7947 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF1B0020A041D2008A7947 /* Main.storyboard */; };
 		9DDF1B0420A041D5008A7947 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF1B0320A041D5008A7947 /* Assets.xcassets */; };
@@ -64,6 +66,13 @@
 		9DDF1BC620A04A32008A7947 /* ZWMSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1B9A20A04A32008A7947 /* ZWMSegmentView.m */; };
 		9DDF1BD020A04D91008A7947 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF1BD220A04D91008A7947 /* InfoPlist.strings */; };
 		9DDF1BD920A04DBD008A7947 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF1BDB20A04DBD008A7947 /* Localizable.strings */; };
+		9DF31AB820A2921100572015 /* HistoryOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF31AB720A2921100572015 /* HistoryOrderVC.m */; };
+		9DF31ABB20A2938A00572015 /* CellForLeftPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF31ABA20A2938A00572015 /* CellForLeftPage.m */; };
+		9DF31ABE20A2960D00572015 /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF31ABD20A2960D00572015 /* ChangePasswordVC.m */; };
+		9DF31AC120A2989C00572015 /* ChangelanguageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF31AC020A2989C00572015 /* ChangelanguageVC.m */; };
+		9DF31AC420A2F37900572015 /* ModelForHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF31AC320A2F37900572015 /* ModelForHistory.m */; };
+		9DF31AC720A2F46900572015 /* ModelForOrderDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF31AC620A2F46900572015 /* ModelForOrderDetail.m */; };
+		9DF31ACA20A2F83800572015 /* CellForHistoryOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF31AC920A2F83800572015 /* CellForHistoryOrder.m */; };
 		B23D13BBAF20434AD5B3B7DA /* libPods-BeeOrderForRider.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE746D01E86E78E432131B57 /* libPods-BeeOrderForRider.a */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +101,10 @@
 		9D1BC65F20A0573500AB8F73 /* LeftPageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftPageVC.m; sourceTree = "<group>"; };
 		9D1BC66120A0593400AB8F73 /* QCAnimateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCAnimateViewController.h; sourceTree = "<group>"; };
 		9D1BC66220A0593400AB8F73 /* QCAnimateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCAnimateViewController.m; sourceTree = "<group>"; };
+		9DA801BB20A17D80009D30C7 /* LoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		9DA801BC20A17D80009D30C7 /* LoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		9DA801BE20A18B66009D30C7 /* UserPhotoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserPhotoVC.h; sourceTree = "<group>"; };
+		9DA801BF20A18B66009D30C7 /* UserPhotoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPhotoVC.m; sourceTree = "<group>"; };
 		9DDF1AF720A041D2008A7947 /* BeeOrderForRider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeeOrderForRider.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DDF1AFA20A041D2008A7947 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9DDF1AFB20A041D2008A7947 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -206,6 +219,20 @@
 		9DDF1BDA20A04DBD008A7947 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9DDF1BDC20A04DBF008A7947 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		9DDF1BDD20A04DC0008A7947 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9DF31AB620A2921100572015 /* HistoryOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryOrderVC.h; sourceTree = "<group>"; };
+		9DF31AB720A2921100572015 /* HistoryOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryOrderVC.m; sourceTree = "<group>"; };
+		9DF31AB920A2938A00572015 /* CellForLeftPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForLeftPage.h; sourceTree = "<group>"; };
+		9DF31ABA20A2938A00572015 /* CellForLeftPage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForLeftPage.m; sourceTree = "<group>"; };
+		9DF31ABC20A2960D00572015 /* ChangePasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePasswordVC.h; sourceTree = "<group>"; };
+		9DF31ABD20A2960D00572015 /* ChangePasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordVC.m; sourceTree = "<group>"; };
+		9DF31ABF20A2989C00572015 /* ChangelanguageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangelanguageVC.h; sourceTree = "<group>"; };
+		9DF31AC020A2989C00572015 /* ChangelanguageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangelanguageVC.m; sourceTree = "<group>"; };
+		9DF31AC220A2F37900572015 /* ModelForHistory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelForHistory.h; sourceTree = "<group>"; };
+		9DF31AC320A2F37900572015 /* ModelForHistory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelForHistory.m; sourceTree = "<group>"; };
+		9DF31AC520A2F46900572015 /* ModelForOrderDetail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelForOrderDetail.h; sourceTree = "<group>"; };
+		9DF31AC620A2F46900572015 /* ModelForOrderDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelForOrderDetail.m; sourceTree = "<group>"; };
+		9DF31AC820A2F83800572015 /* CellForHistoryOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForHistoryOrder.h; sourceTree = "<group>"; };
+		9DF31AC920A2F83800572015 /* CellForHistoryOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForHistoryOrder.m; sourceTree = "<group>"; };
 		E5A06966635082059B36B08F /* Pods-BeeOrderForRider.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeeOrderForRider.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeeOrderForRider/Pods-BeeOrderForRider.debug.xcconfig"; sourceTree = "<group>"; };
 		EE746D01E86E78E432131B57 /* libPods-BeeOrderForRider.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeeOrderForRider.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -308,6 +335,9 @@
 			children = (
 				9D1BC65E20A0573500AB8F73 /* LeftPageVC.h */,
 				9D1BC65F20A0573500AB8F73 /* LeftPageVC.m */,
+				9DF31AB220A291EE00572015 /* HistoryOrderPage */,
+				9DF31ABF20A2989C00572015 /* ChangelanguageVC.h */,
+				9DF31AC020A2989C00572015 /* ChangelanguageVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -315,6 +345,8 @@
 		9D1BC65920A052FE00AB8F73 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9DF31AB920A2938A00572015 /* CellForLeftPage.h */,
+				9DF31ABA20A2938A00572015 /* CellForLeftPage.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -328,6 +360,19 @@
 				9D1BC66220A0593400AB8F73 /* QCAnimateViewController.m */,
 			);
 			path = Navi;
+			sourceTree = "<group>";
+		};
+		9DA801BA20A170B0009D30C7 /* LoginPage */ = {
+			isa = PBXGroup;
+			children = (
+				9DA801BB20A17D80009D30C7 /* LoginVC.h */,
+				9DA801BC20A17D80009D30C7 /* LoginVC.m */,
+				9DA801BE20A18B66009D30C7 /* UserPhotoVC.h */,
+				9DA801BF20A18B66009D30C7 /* UserPhotoVC.m */,
+				9DF31ABC20A2960D00572015 /* ChangePasswordVC.h */,
+				9DF31ABD20A2960D00572015 /* ChangePasswordVC.m */,
+			);
+			path = LoginPage;
 			sourceTree = "<group>";
 		};
 		9DDF1AEE20A041D2008A7947 = {
@@ -355,6 +400,7 @@
 		9DDF1AF920A041D2008A7947 /* BeeOrderForRider */ = {
 			isa = PBXGroup;
 			children = (
+				9DA801BA20A170B0009D30C7 /* LoginPage */,
 				9DDF1B2F20A04A22008A7947 /* Tools */,
 				9D1BC65A20A0530A00AB8F73 /* Navi */,
 				9D1BC65220A052FE00AB8F73 /* HomePage */,
@@ -645,6 +691,45 @@
 			path = ZWMSegment;
 			sourceTree = "<group>";
 		};
+		9DF31AB220A291EE00572015 /* HistoryOrderPage */ = {
+			isa = PBXGroup;
+			children = (
+				9DF31AB420A291EE00572015 /* VC */,
+				9DF31AB320A291EE00572015 /* Model */,
+				9DF31AB520A291EE00572015 /* View */,
+			);
+			path = HistoryOrderPage;
+			sourceTree = "<group>";
+		};
+		9DF31AB320A291EE00572015 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9DF31AC220A2F37900572015 /* ModelForHistory.h */,
+				9DF31AC320A2F37900572015 /* ModelForHistory.m */,
+				9DF31AC520A2F46900572015 /* ModelForOrderDetail.h */,
+				9DF31AC620A2F46900572015 /* ModelForOrderDetail.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9DF31AB420A291EE00572015 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				9DF31AB620A2921100572015 /* HistoryOrderVC.h */,
+				9DF31AB720A2921100572015 /* HistoryOrderVC.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		9DF31AB520A291EE00572015 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9DF31AC820A2F83800572015 /* CellForHistoryOrder.h */,
+				9DF31AC920A2F83800572015 /* CellForHistoryOrder.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -842,16 +927,20 @@
 				9DDF1B0A20A041D5008A7947 /* main.m in Sources */,
 				9DDF1BA720A04A32008A7947 /* QCSegmentVC.m in Sources */,
 				9DDF1BC120A04A32008A7947 /* UIScrollView+MJExtension.m in Sources */,
+				9DA801BD20A17D80009D30C7 /* LoginVC.m in Sources */,
 				9DDF1BBB20A04A32008A7947 /* MJRefreshGifHeader.m in Sources */,
 				9D1BC66020A0573500AB8F73 /* LeftPageVC.m in Sources */,
 				9DDF1BB920A04A32008A7947 /* MJRefreshBackNormalFooter.m in Sources */,
 				9DDF1BB420A04A32008A7947 /* MJRefreshHeader.m in Sources */,
 				9DDF1BA220A04A32008A7947 /* CGXPickerViewManager.m in Sources */,
 				9DDF1B9E20A04A32008A7947 /* CGXDatePickerView.m in Sources */,
+				9DF31AC420A2F37900572015 /* ModelForHistory.m in Sources */,
 				9DDF1BA820A04A32008A7947 /* UIView+CHView.m in Sources */,
 				9DDF1B2E20A0499E008A7947 /* QCNavigationController.m in Sources */,
+				9DF31AC120A2989C00572015 /* ChangelanguageVC.m in Sources */,
 				9DDF1BC620A04A32008A7947 /* ZWMSegmentView.m in Sources */,
 				9DDF1BA320A04A32008A7947 /* CGXStringPickerView.m in Sources */,
+				9DF31ABE20A2960D00572015 /* ChangePasswordVC.m in Sources */,
 				9DDF1BB220A04A32008A7947 /* MJRefreshComponent.m in Sources */,
 				9DDF1BA920A04A32008A7947 /* MBManager.m in Sources */,
 				9DDF1BB620A04A32008A7947 /* MJRefreshAutoNormalFooter.m in Sources */,
@@ -863,6 +952,7 @@
 				9DDF1BBC20A04A32008A7947 /* MJRefreshNormalHeader.m in Sources */,
 				9DDF1BC420A04A32008A7947 /* UIView+ZWMBadge.m in Sources */,
 				9DDF1B9F20A04A32008A7947 /* CGXPickerUIBaseView.m in Sources */,
+				9DF31ABB20A2938A00572015 /* CellForLeftPage.m in Sources */,
 				9DDF1BB720A04A32008A7947 /* MJRefreshAutoStateFooter.m in Sources */,
 				9DDF1BBF20A04A32008A7947 /* MJRefreshConst.m in Sources */,
 				9DDF1BAE20A04A32008A7947 /* FileTool.m in Sources */,
@@ -871,8 +961,10 @@
 				9DDF1AFC20A041D2008A7947 /* AppDelegate.m in Sources */,
 				9DDF1BAA20A04A32008A7947 /* UIColor+Hex.m in Sources */,
 				9DDF1B9C20A04A32008A7947 /* CGXAddressModel.m in Sources */,
+				9DF31AB820A2921100572015 /* HistoryOrderVC.m in Sources */,
 				9DDF1BC020A04A32008A7947 /* NSBundle+MJRefresh.m in Sources */,
 				9DDF1BB520A04A32008A7947 /* MJRefreshAutoGifFooter.m in Sources */,
+				9DF31ACA20A2F83800572015 /* CellForHistoryOrder.m in Sources */,
 				9DDF1BC320A04A32008A7947 /* UIView+MJExtension.m in Sources */,
 				9DDF1BC220A04A32008A7947 /* UIScrollView+MJRefresh.m in Sources */,
 				9DDF1BA520A04A32008A7947 /* ZBLocalized.m in Sources */,
@@ -882,9 +974,11 @@
 				9DDF1BA420A04A32008A7947 /* NSDate+CGXPicker.m in Sources */,
 				9DDF1BB320A04A32008A7947 /* MJRefreshFooter.m in Sources */,
 				9DDF1BAC20A04A32008A7947 /* KeyChainStore.m in Sources */,
+				9DA801C020A18B66009D30C7 /* UserPhotoVC.m in Sources */,
 				9DDF1BB020A04A32008A7947 /* MJRefreshAutoFooter.m in Sources */,
 				9DDF1BC520A04A32008A7947 /* ZWMSegmentController.m in Sources */,
 				9DDF1BAF20A04A32008A7947 /* MHNetWorkTask.m in Sources */,
+				9DF31AC720A2F46900572015 /* ModelForOrderDetail.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

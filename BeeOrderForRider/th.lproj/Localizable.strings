@@ -6,3 +6,37 @@
   Copyright © 2018年 QinChBeSt. All rights reserved.
 */
 "主页" = "home";
+"取消" = "Cancel";
+"确定" = "Ok";
+//=========================登录
+"登录" = "Login";
+"请输入BeeRider账号" = "Please enter the BeeRider account";
+"请输入密码" = "Please enter your password";
+"登录成功" = "Login successful";
+"用户协议" = "User agreement";
+"登录代表您已同意《BeeRider用户协议》" = "login represents that you have agreed to《BeeRider user agreement》";
+"《BeeRider用户协议》"  =  "《BeeRider user agreement》";
+"账号异常，请重新登录" = "Account exception, please login again";
+
+//=========================主页
+"开工" = "Start work";
+"忙碌" = "Busy";
+"收工" = "Knock off";
+"历史订单" = "Historical order";
+"修改密码" = "Change password";
+"语言切换" = "Language switch";
+"关于BeeRider骑手" = "About the BeeRider rider";
+"退出登录" = "Log out";
+"跟随系统" = "Follow the system";
+
+//历史订单
+"搜索" = "search";
+"开始时间" = "Start time";
+"结束时间" = "End time";
+"请选择开始时间" = "Please select start time";
+"请选择结束时间" = "Please select end time";
+"总计" = "total";
+"元" = "USD";
+"订单编号:" = "Order No.";
+"取" = "Take";
+"送" = "Send";

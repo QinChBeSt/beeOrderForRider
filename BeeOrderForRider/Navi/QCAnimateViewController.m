@@ -31,15 +31,27 @@ static CGFloat const animationTime = 0.4;
 }
 
 - (void)showAnimation {
-    self.view.userInteractionEnabled = NO;
-    // 根据当前x，计算隐藏时间
-    CGFloat time = fabs(self.leftVc.view.frame.origin.x / self.leftVc.view.frame.size.width) * animationTime;
-    [UIView animateWithDuration:time animations:^{
-        self.leftVc.view.frame = CGRectMake(0, 0, self.leftVc.view.frame.size.width, [UIScreen mainScreen].bounds.size.height);
-        self.bgView.alpha = 0.5;
-    } completion:^(BOOL finished) {
-        self.view.userInteractionEnabled = YES;
-    }];
+    if ([self.showLeft isEqualToString:@"1"]) {
+        self.view.userInteractionEnabled = NO;
+        // 根据当前x，计算隐藏时间
+        [UIView animateWithDuration:0 animations:^{
+            self.leftVc.view.frame = CGRectMake(0, 0, self.leftVc.view.frame.size.width, [UIScreen mainScreen].bounds.size.height);
+            self.bgView.alpha = 0.5;
+        } completion:^(BOOL finished) {
+            self.view.userInteractionEnabled = YES;
+        }];
+    }else{
+        self.view.userInteractionEnabled = NO;
+        // 根据当前x，计算隐藏时间
+        CGFloat time = fabs(self.leftVc.view.frame.origin.x / self.leftVc.view.frame.size.width) * animationTime;
+        [UIView animateWithDuration:time animations:^{
+            self.leftVc.view.frame = CGRectMake(0, 0, self.leftVc.view.frame.size.width, [UIScreen mainScreen].bounds.size.height);
+            self.bgView.alpha = 0.5;
+        } completion:^(BOOL finished) {
+            self.view.userInteractionEnabled = YES;
+        }];
+    }
+   
 }
 
 - (void)closeAnimation {
@@ -57,7 +69,7 @@ static CGFloat const animationTime = 0.4;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
 }
 
 - (void)viewDidLoad {
@@ -80,13 +92,17 @@ static CGFloat const animationTime = 0.4;
     
     // 添加控制器
     LeftPageVC *leftVc = [[LeftPageVC alloc] init];
-    leftVc.view.backgroundColor = [UIColor redColor];
-    CGFloat width = [UIScreen mainScreen].bounds.size.width - 50;
-    if ([UIScreen mainScreen].bounds.size.width > 375) {
-        width -= 50;
-    } else if ([UIScreen mainScreen].bounds.size.width > 320) {
-        width = width - 25;
-    }
+    leftVc.blockCloceSide = ^(NSString *workState) {
+        [self closeSideBar];
+    };
+    leftVc.view.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+    //    self.width = [UIScreen mainScreen].bounds.size.width - 50;
+    //    if ([UIScreen mainScreen].bounds.size.width > 375) {
+    //        self.width -= 50;
+    //    } else if ([UIScreen mainScreen].bounds.size.width > 320) {
+    //        self.width = self.width - 25;
+    //    }
+    CGFloat width = [UIScreen mainScreen].bounds.size.width * 0.8;
     leftVc.view.frame = CGRectMake(-width, 0, width, [UIScreen mainScreen].bounds.size.height);
     [self.view addSubview:leftVc.view];
     [self addChildViewController:leftVc];

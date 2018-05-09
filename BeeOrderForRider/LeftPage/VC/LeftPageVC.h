@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void (^blockCloceSide)(NSString *);
 @interface LeftPageVC : UIViewController
-
+@property (nonatomic , copy)blockCloceSide blockCloceSide;
 @end

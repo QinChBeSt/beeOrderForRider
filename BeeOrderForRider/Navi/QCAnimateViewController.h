@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface QCAnimateViewController : UIViewController
-
+@property (nonatomic , strong)NSString *showLeft;
 @end

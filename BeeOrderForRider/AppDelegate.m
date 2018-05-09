@@ -77,7 +77,7 @@
     [self.window makeKeyAndVisible];
     
     return YES;
-    return YES;
+    
 }
 
 
@@ -194,9 +194,5 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-- (UIStatusBarStyle)preferredStatusBarStyle{
-    
-    return UIStatusBarStyleLightContent;
-    
-}
+
 @end
