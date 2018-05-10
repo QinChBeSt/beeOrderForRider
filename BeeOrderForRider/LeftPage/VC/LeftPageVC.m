@@ -385,7 +385,7 @@
        
     }
     else if (indexPath.row == 4){
-        [self logOut];
+        [self creatLogoutAction];
         
     }
     
@@ -501,6 +501,38 @@
     
     
 }
+-(void)creatLogoutAction{
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:ZBLocalized(@"退出登录", nil) message:@"是否退出登录" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    /*
+     typedef NS_ENUM(NSInteger, UIAlertActionStyle) {
+     UIAlertActionStyleDefault = 0,
+     UIAlertActionStyleCancel,         取消按钮
+     UIAlertActionStyleDestructive     破坏性按钮，比如：“删除”，字体颜色是红色的
+     } NS_ENUM_AVAILABLE_IOS(8_0);
+     
+     */
+    // 创建action，这里action1只是方便编写，以后再编程的过程中还是以命名规范为主
+  
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:ZBLocalized(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"点击了取消");
+    }];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:ZBLocalized(@"确定", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self logOut];
+    }];
+   
+    
+    //把action添加到actionSheet里
+    [actionSheet addAction:action1];
+    [actionSheet addAction:action2];
+    
+    
+    //相当于之前的[actionSheet show];
+    //[self.navigationController pushViewController:actionSheet animated:NO];
+    [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
+
 -(void)toGetAC{
     NSDictionary *dic = @{
                           @"name":self.workState,

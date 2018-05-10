@@ -20,6 +20,14 @@
 @property (nonatomic , strong)UILabel *addPicLabel;
 @property (nonatomic , strong)UITableView *tableView;
 @property (nonatomic , strong)NSMutableArray *arrForHistory;
+
+@property (nonatomic , strong) NSString *parOpenStr;
+
+@property (nonatomic , strong) NSString *parCloseStr;
+/**
+ *   页数
+ */
+@property (nonatomic,assign) int pageIndex;
 @end
 
 @implementation HistoryOrderVC
@@ -131,7 +139,15 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
     self.tableView.tableFooterView = [[UIView alloc]init];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self toSearchHistory];
+    }];
+    MJRefreshAutoNormalFooter * footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self loadMoreBills];
+    }];
+    self.tableView.mj_footer = footer;
     [self.view addSubview:self.tableView];
 }
 #pragma mark- UITabelViewDataSource/delegat
@@ -206,6 +222,7 @@
     }];
 }
 -(void)toSearchHistory{
+    self.pageIndex = 1;
     if (self.openStr.length == 0) {
         [MBManager showBriefAlert:ZBLocalized(@"请选择开始时间", nil)];
     }else if(self.closeStr.length == 0){
@@ -215,18 +232,19 @@
         defaults = [NSUserDefaults standardUserDefaults];
         NSString *userId = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
         
-        NSString *parOpenStr = [self pp_formatDateWithArrYMDToMD:self.openStr];
-        NSString *parCloseStr = [self pp_formatDateWithArrYMDToMD:self.closeStr];
+        self.parOpenStr = [self pp_formatDateWithArrYMDToMD:self.openStr];
+       self.parCloseStr = [self pp_formatDateWithArrYMDToMD:self.closeStr];
         
         NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,GetHistoryURL];
-        NSDictionary *parameters = @{@"stime":parOpenStr,
-                                     @"etime":parCloseStr,
+        NSDictionary *parameters = @{@"stime":self.parOpenStr,
+                                     @"etime":self.parCloseStr,
                                      @"page":@"1",
                                      @"qsid":userId
                                      };
 
         //请求的方式：POST
         [self.arrForHistory removeAllObjects];
+        [self.tableView.mj_header setHidden:NO];
         [MHNetWorkTask getWithURL:url withParameter:parameters withHttpHeader:nil withResponseType:ResponseTypeJSON withSuccess:^(id result) {
             NSString *code = [NSString stringWithFormat:@"%@",result[@"code"]];
             if ([code isEqualToString:@"1"]) {
@@ -240,16 +258,83 @@
                     [self.arrForHistory addObject:mod];
                     
                 }
+                if (self.arrForHistory.count == 0) {
+                    [self.tableView.mj_header endRefreshing];
+                    [self.tableView.mj_footer endRefreshingWithNoMoreData];
+                    [self.tableView reloadData];
+                }else{
+                    [self.tableView.mj_footer resetNoMoreData];
+                    [self.tableView.mj_header endRefreshing];
+                    [self.tableView reloadData];
+                }
             }
             
             else{
+                [self.tableView.mj_header endRefreshing];
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
                 [MBManager showBriefAlert:result[@"msg"]];
             }
-            [self.tableView reloadData];
         } withFail:^(NSError *error) {
             
         }];
     }
+}
+-(void)loadMoreBills{
+     self.pageIndex ++;
+    if (self.openStr.length == 0) {
+        [MBManager showBriefAlert:ZBLocalized(@"请选择开始时间", nil)];
+    }else if(self.closeStr.length == 0){
+        [MBManager showBriefAlert:ZBLocalized(@"请选择结束时间", nil)];
+    }else{
+        NSUserDefaults *defaults;
+        defaults = [NSUserDefaults standardUserDefaults];
+        NSString *userId = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
+        
+        NSString *page = [NSString stringWithFormat:@"%d",self.pageIndex];
+        
+        NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,GetHistoryURL];
+        NSDictionary *parameters = @{@"stime":self.parOpenStr,
+                                     @"etime":self.parCloseStr,
+                                     @"page":page,
+                                     @"qsid":userId
+                                     };
+        
+        //请求的方式：POST
+
+        [MHNetWorkTask getWithURL:url withParameter:parameters withHttpHeader:nil withResponseType:ResponseTypeJSON withSuccess:^(id result) {
+            NSString *code = [NSString stringWithFormat:@"%@",result[@"code"]];
+            if ([code isEqualToString:@"1"]) {
+                NSDictionary *dic = result[@"value"];
+                self.addPicLabel.text = [NSString stringWithFormat:@"%@ %@%@",ZBLocalized(@"总计", nil),dic[@"totalspic"],ZBLocalized(@"元", nil)];
+                NSMutableArray *arr = dic[@"getorderlist"];
+                if (arr.count == 0) {
+                    [self.tableView.mj_footer endRefreshingWithNoMoreData];
+                    return ;
+                }
+                for (NSMutableDictionary *dicRes in arr) {
+                    
+                    ModelForHistory *mod = [ModelForHistory yy_modelWithDictionary:dicRes];
+                    
+                    [self.arrForHistory addObject:mod];
+                    
+                }
+                if (self.arrForHistory.count == 0) {
+                   [self.tableView.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    [self.tableView.mj_footer endRefreshing];
+                    [self.tableView reloadData];
+                }
+            }
+            
+            else{
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+                [MBManager showBriefAlert:result[@"msg"]];
+            }
+        } withFail:^(NSError *error) {
+            
+        }];
+    }
+    
 }
 -(void)back{
     [self.navigationController popViewControllerAnimated:YES];

@@ -57,7 +57,7 @@ int const ZWMSegmentHeight = 45;//可根据项目需求设置高度
     _minItemSpace = 40.;
     _segmentTintColor = [UIColor blackColor];
     _segmentNormalColor = [UIColor grayColor];
-    _font = [UIFont systemFontOfSize:16];
+    _font = [UIFont systemFontOfSize:14];
     _buttonSpace = [self calculateSpace];
     _indicateHeight = 2.;
     _duration = .3;
@@ -249,7 +249,7 @@ int const ZWMSegmentHeight = 45;//可根据项目需求设置高度
 
 - (void)setSegmentTintColor:(UIColor *)segmentTintColor {
     _segmentTintColor = segmentTintColor;
-    _indicateView.backgroundColor = _segmentTintColor;
+    _indicateView.backgroundColor = [UIColor colorWithHexString:BaseYellow];
     for (UIView *view in _contentView.subviews) {
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;

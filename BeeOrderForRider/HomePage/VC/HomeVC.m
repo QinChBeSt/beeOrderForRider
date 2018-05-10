@@ -9,6 +9,8 @@
 #import "HomeVC.h"
 #import "QCAnimateViewController.h"
 #import "LoginVC.h"
+#import "ZWMSegmentController.h"
+#import "HomeOrderMissionVC.h"
 @interface HomeVC ()<UIGestureRecognizerDelegate>
 /** tapGestureRec */
 @property (nonatomic, weak) UITapGestureRecognizer *tapGestureRec;
@@ -23,6 +25,7 @@
 
 @property (nonatomic , strong)UIView *naviView;
 @property (nonatomic , strong)UILabel *titleLabel ;
+@property (nonatomic, strong) ZWMSegmentController *segmentVC;
 @end
 
 @implementation HomeVC
@@ -106,6 +109,37 @@
         make.centerY.equalTo(backImg);
     }];
 }
+#pragma mark - ui
+- (void)CreateSegment{
+    
+    HomeOrderMissionVC *doingOrder = [[HomeOrderMissionVC alloc] init];
+    HomeOrderMissionVC *finshOrder = [[HomeOrderMissionVC alloc] init];
+    HomeOrderMissionVC *CleanOrder = [[HomeOrderMissionVC alloc] init];
+    
+    
+    NSArray *array = @[doingOrder,finshOrder,CleanOrder];
+
+    
+    self.segmentVC = [[ZWMSegmentController alloc] initWithFrame:CGRectMake(0, SafeAreaTopHeight , SCREEN_WIDTH, SCREENH_HEIGHT - SafeAreaTopHeight ) titles:@[ZBLocalized(@"新任务", nil),ZBLocalized(@"待取货", nil),ZBLocalized(@"待送达", nil)]];
+    self.segmentVC.segmentView.showSeparateLine = YES;
+    self.segmentVC.segmentView.segmentTintColor = [UIColor blackColor];
+    self.segmentVC.segmentView.separateColor = [UIColor whiteColor];
+    self.segmentVC.segmentView.segmentNormalColor = [UIColor colorWithHexString:BaseTextGrayColor];
+    self.segmentVC.segmentView.backgroundColor = [UIColor whiteColor];
+    self.segmentVC.viewControllers = [array copy];
+    
+    
+    self.segmentVC.segmentView.style=ZWMSegmentStyleFlush;
+    
+    [self addSegmentController:self.segmentVC];
+    [self.segmentVC  setSelectedAtIndex:0];
+    
+    
+}
+
+
+
+
 #pragma mark - 点击事件
 -(void)back{
     [self.navigationController popViewControllerAnimated:YES];
@@ -114,6 +148,7 @@
     [super viewDidLoad];
    
     [self createNaviView];
+    [self CreateSegment];
     if ([self.showLeft isEqualToString:@"1"]) {
         [self profileCenter];
     }
