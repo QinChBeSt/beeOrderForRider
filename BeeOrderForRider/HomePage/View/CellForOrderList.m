@@ -56,6 +56,7 @@
     UILabel *get = [[UILabel alloc]init];
     get.adjustsFontSizeToFitWidth = YES;
     get.text = ZBLocalized(@"取",nil);
+    get.textAlignment = NSTextAlignmentCenter;
     get.numberOfLines = 0;
     get.textColor = [UIColor colorWithHexString:BaseTextGrayColor];
     get.backgroundColor = [UIColor colorWithHexString:BaseYellow];
@@ -111,6 +112,7 @@
     
     UILabel *put = [[UILabel alloc]init];
     put.adjustsFontSizeToFitWidth = YES;
+    put.textAlignment = NSTextAlignmentCenter;
     put.text = ZBLocalized(@"送",nil);
     put.numberOfLines = 0;
     put.textColor = [UIColor whiteColor];
