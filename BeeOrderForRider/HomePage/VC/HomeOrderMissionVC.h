@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeOrderMissionVC : UIViewController
-
+- (id)initWithType:(NSString *)type;
 @end

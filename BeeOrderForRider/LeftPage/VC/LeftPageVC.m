@@ -502,7 +502,7 @@
     
 }
 -(void)creatLogoutAction{
-    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:ZBLocalized(@"退出登录", nil) message:@"是否退出登录" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:ZBLocalized(@"退出登录", nil) message:ZBLocalized(@"是否退出登录?", nil) preferredStyle:UIAlertControllerStyleActionSheet];
     
     /*
      typedef NS_ENUM(NSInteger, UIAlertActionStyle) {

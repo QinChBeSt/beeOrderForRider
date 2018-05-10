@@ -7,7 +7,8 @@
 */
 "主页" = "home";
 "取消" = "Cancel";
-"确定" = "Ok";
+"确定" = "OK";
+"成功" = "Successful";
 //=========================登录
 "登录" = "Login";
 "请输入BeeRider账号" = "Please enter the BeeRider account";
@@ -27,10 +28,16 @@
 "语言切换" = "Language switch";
 "关于BeeRider骑手" = "About the BeeRider rider";
 "退出登录" = "Log out";
+"是否退出登录?" = "Do you want to Log out?";
 "跟随系统" = "Follow the system";
 "新任务" = "New mission";
 "待取货" = "To be taken";
 "待送达" = "To be served";
+"联系商家" = "call shop";
+"抢单" = "Order Receiving";
+"上报到店" = "Arrive Shop";
+"确认取货" = "Confirm receipt";
+"确认送达" = "Have Service";
 //历史订单
 "搜索" = "search";
 "开始时间" = "Start time";

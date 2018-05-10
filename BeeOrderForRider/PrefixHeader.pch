@@ -45,6 +45,10 @@
 #define ChangeWorkStatesURL @"/qsapi/workStart"
 //获取历史订单
 #define GetHistoryURL @"/qsapi/hisorderlist"
+//获取订单列表
+#define GetOrderListURL @"/qsapi/orderlist"
+//修改订单状态
+#define updateOrderStateURL @"/qsapi/uporder"
 
 #define MainScreenScale [[UIScreen mainScreen]scale] //屏幕的分辨率 当结果为1时，显示的是普通屏幕，结果为2时，显示的是Retian屏幕
 // App Frame Height&Width

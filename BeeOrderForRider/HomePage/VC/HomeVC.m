@@ -11,6 +11,8 @@
 #import "LoginVC.h"
 #import "ZWMSegmentController.h"
 #import "HomeOrderMissionVC.h"
+#import <CoreLocation/CLLocationManager.h>
+
 @interface HomeVC ()<UIGestureRecognizerDelegate>
 /** tapGestureRec */
 @property (nonatomic, weak) UITapGestureRecognizer *tapGestureRec;
@@ -112,9 +114,9 @@
 #pragma mark - ui
 - (void)CreateSegment{
     
-    HomeOrderMissionVC *doingOrder = [[HomeOrderMissionVC alloc] init];
-    HomeOrderMissionVC *finshOrder = [[HomeOrderMissionVC alloc] init];
-    HomeOrderMissionVC *CleanOrder = [[HomeOrderMissionVC alloc] init];
+    HomeOrderMissionVC *doingOrder = [[HomeOrderMissionVC alloc] initWithType:@"4"];
+    HomeOrderMissionVC *finshOrder = [[HomeOrderMissionVC alloc] initWithType:@"6"];
+    HomeOrderMissionVC *CleanOrder = [[HomeOrderMissionVC alloc] initWithType:@"8"];
     
     
     NSArray *array = @[doingOrder,finshOrder,CleanOrder];
@@ -149,6 +151,8 @@
    
     [self createNaviView];
     [self CreateSegment];
+    
+  
     if ([self.showLeft isEqualToString:@"1"]) {
         [self profileCenter];
     }

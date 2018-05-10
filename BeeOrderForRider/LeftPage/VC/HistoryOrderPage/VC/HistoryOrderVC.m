@@ -144,10 +144,13 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self toSearchHistory];
     }];
+    
     MJRefreshAutoNormalFooter * footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [self loadMoreBills];
     }];
     self.tableView.mj_footer = footer;
+    self.tableView.mj_header.hidden = YES;
+    self.tableView.mj_footer.hidden = YES;
     [self.view addSubview:self.tableView];
 }
 #pragma mark- UITabelViewDataSource/delegat
@@ -228,6 +231,8 @@
     }else if(self.closeStr.length == 0){
         [MBManager showBriefAlert:ZBLocalized(@"请选择结束时间", nil)];
     }else{
+        self.tableView.mj_header.hidden = NO;
+        self.tableView.mj_footer.hidden = NO;
         NSUserDefaults *defaults;
         defaults = [NSUserDefaults standardUserDefaults];
         NSString *userId = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
@@ -286,6 +291,8 @@
     }else if(self.closeStr.length == 0){
         [MBManager showBriefAlert:ZBLocalized(@"请选择结束时间", nil)];
     }else{
+        
+        
         NSUserDefaults *defaults;
         defaults = [NSUserDefaults standardUserDefaults];
         NSString *userId = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
