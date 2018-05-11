@@ -10,6 +10,8 @@
 #import "ModelForHistory.h"
 #import "CellForOrderList.h"
 #import <CoreLocation/CoreLocation.h>
+#import "OrderDetilVC.h"
+#import "MapVC.h"
 
 @interface HomeOrderMissionVC ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
 @property (nonatomic,strong) CLLocationManager * manger;
@@ -249,13 +251,28 @@
     cell.blockChangeOrderState = ^(NSDictionary *str) {
         [self getNetworkForChangeOrderType:str];
     };
-    
+    cell.blocktoMapView = ^(NSDictionary *dic) {
+        MapVC *map = [[MapVC alloc]init];
+        map.type = self.CountType;
+        map.dic = dic;
+       
+        [self.navigationController pushViewController:map animated:YES];
+    };
     
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
      return [self cellHeightForIndexPath:indexPath cellContentViewWidth:SCREEN_WIDTH  tableView:self.tableView];
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    OrderDetilVC *order = [[OrderDetilVC alloc]init];
+    ModelForHistory *mod = [[ModelForHistory alloc]init];
+    mod = [self.arrForHistory objectAtIndex:indexPath.row];
+    order.mod = mod;
+    [self.navigationController pushViewController:order animated:YES];
+}
+
+
 -(void)getNetworkForChangeOrderType: (NSDictionary *)str{
     NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,updateOrderStateURL];
    

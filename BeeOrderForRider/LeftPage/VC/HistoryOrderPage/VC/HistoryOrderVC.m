@@ -11,6 +11,7 @@
 #import "ModelForHistory.h"
 #import "ModelForOrderDetail.h"
 #import "CellForHistoryOrder.h"
+#import "OrderDetilVC.h"
 @interface HistoryOrderVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UIView *naviView;
 @property (nonatomic , strong)UIButton *openBtn;
@@ -45,6 +46,15 @@
     [self createNaviView];
     [self createBtnView];
     [self createTableView];
+    UIScreenEdgePanGestureRecognizer *leftEdgeGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self
+                                                                                                          action:@selector(moveViewWithGesture:)];
+    leftEdgeGesture.edges = UIRectEdgeLeft;// 屏幕左侧边缘响应
+    [self.view addGestureRecognizer:leftEdgeGesture];
+}
+- (void)moveViewWithGesture:(UIPanGestureRecognizer *)panGes {
+    if (panGes.state == UIGestureRecognizerStateEnded) {
+        [self back];
+    }
 }
 #pragma mark - ui
 -(void)createNaviView{
@@ -175,7 +185,13 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 160;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    OrderDetilVC *order = [[OrderDetilVC alloc]init];
+    ModelForHistory *mod = [[ModelForHistory alloc]init];
+    mod = [self.arrForHistory objectAtIndex:indexPath.row];
+    order.mod = mod;
+    [self.navigationController pushViewController:order animated:YES];
+}
 
 - (NSString *)pp_formatDateWithArrYMDToMD:(NSString *)str
 {

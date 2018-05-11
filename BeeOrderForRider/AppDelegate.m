@@ -73,7 +73,7 @@
     self.window.backgroundColor =[UIColor whiteColor];
     
     // 设置窗口的根控制器
-    self.window.rootViewController = [[QCNavigationController alloc] initWithRootViewController:[[HomeVC alloc] init]];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[HomeVC alloc] init]];
     [self.window makeKeyAndVisible];
     
     return YES;

@@ -109,6 +109,16 @@
         make.right.equalTo(ws.contentView.mas_right).offset(-15);
         make.width.and.height.equalTo(@(20));
     }];
+    UIButton *toMapView = [UIButton buttonWithType:UIButtonTypeCustom];
+    [toMapView addTarget:self action:@selector(toMapAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:toMapView];
+    [toMapView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(ws.contentView);
+        make.top.equalTo(ws.shopAddLab);
+        make.bottom.equalTo(ws.shopAddLab);
+        make.right.equalTo(ws.contentView);
+    }];
+    
     
     UILabel *put = [[UILabel alloc]init];
     put.adjustsFontSizeToFitWidth = YES;
@@ -201,6 +211,8 @@
     
     self.longStr = mod.shoplonng;
     self.latStr = mod.shoplat;
+    self.userLatStr = mod.ulat;
+    self.userLongStr = mod.ulonng;
     [self getDissForShop];
 }
 -(void)setRightBtnTit{
@@ -232,6 +244,13 @@
 -(void)callShop{
     NSMutableString *str=[[NSMutableString alloc]initWithFormat:@"tel:%@",self.shopPhoneNum];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+}
+-(void)toMapAction{
+    NSDictionary * dic2 = @{ @"uLat":self.userLatStr,@"uLong":self.userLongStr,@"sLat":self.latStr,@"sLong":self.longStr};
+    if (self.blocktoMapView) {
+        self.blocktoMapView(dic2);
+    }
+    
 }
 -(void)changeOrderTypeAction{
     NSDictionary * dic2 = @{ @"flg":self.setUpdateOrderStr,@"ordernum":self.orderNumberStr};

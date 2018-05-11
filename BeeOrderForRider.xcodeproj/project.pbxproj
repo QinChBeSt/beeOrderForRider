@@ -12,6 +12,12 @@
 		9D1BC66320A0593400AB8F73 /* QCAnimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D1BC66220A0593400AB8F73 /* QCAnimateViewController.m */; };
 		9D24A67B20A3E35C00B149F4 /* HomeOrderMissionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D24A67A20A3E35C00B149F4 /* HomeOrderMissionVC.m */; };
 		9D24A68120A41AE800B149F4 /* CellForOrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D24A68020A41AE800B149F4 /* CellForOrderList.m */; };
+		9D64F39520A5240F0068AF3D /* OrderDetilVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D64F39420A5240F0068AF3D /* OrderDetilVC.m */; };
+		9D64F39820A530340068AF3D /* CellForLtextRimg.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D64F39720A530340068AF3D /* CellForLtextRimg.m */; };
+		9D64F39B20A5305A0068AF3D /* CellForLRtext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D64F39A20A5305A0068AF3D /* CellForLRtext.m */; };
+		9D64F39E20A530BE0068AF3D /* CellForGoodsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D64F39D20A530BE0068AF3D /* CellForGoodsList.m */; };
+		9D64F3A120A58FA10068AF3D /* MapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D64F3A020A58FA10068AF3D /* MapVC.m */; };
+		9D64F3A520A58FB00068AF3D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D64F3A420A58FB00068AF3D /* MapKit.framework */; };
 		9DA801BD20A17D80009D30C7 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA801BC20A17D80009D30C7 /* LoginVC.m */; };
 		9DA801C020A18B66009D30C7 /* UserPhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA801BF20A18B66009D30C7 /* UserPhotoVC.m */; };
 		9DDF1AFC20A041D2008A7947 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1AFB20A041D2008A7947 /* AppDelegate.m */; };
@@ -107,6 +113,17 @@
 		9D24A67A20A3E35C00B149F4 /* HomeOrderMissionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeOrderMissionVC.m; sourceTree = "<group>"; };
 		9D24A67F20A41AE800B149F4 /* CellForOrderList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForOrderList.h; sourceTree = "<group>"; };
 		9D24A68020A41AE800B149F4 /* CellForOrderList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForOrderList.m; sourceTree = "<group>"; };
+		9D64F39320A5240F0068AF3D /* OrderDetilVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetilVC.h; sourceTree = "<group>"; };
+		9D64F39420A5240F0068AF3D /* OrderDetilVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetilVC.m; sourceTree = "<group>"; };
+		9D64F39620A530340068AF3D /* CellForLtextRimg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForLtextRimg.h; sourceTree = "<group>"; };
+		9D64F39720A530340068AF3D /* CellForLtextRimg.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForLtextRimg.m; sourceTree = "<group>"; };
+		9D64F39920A5305A0068AF3D /* CellForLRtext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForLRtext.h; sourceTree = "<group>"; };
+		9D64F39A20A5305A0068AF3D /* CellForLRtext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForLRtext.m; sourceTree = "<group>"; };
+		9D64F39C20A530BE0068AF3D /* CellForGoodsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForGoodsList.h; sourceTree = "<group>"; };
+		9D64F39D20A530BE0068AF3D /* CellForGoodsList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForGoodsList.m; sourceTree = "<group>"; };
+		9D64F39F20A58FA10068AF3D /* MapVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapVC.h; sourceTree = "<group>"; };
+		9D64F3A020A58FA10068AF3D /* MapVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapVC.m; sourceTree = "<group>"; };
+		9D64F3A420A58FB00068AF3D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9DA801BB20A17D80009D30C7 /* LoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		9DA801BC20A17D80009D30C7 /* LoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		9DA801BE20A18B66009D30C7 /* UserPhotoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserPhotoVC.h; sourceTree = "<group>"; };
@@ -248,6 +265,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D64F3A520A58FB00068AF3D /* MapKit.framework in Frameworks */,
 				B23D13BBAF20434AD5B3B7DA /* libPods-BeeOrderForRider.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +290,7 @@
 		02D3B34D3246D86F3864009C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D64F3A420A58FB00068AF3D /* MapKit.framework */,
 				EE746D01E86E78E432131B57 /* libPods-BeeOrderForRider.a */,
 			);
 			name = Frameworks;
@@ -310,6 +329,10 @@
 				9D1BC65C20A0539800AB8F73 /* HomeVC.m */,
 				9D24A67920A3E35C00B149F4 /* HomeOrderMissionVC.h */,
 				9D24A67A20A3E35C00B149F4 /* HomeOrderMissionVC.m */,
+				9D64F39320A5240F0068AF3D /* OrderDetilVC.h */,
+				9D64F39420A5240F0068AF3D /* OrderDetilVC.m */,
+				9D64F39F20A58FA10068AF3D /* MapVC.h */,
+				9D64F3A020A58FA10068AF3D /* MapVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -317,6 +340,14 @@
 		9D1BC65520A052FE00AB8F73 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9DF31AB920A2938A00572015 /* CellForLeftPage.h */,
+				9DF31ABA20A2938A00572015 /* CellForLeftPage.m */,
+				9D64F39620A530340068AF3D /* CellForLtextRimg.h */,
+				9D64F39720A530340068AF3D /* CellForLtextRimg.m */,
+				9D64F39920A5305A0068AF3D /* CellForLRtext.h */,
+				9D64F39A20A5305A0068AF3D /* CellForLRtext.m */,
+				9D64F39C20A530BE0068AF3D /* CellForGoodsList.h */,
+				9D64F39D20A530BE0068AF3D /* CellForGoodsList.m */,
 				9D24A67F20A41AE800B149F4 /* CellForOrderList.h */,
 				9D24A68020A41AE800B149F4 /* CellForOrderList.m */,
 			);
@@ -355,8 +386,6 @@
 		9D1BC65920A052FE00AB8F73 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9DF31AB920A2938A00572015 /* CellForLeftPage.h */,
-				9DF31ABA20A2938A00572015 /* CellForLeftPage.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -810,6 +839,11 @@
 				TargetAttributes = {
 					9DDF1AF620A041D2008A7947 = {
 						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					9DDF1B0E20A041D6008A7947 = {
 						CreatedOnToolsVersion = 9.3;
@@ -936,6 +970,7 @@
 				9DDF1BBD20A04A32008A7947 /* MJRefreshStateHeader.m in Sources */,
 				9DDF1B0A20A041D5008A7947 /* main.m in Sources */,
 				9DDF1BA720A04A32008A7947 /* QCSegmentVC.m in Sources */,
+				9D64F39520A5240F0068AF3D /* OrderDetilVC.m in Sources */,
 				9DDF1BC120A04A32008A7947 /* UIScrollView+MJExtension.m in Sources */,
 				9DA801BD20A17D80009D30C7 /* LoginVC.m in Sources */,
 				9DDF1BBB20A04A32008A7947 /* MJRefreshGifHeader.m in Sources */,
@@ -948,6 +983,7 @@
 				9DDF1BA820A04A32008A7947 /* UIView+CHView.m in Sources */,
 				9DDF1B2E20A0499E008A7947 /* QCNavigationController.m in Sources */,
 				9DF31AC120A2989C00572015 /* ChangelanguageVC.m in Sources */,
+				9D64F39820A530340068AF3D /* CellForLtextRimg.m in Sources */,
 				9DDF1BC620A04A32008A7947 /* ZWMSegmentView.m in Sources */,
 				9D24A68120A41AE800B149F4 /* CellForOrderList.m in Sources */,
 				9DDF1BA320A04A32008A7947 /* CGXStringPickerView.m in Sources */,
@@ -955,6 +991,7 @@
 				9DDF1BB220A04A32008A7947 /* MJRefreshComponent.m in Sources */,
 				9DDF1BA920A04A32008A7947 /* MBManager.m in Sources */,
 				9DDF1BB620A04A32008A7947 /* MJRefreshAutoNormalFooter.m in Sources */,
+				9D64F3A120A58FA10068AF3D /* MapVC.m in Sources */,
 				9DDF1BA120A04A32008A7947 /* CGXPickerView.m in Sources */,
 				9DDF1B9D20A04A32008A7947 /* CGXAddressPcikerView.m in Sources */,
 				9DDF1BA620A04A32008A7947 /* MD5encryption.m in Sources */,
@@ -967,9 +1004,11 @@
 				9DDF1BB720A04A32008A7947 /* MJRefreshAutoStateFooter.m in Sources */,
 				9DDF1BBF20A04A32008A7947 /* MJRefreshConst.m in Sources */,
 				9DDF1BAE20A04A32008A7947 /* FileTool.m in Sources */,
+				9D64F39E20A530BE0068AF3D /* CellForGoodsList.m in Sources */,
 				9D1BC65D20A0539800AB8F73 /* HomeVC.m in Sources */,
 				9DDF1BBA20A04A32008A7947 /* MJRefreshBackStateFooter.m in Sources */,
 				9DDF1AFC20A041D2008A7947 /* AppDelegate.m in Sources */,
+				9D64F39B20A5305A0068AF3D /* CellForLRtext.m in Sources */,
 				9DDF1BAA20A04A32008A7947 /* UIColor+Hex.m in Sources */,
 				9DDF1B9C20A04A32008A7947 /* CGXAddressModel.m in Sources */,
 				9D24A67B20A3E35C00B149F4 /* HomeOrderMissionVC.m in Sources */,

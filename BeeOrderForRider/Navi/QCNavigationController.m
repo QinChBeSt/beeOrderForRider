@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //    // 这句话很重要，可以到单独的控制器里去设置
-    //    self.navigationBar.translucent = YES;
+        self.navigationBar.translucent = YES;
     [self.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17], NSForegroundColorAttributeName:[UIColor blackColor]}];
     [self.navigationController.navigationBar setHidden:YES];
 }
@@ -26,9 +26,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)backButtonTapClick {
-    [self popViewControllerAnimated:YES];
-}
+
 
 
 /*

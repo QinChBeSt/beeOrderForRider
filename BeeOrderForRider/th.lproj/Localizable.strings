@@ -13,6 +13,10 @@
 "登录" = "Login";
 "请输入BeeRider账号" = "Please enter the BeeRider account";
 "请输入密码" = "Please enter your password";
+"请确认密码" = "Please confirm the password";
+"请输入新密码" = "Please enter new password";
+"请输入旧密码" = "Please enter old password";
+"密码错误" = "Password error";
 "登录成功" = "Login successful";
 "用户协议" = "User agreement";
 "登录代表您已同意《BeeRider用户协议》" = "login represents that you have agreed to《BeeRider user agreement》";
@@ -38,6 +42,14 @@
 "上报到店" = "Arrive Shop";
 "确认取货" = "Confirm receipt";
 "确认送达" = "Have Service";
+"小计" = "Total";
+"￥" = "$";
+"配送费" = "Distribution";
+"优惠金额" = "Preferential amount";
+"配送地址" = "Address";
+"订单时间" = "Order time";
+"订单号码" = "Order number";
+"订单详情" = "Detail Order";
 //历史订单
 "搜索" = "search";
 "开始时间" = "Start time";

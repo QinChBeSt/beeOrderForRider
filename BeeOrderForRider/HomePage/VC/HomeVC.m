@@ -162,8 +162,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     // 屏幕边缘pan手势(优先级高于其他手势)
-    UIScreenEdgePanGestureRecognizer *leftEdgeGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self
-                                                                                                          action:@selector(moveViewWithGesture:)];
+    UIScreenEdgePanGestureRecognizer *leftEdgeGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(moveViewWithGesture:)];
     leftEdgeGesture.edges = UIRectEdgeLeft;// 屏幕左侧边缘响应
     [self.view addGestureRecognizer:leftEdgeGesture];
     leftEdgeGesture.delegate = self;
