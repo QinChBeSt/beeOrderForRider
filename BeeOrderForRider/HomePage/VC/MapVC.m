@@ -8,7 +8,8 @@
 
 #import "MapVC.h"
 #import <MapKit/MapKit.h>
-@interface MapVC ()<CLLocationManagerDelegate>
+#import <CoreLocation/CoreLocation.h>
+@interface MapVC ()<CLLocationManagerDelegate,MKMapViewDelegate>
 @property (nonatomic , strong)UIView *naviView;
 @property (nonatomic , strong) CLLocationManager *locationManager;
 @property (nonatomic , strong)CLGeocoder *geo;
@@ -20,7 +21,7 @@
 @end
 
 @implementation MapVC{
-    MKMapView *mapView;
+    
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -80,19 +81,120 @@
     [super viewDidLoad];
     [self createNaviView];
     self.mapView =[[MKMapView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREENH_HEIGHT - SafeAreaTopHeight)];
-    
+    self.mapView.delegate = self;
     self.mapView.mapType=MKMapTypeStandard;
-    
+    self.mapView.showsUserLocation = YES;
+    self.mapView.userTrackingMode =  MKUserTrackingModeFollow;
+    self.mapView.showsBuildings = YES;
+    // 指南针
+    self.mapView.showsCompass = YES;
+    // 兴趣点
+    self.mapView.showsPointsOfInterest = YES;
+    // 比例尺
+    self.mapView.showsScale = YES;
+    // 交通
+    self.mapView.showsTraffic = YES;
+
     [self.view addSubview:self.mapView];
     
     UIButton *toMapView = [UIButton buttonWithType:UIButtonTypeCustom];
     [toMapView addTarget:self action:@selector(toMapAction) forControlEvents:UIControlEventTouchUpInside];
-    toMapView.frame  = CGRectMake(50, SCREENH_HEIGHT - 100, 100, 80);
-    toMapView.backgroundColor = [UIColor redColor];
+    [toMapView setTitle:ZBLocalized(@"去导航", nil) forState:UIControlStateNormal];
+    [toMapView setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    toMapView.frame  = CGRectMake( 60, SCREENH_HEIGHT - SafeAreaTabbarHeight - 70 - SafeAreaTopHeight, SCREEN_WIDTH - 120, 50);
+    toMapView.backgroundColor = [UIColor colorWithHexString:BaseYellow];
     [self.mapView addSubview:toMapView];
     
     
 }
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    
+    [mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
+    
+    // 显示地图的显示区域
+    // 控制区域中心
+    CLLocationCoordinate2D center = userLocation.location.coordinate;
+    
+    CGFloat locLat =userLocation.location.coordinate.latitude;
+    CGFloat locLong = userLocation.location.coordinate.longitude;
+    CGFloat toLat = [self.latStr floatValue];
+    CGFloat toLong = [self.longStr floatValue];
+    
+    CGFloat latSpace = locLat - toLat;
+    if (latSpace < 0) {
+        latSpace = 0 -latSpace;
+    }
+    CGFloat longSpace = locLong - toLong;
+    if (longSpace < 0) {
+        longSpace = 0 -longSpace;
+    }
+    // 设置区域跨度
+    MKCoordinateSpan span = MKCoordinateSpanMake(latSpace *2.1, longSpace *2.1);
+    
+    // 创建一个区域
+    MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
+    // 设置地图显示区域
+    [mapView setRegion:region animated:YES];
+    
+    CLLocationCoordinate2D fromcoor=center;
+    CLLocationCoordinate2D tocoor = CLLocationCoordinate2DMake(toLat, toLong);
+    //创建出发点和目的点信息
+    MKPlacemark *fromPlace = [[MKPlacemark alloc] initWithCoordinate:fromcoor
+                                                   addressDictionary:nil];
+    MKPlacemark *toPlace = [[MKPlacemark alloc]initWithCoordinate:tocoor addressDictionary:nil];
+    //创建出发节点和目的地节点
+    MKMapItem * fromItem = [[MKMapItem alloc]initWithPlacemark:fromPlace];
+    MKMapItem * toItem = [[MKMapItem alloc]initWithPlacemark:toPlace];
+    //初始化导航搜索请求
+    MKDirectionsRequest *request = [[MKDirectionsRequest alloc]init];
+    request.source=fromItem;
+    request.destination=toItem;
+    request.requestsAlternateRoutes=YES;
+    //初始化请求检索
+    MKDirections *directions = [[MKDirections alloc]initWithRequest:request];
+    //开始检索，结果会返回在block中
+    [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
+        if (error) {
+            NSLog(@"error:%@",error);
+        }else{
+            //提取导航线路结果中的一条线路
+            MKRoute *route =response.routes[0];
+            //将线路中的每一步详情提取出来
+            NSArray * stepArray = [NSArray arrayWithArray:route.steps];
+            //进行遍历
+            for (int i=0; i<stepArray.count; i++) {
+                //线路的详情节点
+                MKRouteStep * step = stepArray[i];
+                //在此节点处添加一个大头针
+                MKPointAnnotation * point = [[MKPointAnnotation alloc]init];
+                point.coordinate=step.polyline.coordinate;
+                point.title=step.instructions;
+                point.subtitle=step.notice;
+                //[self.mapView addAnnotation:point];
+                //将此段线路添加到地图上
+                [self.mapView addOverlay:step.polyline];
+            }
+        }
+    }];
+}
+//地图覆盖物的代理方法
+-(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay{
+    MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
+    
+    renderer.strokeColor = [UIColor redColor];
+    
+    renderer.lineWidth = 2.0;
+    
+    return  renderer;
+}
+//标注的代理方法
+//-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+//    MKPinAnnotationView * view= [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"anno"];
+//    view.canShowCallout=YES;
+//    return view;
+//}
+
 -(void)toMapAction{
     
     CLLocationCoordinate2D loc = CLLocationCoordinate2DMake([self.latStr floatValue], [self.longStr floatValue]);

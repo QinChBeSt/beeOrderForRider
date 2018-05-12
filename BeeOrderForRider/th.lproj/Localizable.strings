@@ -50,6 +50,8 @@
 "订单时间" = "Order time";
 "订单号码" = "Order number";
 "订单详情" = "Detail Order";
+"去导航" = "To navigation";
+"导航" = "navigation";
 //历史订单
 "搜索" = "search";
 "开始时间" = "Start time";

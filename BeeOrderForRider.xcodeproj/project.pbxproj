@@ -12,6 +12,7 @@
 		9D1BC66320A0593400AB8F73 /* QCAnimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D1BC66220A0593400AB8F73 /* QCAnimateViewController.m */; };
 		9D24A67B20A3E35C00B149F4 /* HomeOrderMissionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D24A67A20A3E35C00B149F4 /* HomeOrderMissionVC.m */; };
 		9D24A68120A41AE800B149F4 /* CellForOrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D24A68020A41AE800B149F4 /* CellForOrderList.m */; };
+		9D479E9220A6BBA100895F78 /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D479E9120A6BBA100895F78 /* AboutVC.m */; };
 		9D64F39520A5240F0068AF3D /* OrderDetilVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D64F39420A5240F0068AF3D /* OrderDetilVC.m */; };
 		9D64F39820A530340068AF3D /* CellForLtextRimg.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D64F39720A530340068AF3D /* CellForLtextRimg.m */; };
 		9D64F39B20A5305A0068AF3D /* CellForLRtext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D64F39A20A5305A0068AF3D /* CellForLRtext.m */; };
@@ -113,6 +114,8 @@
 		9D24A67A20A3E35C00B149F4 /* HomeOrderMissionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeOrderMissionVC.m; sourceTree = "<group>"; };
 		9D24A67F20A41AE800B149F4 /* CellForOrderList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForOrderList.h; sourceTree = "<group>"; };
 		9D24A68020A41AE800B149F4 /* CellForOrderList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForOrderList.m; sourceTree = "<group>"; };
+		9D479E9020A6BBA100895F78 /* AboutVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutVC.h; sourceTree = "<group>"; };
+		9D479E9120A6BBA100895F78 /* AboutVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutVC.m; sourceTree = "<group>"; };
 		9D64F39320A5240F0068AF3D /* OrderDetilVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetilVC.h; sourceTree = "<group>"; };
 		9D64F39420A5240F0068AF3D /* OrderDetilVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetilVC.m; sourceTree = "<group>"; };
 		9D64F39620A530340068AF3D /* CellForLtextRimg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForLtextRimg.h; sourceTree = "<group>"; };
@@ -379,6 +382,8 @@
 				9DF31ABF20A2989C00572015 /* ChangelanguageVC.h */,
 				9DF31AC020A2989C00572015 /* ChangelanguageVC.m */,
 				9DF31AB220A291EE00572015 /* HistoryOrderPage */,
+				9D479E9020A6BBA100895F78 /* AboutVC.h */,
+				9D479E9120A6BBA100895F78 /* AboutVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -967,6 +972,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DDF1BAB20A04A32008A7947 /* JZLocationConverter.m in Sources */,
+				9D479E9220A6BBA100895F78 /* AboutVC.m in Sources */,
 				9DDF1BBD20A04A32008A7947 /* MJRefreshStateHeader.m in Sources */,
 				9DDF1B0A20A041D5008A7947 /* main.m in Sources */,
 				9DDF1BA720A04A32008A7947 /* QCSegmentVC.m in Sources */,

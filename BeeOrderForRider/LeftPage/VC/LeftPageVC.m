@@ -12,6 +12,7 @@
 #import "ChangePasswordVC.h"
 #import "CellForLeftPage.h"
 #import "ChangelanguageVC.h"
+#import "AboutVC.h"
 #define headViewHeight 140
 #define buttomViewHeight 100
 @interface LeftPageVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -382,7 +383,8 @@
         //[self.navigationController pushViewController:lang animated:YES];
     }
     else if (indexPath.row == 3){
-       
+        AboutVC *about = [[AboutVC alloc]init];
+        [self.navigationController pushViewController:about animated:YES];
     }
     else if (indexPath.row == 4){
         [self creatLogoutAction];

@@ -179,7 +179,7 @@
        CLLocationCoordinate2D coordinate =  loc.coordinate;
         self.latLoc = [NSString stringWithFormat:@"%lf",coordinate.latitude];
         self.longLoc = [NSString stringWithFormat:@"%lf",coordinate.longitude];
-        NSLog(@"定位到经度 %lf,纬度 %lf",coordinate.longitude,coordinate.latitude);
+        NSLog(@"定位到经度long %lf,纬度lat %lf",coordinate.longitude,coordinate.latitude);
     
     }
     
