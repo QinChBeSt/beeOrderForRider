@@ -169,7 +169,8 @@
             [MBManager showBriefAlert:ZBLocalized(@"登录成功", nil)];
             [self performSelector:@selector(back) withObject:nil/*可传任意类型参数*/ afterDelay:2.0];
         }else{
-            [MBManager showBriefAlert:responseObject[@"msg"]];
+            NSString *cedeErr = [NSString stringWithFormat:@"code = %@ ,msg = %@",code,responseObject[@"msg"]];
+            [MBManager showBriefAlert:cedeErr];
         }
         
         
