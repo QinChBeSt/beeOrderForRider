@@ -114,6 +114,7 @@
 		9D24A67A20A3E35C00B149F4 /* HomeOrderMissionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeOrderMissionVC.m; sourceTree = "<group>"; };
 		9D24A67F20A41AE800B149F4 /* CellForOrderList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForOrderList.h; sourceTree = "<group>"; };
 		9D24A68020A41AE800B149F4 /* CellForOrderList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForOrderList.m; sourceTree = "<group>"; };
+		9D2F370420AA6A2700A916E6 /* BeeOrderForRider.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeeOrderForRider.entitlements; sourceTree = "<group>"; };
 		9D479E9020A6BBA100895F78 /* AboutVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutVC.h; sourceTree = "<group>"; };
 		9D479E9120A6BBA100895F78 /* AboutVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutVC.m; sourceTree = "<group>"; };
 		9D64F39320A5240F0068AF3D /* OrderDetilVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetilVC.h; sourceTree = "<group>"; };
@@ -444,6 +445,7 @@
 		9DDF1AF920A041D2008A7947 /* BeeOrderForRider */ = {
 			isa = PBXGroup;
 			children = (
+				9D2F370420AA6A2700A916E6 /* BeeOrderForRider.entitlements */,
 				9DA801BA20A170B0009D30C7 /* LoginPage */,
 				9DDF1B2F20A04A22008A7947 /* Tools */,
 				9D1BC65A20A0530A00AB8F73 /* Navi */,
@@ -848,6 +850,9 @@
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 					9DDF1B0E20A041D6008A7947 = {
@@ -1231,18 +1236,21 @@
 			baseConfigurationReference = E5A06966635082059B36B08F /* Pods-BeeOrderForRider.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = BeeOrderForRider/BeeOrderForRider.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V2FVN6A8N7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BeeOrderForRider/PrefixHeader.pch";
 				INFOPLIST_FILE = BeeOrderForRider/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wtb.beeToRider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1251,18 +1259,21 @@
 			baseConfigurationReference = 0E700E2F235BC7AA63DE1B7E /* Pods-BeeOrderForRider.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = BeeOrderForRider/BeeOrderForRider.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V2FVN6A8N7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BeeOrderForRider/PrefixHeader.pch";
 				INFOPLIST_FILE = BeeOrderForRider/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wtb.beeToRider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

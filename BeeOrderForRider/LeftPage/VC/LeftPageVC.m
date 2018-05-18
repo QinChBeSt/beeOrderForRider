@@ -487,6 +487,20 @@
 }
 -(void)logOut{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+        
+        NSLog(@"删除Alias==%ld",(long)iResCode);
+        
+    } seq:0];
+
+    NSString *userId = [defaults objectForKey:UD_USERID];
+    NSString *strTag = [NSString stringWithFormat:@"qs%@",userId];
+    NSSet *set = [[NSSet alloc] initWithObjects:strTag,nil];
+    [JPUSHService deleteTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+        
+        NSLog(@"删除Tag====%ld",(long)iResCode);
+    } seq:0];
     [defaults setObject:nil forKey:UD_USERID];
     [defaults setObject:nil forKey:UD_USERNAME];
     [defaults setObject:nil forKey:UD_USERPHONE];
@@ -496,6 +510,8 @@
     [defaults setObject:nil forKey:UD_USERPassword];
     [defaults setObject:nil forKey:UD_USERState];
     [defaults synchronize];
+    
+    
     
     LoginVC *login = [[LoginVC alloc]init];
     login.hidesBottomBarWhenPushed = YES;

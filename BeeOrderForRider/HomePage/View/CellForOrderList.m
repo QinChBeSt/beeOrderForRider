@@ -99,7 +99,7 @@
         make.height.equalTo(@(lineHeight-10));
         make.left.equalTo(ws.shopNameLab.mas_left);
         make.top.equalTo(ws.shopNameLab.mas_bottom);
-        make.right.equalTo(ws.contentView.mas_right).offset(50);
+        make.right.equalTo(ws.contentView.mas_right).offset(-50);
     }];
     UIImageView *rightIcon = [[UIImageView alloc]init];
     [rightIcon setImage:[UIImage imageNamed:@"右箭头"]];

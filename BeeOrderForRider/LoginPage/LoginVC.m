@@ -160,11 +160,26 @@
             [defaults setObject:md5CodeStr forKey:UD_USERPassword];
             [defaults setObject:self.phoneNumStr forKey:UD_USERAccount];
             [defaults setObject:userId forKey:UD_USERID];
-            [defaults setObject:userImgUrl forKey:UD_USERLOGO];
+            if([userImgUrl isEqual:[NSNull null]]) {
+
+                [defaults setObject:nil forKey:UD_USERLOGO];
+            }else{
+                [defaults setObject:userImgUrl forKey:UD_USERLOGO];
+            }
+            
             [defaults setObject:userName forKey:UD_USERNAME];
             [defaults setObject:userPhone forKey:UD_USERPHONE];
             [defaults setObject:userState forKey:UD_USERState];
             [defaults synchronize];
+            
+            [JPUSHService setAlias:@"qs" completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                NSLog(@"注册Alias==%ld",(long)iResCode);
+            } seq:0];
+            NSString *strTag = [NSString stringWithFormat:@"qs%@",userId];
+            NSSet *set = [[NSSet alloc] initWithObjects:strTag,nil];
+            [JPUSHService setTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+                NSLog(@"注册Tag===%ld",(long)iResCode);
+            } seq:0];
             
             [MBManager showBriefAlert:ZBLocalized(@"登录成功", nil)];
             [self performSelector:@selector(back) withObject:nil/*可传任意类型参数*/ afterDelay:2.0];
