@@ -12,7 +12,9 @@
 		9D1BC66320A0593400AB8F73 /* QCAnimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D1BC66220A0593400AB8F73 /* QCAnimateViewController.m */; };
 		9D24A67B20A3E35C00B149F4 /* HomeOrderMissionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D24A67A20A3E35C00B149F4 /* HomeOrderMissionVC.m */; };
 		9D24A68120A41AE800B149F4 /* CellForOrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D24A68020A41AE800B149F4 /* CellForOrderList.m */; };
+		9D3E85DA20B663FA00F21182 /* CellForTodayMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E85D920B663FA00F21182 /* CellForTodayMoney.m */; };
 		9D479E9220A6BBA100895F78 /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D479E9120A6BBA100895F78 /* AboutVC.m */; };
+		9D4E39B120B56F71005F57DF /* ViewMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4E39B020B56F71005F57DF /* ViewMoneyVC.m */; };
 		9D64F39520A5240F0068AF3D /* OrderDetilVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D64F39420A5240F0068AF3D /* OrderDetilVC.m */; };
 		9D64F39820A530340068AF3D /* CellForLtextRimg.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D64F39720A530340068AF3D /* CellForLtextRimg.m */; };
 		9D64F39B20A5305A0068AF3D /* CellForLRtext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D64F39A20A5305A0068AF3D /* CellForLRtext.m */; };
@@ -115,8 +117,12 @@
 		9D24A67F20A41AE800B149F4 /* CellForOrderList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForOrderList.h; sourceTree = "<group>"; };
 		9D24A68020A41AE800B149F4 /* CellForOrderList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForOrderList.m; sourceTree = "<group>"; };
 		9D2F370420AA6A2700A916E6 /* BeeOrderForRider.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeeOrderForRider.entitlements; sourceTree = "<group>"; };
+		9D3E85D820B663FA00F21182 /* CellForTodayMoney.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForTodayMoney.h; sourceTree = "<group>"; };
+		9D3E85D920B663FA00F21182 /* CellForTodayMoney.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForTodayMoney.m; sourceTree = "<group>"; };
 		9D479E9020A6BBA100895F78 /* AboutVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutVC.h; sourceTree = "<group>"; };
 		9D479E9120A6BBA100895F78 /* AboutVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutVC.m; sourceTree = "<group>"; };
+		9D4E39AF20B56F71005F57DF /* ViewMoneyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewMoneyVC.h; sourceTree = "<group>"; };
+		9D4E39B020B56F71005F57DF /* ViewMoneyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewMoneyVC.m; sourceTree = "<group>"; };
 		9D64F39320A5240F0068AF3D /* OrderDetilVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetilVC.h; sourceTree = "<group>"; };
 		9D64F39420A5240F0068AF3D /* OrderDetilVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetilVC.m; sourceTree = "<group>"; };
 		9D64F39620A530340068AF3D /* CellForLtextRimg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForLtextRimg.h; sourceTree = "<group>"; };
@@ -378,13 +384,15 @@
 		9D1BC65820A052FE00AB8F73 /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				9DF31AB220A291EE00572015 /* HistoryOrderPage */,
 				9D1BC65E20A0573500AB8F73 /* LeftPageVC.h */,
 				9D1BC65F20A0573500AB8F73 /* LeftPageVC.m */,
 				9DF31ABF20A2989C00572015 /* ChangelanguageVC.h */,
 				9DF31AC020A2989C00572015 /* ChangelanguageVC.m */,
-				9DF31AB220A291EE00572015 /* HistoryOrderPage */,
 				9D479E9020A6BBA100895F78 /* AboutVC.h */,
 				9D479E9120A6BBA100895F78 /* AboutVC.m */,
+				9D4E39AF20B56F71005F57DF /* ViewMoneyVC.h */,
+				9D4E39B020B56F71005F57DF /* ViewMoneyVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -392,6 +400,8 @@
 		9D1BC65920A052FE00AB8F73 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9D3E85D820B663FA00F21182 /* CellForTodayMoney.h */,
+				9D3E85D920B663FA00F21182 /* CellForTodayMoney.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -996,6 +1006,7 @@
 				9DF31AC120A2989C00572015 /* ChangelanguageVC.m in Sources */,
 				9D64F39820A530340068AF3D /* CellForLtextRimg.m in Sources */,
 				9DDF1BC620A04A32008A7947 /* ZWMSegmentView.m in Sources */,
+				9D3E85DA20B663FA00F21182 /* CellForTodayMoney.m in Sources */,
 				9D24A68120A41AE800B149F4 /* CellForOrderList.m in Sources */,
 				9DDF1BA320A04A32008A7947 /* CGXStringPickerView.m in Sources */,
 				9DF31ABE20A2960D00572015 /* ChangePasswordVC.m in Sources */,
@@ -1016,6 +1027,7 @@
 				9DDF1BBF20A04A32008A7947 /* MJRefreshConst.m in Sources */,
 				9DDF1BAE20A04A32008A7947 /* FileTool.m in Sources */,
 				9D64F39E20A530BE0068AF3D /* CellForGoodsList.m in Sources */,
+				9D4E39B120B56F71005F57DF /* ViewMoneyVC.m in Sources */,
 				9D1BC65D20A0539800AB8F73 /* HomeVC.m in Sources */,
 				9DDF1BBA20A04A32008A7947 /* MJRefreshBackStateFooter.m in Sources */,
 				9DDF1AFC20A041D2008A7947 /* AppDelegate.m in Sources */,

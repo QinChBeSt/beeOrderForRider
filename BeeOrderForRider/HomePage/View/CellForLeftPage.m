@@ -23,7 +23,7 @@
     self.img = [[UIImageView alloc]init];
     [self.contentView addSubview:self.img];
     [self.img  mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(ws.contentView.mas_left).offset(15);
+        make.left.equalTo(ws.contentView.mas_left).offset(25);
         make.top.equalTo(ws.contentView.mas_top).offset(10);
         make.centerY.equalTo(ws.contentView);
         make.width.equalTo(ws.img.mas_height);

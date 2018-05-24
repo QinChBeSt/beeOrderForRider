@@ -13,14 +13,15 @@
 #import "CellForLeftPage.h"
 #import "ChangelanguageVC.h"
 #import "AboutVC.h"
-#define headViewHeight 140
-#define buttomViewHeight 100
+#import "ViewMoneyVC.h"
+#define headViewHeight SCREENH_HEIGHT * 0.225
+#define buttomViewHeight SCREENH_HEIGHT * 0.150
 @interface LeftPageVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)NSString *orderType;
 @property (nonatomic , strong)UIView *naviView;
 @property (nonatomic , strong)NSString *workState;
 @property (nonatomic , strong)UILabel *titleLabel;
-@property (nonatomic , strong)UIView *headView;
+@property (nonatomic , strong)UIImageView *headView;
 @property (nonatomic , strong)UIView *buttomView;
 @property (nonatomic , strong)UICollectionView *collectionView;
 @property (nonatomic , assign)CGFloat width;
@@ -46,7 +47,7 @@
     NSUserDefaults *defaults;
     defaults = [NSUserDefaults standardUserDefaults];
     NSString *imgUrl  = [NSString stringWithFormat:@"%@%@",IMGBaesURL,[defaults objectForKey:UD_USERLOGO]];
-    [self.headImage sd_setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:[UIImage imageNamed:@"icon_user_normal"]];
+    [self.headImage sd_setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:[UIImage imageNamed:@"icon_qishoutouxiang"]];
     NSString *userName  = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERNAME]];
     self.userNameLab.text = userName;
     NSString *userPhone  = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERPHONE]];
@@ -140,53 +141,54 @@
 
    self.width = [UIScreen mainScreen].bounds.size.width * 0.8;
     self.view.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
-    self.naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.width, SafeAreaTopHeight )];
+    self.naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.width, SafeAreaStatsBarHeight )];
     self.naviView.backgroundColor = [UIColor colorWithHexString:BaseYellow];
     [self.view addSubview:self.naviView];
     
     __weak typeof(self) ws = self;
-    UIImageView *backImg = [[UIImageView alloc]init];
-    [backImg setImage:[UIImage imageNamed:@"back_icon"]];
-    [self.naviView addSubview:backImg];
-    [backImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.naviView.mas_top).offset(SafeAreaStatsBarHeight + 5);
-        make.left.equalTo(ws.naviView.mas_left).offset(15);
-        make.width.equalTo(@(30));
-        make.height.equalTo(@(30));
-    }];
-    
-    UIButton *backBTN = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backBTN addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    [self.naviView addSubview:backBTN];
-    [backBTN mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.naviView.mas_top).offset(SafeAreaStatsBarHeight);
-        make.left.equalTo(ws.naviView.mas_left).offset(10);
-        make.width.equalTo(@(40));
-        make.height.equalTo(@(SafeAreaTopHeight - SafeAreaStatsBarHeight));
-    }];
-    
-    self.titleLabel = [[UILabel alloc]init];
-    self.titleLabel.text = self.workState;
-    self.titleLabel.textColor = [UIColor blackColor];
-    [self.naviView addSubview:self.titleLabel];
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(ws.view);
-        make.centerY.equalTo(backImg);
-    }];
-    
-    self.headView = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, self.width, headViewHeight)];
+//    UIImageView *backImg = [[UIImageView alloc]init];
+//    [backImg setImage:[UIImage imageNamed:@"back_icon"]];
+//    [self.naviView addSubview:backImg];
+//    [backImg mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(ws.naviView.mas_top).offset(SafeAreaStatsBarHeight + 5);
+//        make.left.equalTo(ws.naviView.mas_left).offset(15);
+//        make.width.equalTo(@(30));
+//        make.height.equalTo(@(30));
+//    }];
+//
+//    UIButton *backBTN = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [backBTN addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+//    [self.naviView addSubview:backBTN];
+//    [backBTN mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(ws.naviView.mas_top).offset(SafeAreaStatsBarHeight);
+//        make.left.equalTo(ws.naviView.mas_left).offset(10);
+//        make.width.equalTo(@(40));
+//        make.height.equalTo(@(SafeAreaTopHeight - SafeAreaStatsBarHeight));
+//    }];
+//
+//    self.titleLabel = [[UILabel alloc]init];
+//    self.titleLabel.text = self.workState;
+//    self.titleLabel.textColor = [UIColor blackColor];
+//    [self.naviView addSubview:self.titleLabel];
+//    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(ws.view);
+//        make.centerY.equalTo(backImg);
+//    }];
+    self.headView = [[UIImageView alloc]initWithFrame:CGRectMake(0, SafeAreaStatsBarHeight, self.width, headViewHeight)];
     self.headView.backgroundColor = [UIColor colorWithHexString:BaseYellow];
+    self.headView.image = [UIImage imageNamed:@"bg_qishougerizhongxin"];
     [self.view addSubview:self.headView];
     NSUserDefaults *defaults;
     defaults = [NSUserDefaults standardUserDefaults];
     NSString *imgUrl  = [NSString stringWithFormat:@"%@%@",IMGBaesURL,[defaults objectForKey:UD_USERLOGO]];
     self.headImage = [[UIImageView alloc]init];
-    [self.headImage sd_setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:[UIImage imageNamed:@"icon_user_normal"]];
+    self.headImage.image = [UIImage imageNamed:@"icon_qishoutouxiang"];
+    [self.headImage sd_setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:[UIImage imageNamed:@"icon_qishoutouxiang"]];
     self.headImage.clipsToBounds = YES;
     self.headImage.layer.cornerRadius = (headViewHeight - 60) / 2;
     [self.headView addSubview:self.headImage];
     [self.headImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(ws.headView.mas_left).offset(15);
+        make.left.equalTo(ws.headView.mas_left).offset(25);
         make.centerY.equalTo(ws.headView);
         make.top.equalTo(ws.headView.mas_top).offset(30);
         make.width.equalTo(ws.headImage.mas_height);
@@ -199,7 +201,7 @@
     [self.userNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(ws.headImage.mas_top);
         make.bottom.equalTo(ws.headImage.mas_centerY);
-        make.left.equalTo(ws.headImage.mas_right).offset(30);
+        make.left.equalTo(ws.headImage.mas_right).offset(20);
     }];
     
     self.userPhoneLab = [[UILabel alloc]init];
@@ -209,7 +211,7 @@
     [self.userPhoneLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(ws.headImage.mas_bottom);
         make.top.equalTo(ws.headImage.mas_centerY);
-        make.left.equalTo(ws.headImage.mas_right).offset(30);
+        make.left.equalTo(ws.headImage.mas_right).offset(20);
     }];
 }
 
@@ -234,7 +236,7 @@
         make.left.equalTo(ws.buttomView);
         make.bottom.equalTo(ws.buttomView);
     }];
-    self.workUpImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"开工未选"]];
+    self.workUpImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"icon_kaigong"]];
     [self.workupBtn addSubview:self.workUpImg];
     [self.workUpImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(ws.workupBtn);
@@ -261,7 +263,7 @@
         make.left.equalTo(ws.workupBtn.mas_right);
         make.bottom.equalTo(ws.buttomView);
     }];
-    self.buzyUpImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"忙碌未选"]];
+    self.buzyUpImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"icon_manglu"]];
     [self.buzyBtn addSubview:self.buzyUpImg];
     [self.buzyUpImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(ws.buzyBtn);
@@ -291,7 +293,7 @@
         make.left.equalTo(ws.buzyBtn.mas_right);
         make.bottom.equalTo(ws.buttomView);
     }];
-    self.StopUpImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"暂停未选"]];
+    self.StopUpImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"icon_shougong"]];
     [self.stopBtn addSubview:self.StopUpImg];
     [self.StopUpImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(ws.stopBtn);
@@ -317,7 +319,10 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.bounces = NO;
-    self.tableView.tableFooterView = [[UIView alloc]init];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+    UIView *footView =[[UIView alloc]init];
+    footView.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+    self.tableView.tableFooterView = footView;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -330,7 +335,7 @@
 #pragma mark- UITabelViewDataSource/delegat
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 6;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -344,23 +349,27 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
    
     if (indexPath.row == 0) {
-        cell.img.image = [UIImage imageNamed:@"历史订单"];
+        cell.img.image = [UIImage imageNamed:@"icon_erjidingdan"];
         cell.Tlabel.text = ZBLocalized(@"历史订单", nil);
     }
-    else if (indexPath.row == 1){
-        cell.img.image = [UIImage imageNamed:@"历史订单"];
+    else if (indexPath.row ==2){
+        cell.img.image = [UIImage imageNamed:@"icon_erjimimaxiugai"];
         cell.Tlabel.text = ZBLocalized(@"修改密码", nil);
-    }
-    else if (indexPath.row == 2){
-        cell.img.image = [UIImage imageNamed:@"历史订单"];
-        cell.Tlabel.text = ZBLocalized(@"语言切换", nil);
+    }else if (indexPath.row == 1){
+        cell.img.image = [UIImage imageNamed:@"icon_erjichakanyeji"];
+        cell.Tlabel.text = ZBLocalized(@"查看今日收益", nil);
     }
     else if (indexPath.row == 3){
-        cell.img.image = [UIImage imageNamed:@"历史订单"];
-        cell.Tlabel.text = ZBLocalized(@"关于BeeRider骑手", nil);
+        cell.img.image = [UIImage imageNamed:@"icon_erjiyuyanqiehuan"];
+        cell.Tlabel.text = ZBLocalized(@"语言切换", nil);
     }
     else if (indexPath.row == 4){
-        cell.img.image = [UIImage imageNamed:@"历史订单"];
+        cell.img.image = [UIImage imageNamed:@"icon_erjiguanyu"];
+        cell.Tlabel.text = ZBLocalized(@"关于BeeRider骑手", nil);
+    }
+    
+    else if (indexPath.row == 5){
+        cell.img.image = [UIImage imageNamed:@"icon_erjituichu"];
         cell.Tlabel.text = ZBLocalized(@"退出登录", nil);
     }
     return cell;
@@ -372,23 +381,27 @@
     if (indexPath.row == 0) {
         HistoryOrderVC *history = [[HistoryOrderVC alloc]init];
         [self.navigationController pushViewController:history animated:YES];
+    }else if (indexPath.row == 1){
+        ViewMoneyVC *view = [[ViewMoneyVC alloc]init];
+        [self.navigationController pushViewController:view animated:YES];
+        
     }
-    else if (indexPath.row == 1){
+    else if (indexPath.row == 2){
         ChangePasswordVC *pasVc = [[ChangePasswordVC alloc]init];
         [self.navigationController pushViewController:pasVc animated:YES];
     }
-    else if (indexPath.row == 2){
+    else if (indexPath.row == 3){
         ChangelanguageVC *lang = [[ChangelanguageVC alloc]init];
         [self.navigationController presentViewController:lang animated:YES completion:nil];
         //[self.navigationController pushViewController:lang animated:YES];
     }
-    else if (indexPath.row == 3){
+    else if (indexPath.row == 4){
         AboutVC *about = [[AboutVC alloc]init];
         [self.navigationController pushViewController:about animated:YES];
     }
-    else if (indexPath.row == 4){
-        [self creatLogoutAction];
-        
+    
+    else if (indexPath.row == 5){
+         [self creatLogoutAction];
     }
     
 }
@@ -426,13 +439,13 @@
 //3.网络请求成功后改变按钮状态
 -(void )netWorkSussToChangeState:(NSString *)str{
     if ([str isEqualToString:@"1"]) {
-        self.workUpImg.image = [UIImage imageNamed:@"开工选择"];
+        self.workUpImg.image = [UIImage imageNamed:@"icon_kaigong_down"];
         self.workLab.textColor = [UIColor blackColor];
         
-        self.buzyUpImg.image = [UIImage imageNamed:@"忙碌未选"];
+        self.buzyUpImg.image = [UIImage imageNamed:@"icon_manglu"];
         self.buzyLab.textColor = [UIColor colorWithHexString:@"8a8a8a"];
         
-        self.StopUpImg.image = [UIImage imageNamed:@"暂停未选"];
+        self.StopUpImg.image = [UIImage imageNamed:@"icon_shougong"];
         self.StopLab.textColor = [UIColor colorWithHexString:@"8a8a8a"];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -442,13 +455,13 @@
         self.titleLabel.text = self.workState;
         [self toGetAC];
     }else if ([str isEqualToString:@"2"]){
-        self.workUpImg.image = [UIImage imageNamed:@"开工未选"];
+        self.workUpImg.image = [UIImage imageNamed:@"icon_kaigong"];
         self.workLab.textColor = [UIColor colorWithHexString:@"8a8a8a"];
         
-        self.buzyUpImg.image = [UIImage imageNamed:@"忙碌选择"];
+        self.buzyUpImg.image = [UIImage imageNamed:@"icon_manglu_down"];
         self.buzyLab.textColor = [UIColor blackColor];
         
-        self.StopUpImg.image = [UIImage imageNamed:@"暂停未选"];
+        self.StopUpImg.image = [UIImage imageNamed:@"icon_shougong"];
         self.StopLab.textColor = [UIColor colorWithHexString:@"8a8a8a"];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -458,13 +471,13 @@
         self.titleLabel.text = self.workState;
         [self toGetAC];
     }else if ([str isEqualToString:@"3"]){
-        self.workUpImg.image = [UIImage imageNamed:@"开工未选"];
+        self.workUpImg.image = [UIImage imageNamed:@"icon_kaigong"];
         self.workLab.textColor = [UIColor colorWithHexString:@"8a8a8a"];
         
-        self.buzyUpImg.image = [UIImage imageNamed:@"忙碌未选"];
+        self.buzyUpImg.image = [UIImage imageNamed:@"icon_manglu"];
         self.buzyLab.textColor = [UIColor colorWithHexString:@"8a8a8a"];
         
-        self.StopUpImg.image = [UIImage imageNamed:@"暂停选择"];
+        self.StopUpImg.image = [UIImage imageNamed:@"icon_shougong_down"];
         self.StopLab.textColor = [UIColor blackColor];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

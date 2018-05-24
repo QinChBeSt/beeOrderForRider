@@ -9,6 +9,7 @@
 #import "CellForOrderList.h"
 #import <CoreLocation/CoreLocation.h>
 #define lineHeight 50
+#define lineSmallHeight 30
 @implementation CellForOrderList
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -26,30 +27,30 @@
     [self.contentView addSubview:topLine];
     //订单编号
     self.orderNumLab = [[UILabel alloc]init];
-    self.orderNumLab.textColor = [UIColor blackColor];
+    self.orderNumLab.textColor = [UIColor colorWithHexString:@"4b4b4b"];
     self.orderNumLab.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:self.orderNumLab];
     [self.orderNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topLine.mas_bottom);
         make.left.equalTo(ws.contentView.mas_left).offset(20);
-        make.height.equalTo(@(lineHeight));
+        make.height.equalTo(@(lineSmallHeight));
     }];
     
     //订单距离
     self.orderDateLab = [[UILabel alloc]init];
-    self.orderDateLab.textColor = [UIColor blackColor];
+    self.orderDateLab.textColor = [UIColor colorWithHexString:@"4b4b4b"];
     self.orderDateLab.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:self.orderDateLab];
     [self.orderDateLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topLine.mas_bottom);
         make.right.equalTo(ws.contentView.mas_right).offset(-20);
-        make.height.equalTo(@(lineHeight));
+        make.height.equalTo(@(lineSmallHeight));
     }];
     
-    UIView *topYellowLine = [[UIView alloc]initWithFrame:CGRectMake(0, lineHeight + 10, SCREEN_WIDTH / 4, 2)];
-    topYellowLine.backgroundColor = [UIColor colorWithHexString:BaseYellow];
+    UIView *topYellowLine = [[UIView alloc]initWithFrame:CGRectMake(0, lineSmallHeight + 10, SCREEN_WIDTH / 4, 2)];
+    topYellowLine.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
     [self.contentView addSubview:topYellowLine];
-    UIView *topgrayLine = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH / 4, lineHeight + 10, SCREEN_WIDTH / 4 * 3, 2)];
+    UIView *topgrayLine = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH / 4, lineSmallHeight + 10, SCREEN_WIDTH / 4 * 3, 2)];
     topgrayLine.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
     [self.contentView addSubview:topgrayLine];
     
@@ -60,26 +61,26 @@
     get.numberOfLines = 0;
     get.textColor = [UIColor colorWithHexString:BaseTextGrayColor];
     get.backgroundColor = [UIColor colorWithHexString:BaseYellow];
-    get.layer.cornerRadius=(lineHeight - 20)/ 2;
+    get.layer.cornerRadius=(lineSmallHeight)/ 2;
     get.clipsToBounds = YES;
     [self.contentView addSubview:get];
     [get mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(ws.orderDateLab.mas_bottom).offset(10);
-        make.height.equalTo(@(lineHeight - 20));
+        make.height.equalTo(@(lineSmallHeight));
         make.left.equalTo(ws.orderNumLab);
-        make.width.equalTo(@(lineHeight - 20));
+        make.width.equalTo(@(lineSmallHeight));
     }];
     
     //商家名称
     self.shopNameLab = [[UILabel alloc]init];
     self.shopNameLab.font = [UIFont systemFontOfSize:14];
-    self.shopNameLab.textColor = [UIColor blackColor];
+    self.shopNameLab.textColor = [UIColor colorWithHexString:@"4b4b4b"];
     [self.contentView addSubview:self.shopNameLab];
     [self.shopNameLab setContentCompressionResistancePriority:UILayoutPriorityRequired
                                                       forAxis:UILayoutConstraintAxisHorizontal];
     [self.shopNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(get);
-        make.height.equalTo(@(lineHeight));
+        make.height.equalTo(@(lineSmallHeight));
         make.left.equalTo(get.mas_right).offset(20);
         
     }];
@@ -93,10 +94,10 @@
     self.shopAddLab.textAlignment = NSTextAlignmentLeft;
     self.shopAddLab.numberOfLines = 2;
     self.shopAddLab.font = [UIFont systemFontOfSize:14];
-    self.shopAddLab.textColor = [UIColor colorWithHexString:BaseTextGrayColor];
+    self.shopAddLab.textColor = [UIColor colorWithHexString:@"4b4b4b"];
     [self.contentView addSubview:self.shopAddLab];
     [self.shopAddLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@(lineHeight-10));
+        make.height.equalTo(@(lineSmallHeight));
         make.left.equalTo(ws.shopNameLab.mas_left);
         make.top.equalTo(ws.shopNameLab.mas_bottom);
         make.right.equalTo(ws.contentView.mas_right).offset(-50);
@@ -109,13 +110,32 @@
         make.right.equalTo(ws.contentView.mas_right).offset(-15);
         make.width.and.height.equalTo(@(20));
     }];
+    
+    UIImageView *leftIcon = [[UIImageView alloc]init];
+    [leftIcon setImage:[UIImage imageNamed:@"icon_dizhi"]];
+    [self.contentView addSubview:leftIcon];
+    [leftIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(ws.shopAddLab);
+        make.right.equalTo(ws.shopAddLab.mas_left).offset(-10);
+        make.width.and.height.equalTo(@(15));
+    }];
+    
+    UIView *lineMid = [[UIView alloc]init];
+    lineMid.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+    [self.contentView addSubview:lineMid];
+    [lineMid mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.contentView);
+        make.left.equalTo(ws.contentView.mas_left).offset(15);
+        make.top.equalTo(ws.shopAddLab.mas_bottom).offset(10);
+        make.height.equalTo(@(1));
+    }];
     UIButton *toMapView = [UIButton buttonWithType:UIButtonTypeCustom];
     [toMapView addTarget:self action:@selector(toMapAction) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:toMapView];
     [toMapView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws.contentView);
         make.top.equalTo(ws.shopAddLab);
-        make.bottom.equalTo(ws.shopAddLab);
+        make.bottom.equalTo(lineMid);
         make.right.equalTo(ws.contentView);
     }];
     
@@ -126,12 +146,12 @@
     put.text = ZBLocalized(@"送",nil);
     put.numberOfLines = 0;
     put.textColor = [UIColor whiteColor];
-    put.backgroundColor = [UIColor redColor];
+    put.backgroundColor = [UIColor colorWithHexString:@"fd7625"];
     put.layer.cornerRadius=(lineHeight - 20)/ 2;
     put.clipsToBounds = YES;
     [self.contentView addSubview:put];
     [put mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.shopAddLab.mas_bottom).offset(10);
+        make.top.equalTo(lineMid.mas_bottom).offset(10);
         make.height.equalTo(@(lineHeight - 20));
         make.left.equalTo(ws.orderNumLab);
         make.width.equalTo(@(lineHeight - 20));
@@ -142,7 +162,7 @@
     self.userAddLab.textAlignment = NSTextAlignmentLeft;
     self.userAddLab.numberOfLines = 2;
     self.userAddLab.font = [UIFont systemFontOfSize:14];
-    self.userAddLab.textColor = [UIColor blackColor];
+    self.userAddLab.textColor = [UIColor colorWithHexString:@"4b4b4b"];
     [self.contentView addSubview:self.userAddLab];
     [self.userAddLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(put);
@@ -157,12 +177,15 @@
     [buttomGrayLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(ws.contentView);
         make.width.equalTo(ws.contentView);
-        make.height.equalTo(@(2));
+        make.height.equalTo(@(0));
         make.top.equalTo(ws.userAddLab.mas_bottom).offset(5);
     }];
     
     self.leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.leftButton.backgroundColor = [UIColor colorWithHexString:BaseYellow];
+    self.leftButton.layer.cornerRadius=5;
+    
+    self.leftButton.clipsToBounds = YES;
     [self.leftButton setTitle:ZBLocalized(@"联系商家", nil) forState:UIControlStateNormal];
     [self.leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.leftButton.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -171,12 +194,15 @@
     [self.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(ws.contentView.mas_centerX).offset(-SCREEN_WIDTH / 4);
         make.width.equalTo(@(SCREEN_WIDTH / 3));
-        make.top.equalTo(buttomGrayLine.mas_bottom).offset(10);
+        make.top.equalTo(buttomGrayLine.mas_bottom).offset(0);
         make.height.equalTo(@(40));
     }];
     
     self.rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.rightButton.backgroundColor = [UIColor colorWithHexString:BaseYellow];
+    self.rightButton.layer.cornerRadius=5;
+    
+    self.rightButton.clipsToBounds = YES;
     [self.rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.rightButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.rightButton addTarget:self action:@selector(changeOrderTypeAction) forControlEvents:UIControlEventTouchUpInside];
@@ -184,7 +210,7 @@
     [self.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(ws.contentView.mas_centerX).offset(SCREEN_WIDTH / 4);
         make.width.equalTo(@(SCREEN_WIDTH / 3));
-        make.top.equalTo(buttomGrayLine.mas_bottom).offset(10);
+        make.top.equalTo(buttomGrayLine.mas_bottom).offset(0);
         make.height.equalTo(@(40));
     }];
     

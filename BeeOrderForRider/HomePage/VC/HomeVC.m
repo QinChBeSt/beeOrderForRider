@@ -82,11 +82,11 @@
     
     __weak typeof(self) ws = self;
     UIImageView *backImg = [[UIImageView alloc]init];
-    [backImg setImage:[UIImage imageNamed:@"icon_user_normal"]];
+    [backImg setImage:[UIImage imageNamed:@"icon_touxiang"]];
     [self.naviView addSubview:backImg];
     [backImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(ws.naviView.mas_top).offset(SafeAreaStatsBarHeight + 5);
-        make.left.equalTo(ws.naviView.mas_left).offset(15);
+        make.left.equalTo(ws.naviView.mas_left).offset(20);
         make.width.equalTo(@(30));
         make.height.equalTo(@(30));
     }];
@@ -97,8 +97,8 @@
     [self.naviView addSubview:backBTN];
     [backBTN mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(ws.naviView.mas_top).offset(SafeAreaStatsBarHeight);
-        make.left.equalTo(ws.naviView.mas_left).offset(10);
-        make.width.equalTo(@(40));
+        make.left.equalTo(ws.naviView.mas_left).offset(15);
+        make.width.equalTo(@(45));
         make.height.equalTo(@(SafeAreaTopHeight - SafeAreaStatsBarHeight));
     }];
     

@@ -12,6 +12,7 @@
 #import "ModelForOrderDetail.h"
 #import "CellForHistoryOrder.h"
 #import "OrderDetilVC.h"
+#define lineHeight 40
 @interface HistoryOrderVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UIView *naviView;
 @property (nonatomic , strong)UIButton *openBtn;
@@ -25,6 +26,9 @@
 @property (nonatomic , strong) NSString *parOpenStr;
 
 @property (nonatomic , strong) NSString *parCloseStr;
+@property (nonatomic , strong)UILabel *openLab;
+@property (nonatomic , strong)UILabel *closeLab;
+@property (nonatomic , strong)UIView *topView;
 /**
  *   页数
  */
@@ -45,6 +49,7 @@
     [super viewDidLoad];
     [self createNaviView];
     [self createBtnView];
+    [self createTopView];
     [self createTableView];
     UIScreenEdgePanGestureRecognizer *leftEdgeGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self
                                                                                                           action:@selector(moveViewWithGesture:)];
@@ -106,6 +111,23 @@
         make.centerY.equalTo(backImg);
     }];
 }
+-(void)createTopView{
+    self.topView = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, lineHeight * 3 + 10)];
+    self.topView.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+    [self.view addSubview:self.topView];
+ 
+    UIView *totilView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, lineHeight)];
+    totilView.backgroundColor = [UIColor whiteColor];
+    [self.topView addSubview:totilView];
+    
+    UIView *openView = [[UIView alloc]initWithFrame:CGRectMake( 0,lineHeight + 10, SCREEN_WIDTH, lineHeight)];
+    openView.backgroundColor = [UIColor whiteColor];
+    [self.topView addSubview:openView];
+    
+    UIView *closeView = [[UIView alloc]initWithFrame:CGRectMake(0, lineHeight * 2 + 10, SCREEN_WIDTH, lineHeight)];
+    closeView.backgroundColor = [UIColor whiteColor];
+    [self.topView addSubview:closeView];
+}
 -(void)createBtnView{
     self.openBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:self.openBtn];
@@ -144,7 +166,7 @@
 }
 -(void)createTableView{
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 60, SCREEN_WIDTH, SCREENH_HEIGHT - SafeAreaTopHeight - 60) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + lineHeight* 3 + 10, SCREEN_WIDTH, SCREENH_HEIGHT - SafeAreaTopHeight - lineHeight* 3 - 10) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
