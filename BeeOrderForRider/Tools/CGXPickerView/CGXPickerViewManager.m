@@ -28,7 +28,7 @@
         _titleLabelBGColor = [UIColor whiteColor];
         
         _rightBtnTitle = ZBLocalized(@"确定", nil);
-        _rightBtnBGColor =  [UIColor redColor];
+        _rightBtnBGColor =  [UIColor colorWithHexString:@"fd7625"];
         _rightBtnTitleSize = 16;
         _rightBtnTitleColor = [UIColor whiteColor];
         
@@ -37,7 +37,7 @@
         _rightBtnBorderWidth = 1;
         
         _leftBtnTitle = ZBLocalized(@"取消", nil);
-        _leftBtnBGColor =  [UIColor redColor];
+        _leftBtnBGColor =  [UIColor colorWithHexString:@"fd7625"];
         _leftBtnTitleSize = 16;
         _leftBtnTitleColor = [UIColor whiteColor];
         

@@ -26,6 +26,8 @@
 @property (nonatomic , strong) NSString *parOpenStr;
 
 @property (nonatomic , strong) NSString *parCloseStr;
+
+@property (nonatomic , strong)UILabel *tolitLab;
 @property (nonatomic , strong)UILabel *openLab;
 @property (nonatomic , strong)UILabel *closeLab;
 @property (nonatomic , strong)UIView *topView;
@@ -119,14 +121,107 @@
     UIView *totilView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, lineHeight)];
     totilView.backgroundColor = [UIColor whiteColor];
     [self.topView addSubview:totilView];
+    UILabel *totilTit = [[UILabel alloc]init];
+    totilTit.font = [UIFont systemFontOfSize:14];
+    totilTit.textColor = [UIColor colorWithHexString:@"4b4b4b"];
+    totilTit.text = ZBLocalized(@"总计", nil);
+    [totilView addSubview:totilTit];
+    [totilTit mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(totilView);
+        make.left.equalTo(totilView.mas_left).offset(20);
+    }];
+    
+    self.tolitLab = [[UILabel alloc]init];
+    self.tolitLab.font = [UIFont systemFontOfSize:14];
+    self.tolitLab.textColor = [UIColor colorWithHexString:@"4b4b4b"];
+    self.tolitLab.text = ZBLocalized(@"￥0", nil);
+    [totilView addSubview:self.tolitLab];
+    [self.tolitLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(totilView);
+        make.right.equalTo(totilView.mas_right).offset(-20);
+    }];
+    
+   
     
     UIView *openView = [[UIView alloc]initWithFrame:CGRectMake( 0,lineHeight + 10, SCREEN_WIDTH, lineHeight)];
     openView.backgroundColor = [UIColor whiteColor];
     [self.topView addSubview:openView];
+    UILabel *openTit = [[UILabel alloc]init];
+    [openView addSubview:openTit];
+    openTit.font = [UIFont systemFontOfSize:14];
+    openTit.textColor = [UIColor colorWithHexString:@"4b4b4b"];
+    openTit.text = ZBLocalized(@"派送时间", nil);
+    [openTit mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(openView);
+        make.left.equalTo(openView.mas_left).offset(20);
+    }];
+    UIImageView *openIcon = [[UIImageView alloc]init];
+    openIcon.image = [UIImage imageNamed:@"右箭头"];
+    [openView addSubview:openIcon];
+    [openIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(openView);
+        make.right.equalTo(openView.mas_right).offset(-20);
+        make.width.and.height.equalTo(@(15));
+    }];
+    self.openLab = [[UILabel alloc]init];
+    self.openLab.text = ZBLocalized(@"请选择送达时间", nil);
+    self.openLab.font = [UIFont systemFontOfSize:14];
+    self.openLab.textColor = [UIColor colorWithHexString:@"959595"];
+    [openView addSubview:self.openLab];
+    [self.openLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(openView);
+        make.right.equalTo(openIcon.mas_left).offset(-2);
+    }];
+    UIButton *openBtnn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [openBtnn addTarget:self action:@selector(actionToChooseOpen) forControlEvents:UIControlEventTouchUpInside];
+    [openView addSubview:openBtnn];
+    [openBtnn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(openView);
+        make.centerX.equalTo(openView);
+        make.width.and.height.equalTo(openView);
+    }];
     
     UIView *closeView = [[UIView alloc]initWithFrame:CGRectMake(0, lineHeight * 2 + 10, SCREEN_WIDTH, lineHeight)];
     closeView.backgroundColor = [UIColor whiteColor];
     [self.topView addSubview:closeView];
+    
+    UILabel *closeTit = [[UILabel alloc]init];
+    [closeView addSubview:closeTit];
+    closeTit.font = [UIFont systemFontOfSize:14];
+    closeTit.textColor = [UIColor colorWithHexString:@"4b4b4b"];
+    closeTit.text = ZBLocalized(@"送达时间", nil);
+    [closeTit mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(closeView);
+        make.left.equalTo(closeView.mas_left).offset(20);
+    }];
+    
+    UIImageView *closeIcon = [[UIImageView alloc]init];
+    closeIcon.image = [UIImage imageNamed:@"右箭头"];
+    [closeView addSubview:closeIcon];
+    [closeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(closeView);
+        make.right.equalTo(closeView.mas_right).offset(-20);
+        make.width.and.height.equalTo(@(15));
+    }];
+    
+    self.closeLab = [[UILabel alloc]init];
+    self.closeLab.text = ZBLocalized(@"请选择送达时间", nil);
+    self.closeLab.font = [UIFont systemFontOfSize:14];
+    self.closeLab.textColor = [UIColor colorWithHexString:@"959595"];
+    [closeView addSubview:self.closeLab];
+    [self.closeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(closeView);
+        make.right.equalTo(closeIcon.mas_left).offset(-2);
+    }];
+    
+    UIButton *closeBtnn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [closeBtnn addTarget:self action:@selector(actionToChooseClose) forControlEvents:UIControlEventTouchUpInside];
+    [closeView addSubview:closeBtnn];
+    [closeBtnn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(closeView);
+        make.centerX.equalTo(closeView);
+        make.width.and.height.equalTo(closeView);
+    }];
 }
 -(void)createBtnView{
     self.openBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -205,7 +300,7 @@
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 160;
+     return [self cellHeightForIndexPath:indexPath cellContentViewWidth:SCREEN_WIDTH  tableView:self.tableView];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     OrderDetilVC *order = [[OrderDetilVC alloc]init];
@@ -240,6 +335,8 @@
     [CGXPickerView showDatePickerWithTitle:ZBLocalized(@"开始时间", nil) DateType:UIDatePickerModeDate DefaultSelValue:self.openStr MinDateStr:@"2017-01-01" MaxDateStr:nowStr IsAutoSelect:NO Manager:nil ResultBlock:^(NSString *selectValue) {
         self.openStr = selectValue;
         [self.openBtn setTitle:self.openStr forState:UIControlStateNormal];
+        self.openLab.text = self.openStr;
+        
         
     }];
 }
@@ -259,7 +356,7 @@
     [CGXPickerView showDatePickerWithTitle:ZBLocalized(@"结束时间", nil) DateType:UIDatePickerModeDate DefaultSelValue:self.closeStr MinDateStr:beginStr MaxDateStr:nowStr IsAutoSelect:NO Manager:nil ResultBlock:^(NSString *selectValue) {
         self.closeStr = selectValue;
         [self.closeBtn setTitle:self.closeStr forState:UIControlStateNormal];
-        
+        self.closeLab.text = self.closeStr;
     }];
 }
 -(void)toSearchHistory{
@@ -292,7 +389,7 @@
             NSString *code = [NSString stringWithFormat:@"%@",result[@"code"]];
             if ([code isEqualToString:@"1"]) {
                 NSDictionary *dic = result[@"value"];
-                self.addPicLabel.text = [NSString stringWithFormat:@"%@ %@%@",ZBLocalized(@"总计", nil),dic[@"totalspic"],ZBLocalized(@"元", nil)];
+                self.tolitLab.text = [NSString stringWithFormat:@"%@ %@",ZBLocalized(@"￥", nil),dic[@"totalspic"]];
                 NSMutableArray *arr = dic[@"getorderlist"];
                 for (NSMutableDictionary *dicRes in arr) {
                     

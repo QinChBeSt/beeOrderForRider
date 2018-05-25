@@ -39,6 +39,10 @@
 @property (nonatomic , strong)UIImageView *headImage;
 @property (nonatomic , strong)UILabel *userNameLab;
 @property (nonatomic , strong)UILabel *userPhoneLab;
+@property (nonatomic , strong) UITableView *tableViewToChage;
+@property (nonatomic , strong)UIView *windowBackView;
+@property (nonatomic , strong)UIView *changeLagView;
+@property (nonatomic , strong)NSIndexPath *lastIndexPath;
 @end
 
 @implementation LeftPageVC
@@ -570,6 +574,93 @@
                           };
     NSNotification *noti = [NSNotification notificationWithName:@"homePageType" object:dic];
     [[NSNotificationCenter defaultCenter] postNotification:noti];
+}
+
+
+#pragma mark - 切换语言
+-(void)createwindowBackView{
+    self.windowBackView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT)];
+    self.windowBackView.backgroundColor = [UIColor colorWithHexString:@"363636" alpha:0.3];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.windowBackView];
+    
+}
+-(void)createChangeLag{
+    [self createwindowBackView];
+    __weak typeof(self) ws = self;
+    self.changeLagView = [[UIView alloc]init];
+    self.changeLagView.layer.cornerRadius=10;
+    
+    self.changeLagView.clipsToBounds = YES;
+    self.changeLagView.backgroundColor = [UIColor whiteColor];
+    [self.windowBackView addSubview:self.changeLagView];
+    [self.changeLagView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.view);
+        make.centerY.equalTo(ws.windowBackView);
+        make.left.equalTo(ws.view.mas_left).offset(30);
+        make.height.equalTo(@(185));
+    }];
+    
+    
+    [self createTableView];
+    UIButton *backBtn =[UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn.layer.cornerRadius=15;
+    [backBtn setImage:[UIImage imageNamed:@"icon_guanbianniu"] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(closeWindow) forControlEvents:UIControlEventTouchUpInside];
+    backBtn.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+    backBtn.clipsToBounds = YES;
+    [self.windowBackView addSubview:backBtn];
+    [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.changeLagView.mas_right).offset(-5);
+        make.centerY.equalTo(ws.changeLagView.mas_top).offset(5);
+        make.width.and.height.equalTo(@(30));
+    }];
+    NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
+    NSLog(@"切换后的语言:%@",language);
+    if ([language isEqualToString:@"th"]) {
+        self.lastIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    }
+    else if ([language isEqualToString:@"zh-Hans"]) {
+        self.lastIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    }
+    else if ([language isEqualToString:@"en"]) {
+        self.lastIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    }
+    [self.tableView reloadData];
+    
+    UIButton *okBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [okBtn addTarget:self action:@selector(chooseLugOk) forControlEvents:UIControlEventTouchUpInside];
+    okBtn.layer.cornerRadius=5;
+    okBtn.clipsToBounds = YES;
+    [okBtn setTitle:ZBLocalized(@"确定", nil) forState:UIControlStateNormal];
+    [okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [okBtn setBackgroundColor:[UIColor colorWithHexString:BaseYellow]];
+    okBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self.windowBackView addSubview:okBtn];
+    [okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(ws.tableView.mas_bottom).offset(5);
+        make.bottom.equalTo(ws.changeLagView.mas_bottom).offset(-15);
+        make.right.equalTo(ws.changeLagView.mas_centerX).offset(-10);
+        make.left.equalTo(ws.changeLagView.mas_left).offset(15);
+    }];
+    
+    UIButton *cleanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cleanBtn addTarget:self action:@selector(closeWindow) forControlEvents:UIControlEventTouchUpInside];
+    cleanBtn.layer.cornerRadius=5;
+    cleanBtn.clipsToBounds = YES;
+    [cleanBtn setTitle:ZBLocalized(@"取消", nil) forState:UIControlStateNormal];
+    [cleanBtn setTitleColor:[UIColor colorWithHexString:BaseYellow] forState:UIControlStateNormal];
+    [cleanBtn setBackgroundColor:[UIColor whiteColor]];
+    cleanBtn.layer.borderColor = [UIColor colorWithHexString:BaseYellow].CGColor;
+    cleanBtn.layer.borderWidth = 1;
+    okBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self.windowBackView addSubview:cleanBtn];
+    [cleanBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(ws.tableView.mas_bottom).offset(5);
+        make.bottom.equalTo(ws.changeLagView.mas_bottom).offset(-15);
+        make.left.equalTo(ws.changeLagView.mas_centerX).offset(10);
+        make.right.equalTo(ws.changeLagView.mas_right).offset(-15);
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

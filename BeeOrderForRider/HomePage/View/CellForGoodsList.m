@@ -25,7 +25,7 @@
     [self.bigImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(ws.contentView);
         make.top.equalTo(ws.contentView.mas_top).offset(10);
-        make.left.equalTo(ws.contentView.mas_left).offset(15);
+        make.left.equalTo(ws.contentView.mas_left).offset(25);
         make.width.equalTo(ws.bigImage.mas_height);
     }];
     
@@ -39,12 +39,13 @@
     }];
     
     self.shopPic = [[UILabel alloc]init];
+    self.shopPic.textColor = [UIColor redColor];
     self.shopPic.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:self.shopPic];
     [self.shopPic mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.bigImage.mas_top);
-        make.bottom.equalTo(ws.bigImage.mas_centerY);
-        make.right.equalTo(ws.contentView.mas_right).offset(-15);
+        make.bottom.equalTo(ws.bigImage.mas_bottom);
+        make.top.equalTo(ws.bigImage.mas_centerY);
+        make.right.equalTo(ws.contentView.mas_right).offset(-25);
     }];
     
     self.shopCount = [[UILabel alloc]init];
@@ -53,7 +54,7 @@
     [self.shopCount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(ws.bigImage.mas_bottom);
         make.top.equalTo(ws.bigImage.mas_centerY);
-        make.right.equalTo(ws.contentView.mas_right).offset(-15);
+        make.left.equalTo(ws.bigImage.mas_right).offset(20);
     }];
     
     UIView *line = [[UIView alloc]init];

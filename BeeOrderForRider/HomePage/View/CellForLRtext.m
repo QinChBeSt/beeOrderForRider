@@ -27,7 +27,7 @@
     [self.contentView addSubview:self.leftLab];
     [self.leftLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(ws.contentView);
-        make.left.equalTo(ws.contentView.mas_left).offset(15);
+        make.left.equalTo(ws.contentView.mas_left).offset(25);
     }];
     
     self.rightLab = [[UILabel alloc]init];
@@ -36,7 +36,7 @@
     [self.contentView addSubview:self.rightLab];
     [self.rightLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(ws.contentView);
-        make.right.equalTo(ws.contentView.mas_right).offset(-15);
+        make.right.equalTo(ws.contentView.mas_right).offset(-25);
     }];
     
     self.buttomLine = [[UIView alloc]init];

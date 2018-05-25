@@ -25,6 +25,8 @@
 @property (nonatomic,assign) int pageIndex;
 @property (nonatomic , strong)NSString *latLoc;
 @property (nonatomic , strong)NSString *longLoc;
+
+@property (nonatomic , strong)UIImageView *noDataImg;
 @end
 
 @implementation HomeOrderMissionVC
@@ -74,7 +76,9 @@
                     [self.tableView.mj_header endRefreshing];
                     [self.tableView.mj_footer endRefreshingWithNoMoreData];
                     [self.tableView reloadData];
+                    self.noDataImg.hidden = NO;
                 }else{
+                    self.noDataImg.hidden = YES;
                     [self.tableView.mj_footer resetNoMoreData];
                     [self.tableView.mj_header endRefreshing];
                     [self.tableView reloadData];
@@ -146,6 +150,11 @@
     [super viewDidLoad];
     [self createTableView];
     [self getLocation];
+    self.noDataImg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT - SafeAreaTopHeight - 45)];
+    self.noDataImg.image = [UIImage imageNamed:@"bg_zanwandingdan"];
+    self.noDataImg.hidden = YES;
+    [self.view addSubview:self.noDataImg];
+    
 }
 -(void)getLocation{
     CLLocationManager *manager = [[CLLocationManager alloc] init];

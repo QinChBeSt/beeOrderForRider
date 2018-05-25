@@ -29,6 +29,7 @@
 @property (nonatomic , strong)NSString *orderUserTimeStr;
 @property (nonatomic , strong)NSString *callUserTel;
 @property (nonatomic , strong)NSString *callShopTel;
+@property (nonatomic , strong)NSString *orderBzStr;
 @end
 
 @implementation OrderDetilVC
@@ -105,7 +106,7 @@
 }
 #pragma mark- UITabelViewDataSource/delegat
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 4;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -113,9 +114,11 @@
     if (section == 0) {
         return 1;
     }else if (section == 1){
-        return self.arrForOrderDetail.count + 4;
+        return self.arrForOrderDetail.count + 5;
     }else if (section == 2){
-        return 4;
+        return 1;
+    }else if (section == 3){
+        return 3;
     }
     return 0;
 }
@@ -130,9 +133,18 @@
             {
                 cell = [[CellForLtextRimg alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
             }
-            
+            UIView *line = [[UIView alloc]init];
+            line.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+            [cell addSubview:line];
+            [line mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(cell.contentView);
+                make.width.equalTo(@(SCREEN_WIDTH));
+                make.height.equalTo(@(2));
+                make.top.equalTo(cell.contentView);
+            }];
+            cell.shuxian.hidden = NO;
             cell.leftLab.text = self.shopNameStr;
-            cell.rightImg.image = [UIImage imageNamed:@"电话"];
+            cell.rightImg.image = [UIImage imageNamed:@"icon_xingqingdianhuayonghu"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -146,7 +158,7 @@
                 cell = [[CellForLtextRimg alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
             }
             cell.buttomLine.backgroundColor = [UIColor clearColor];
-            cell.leftLab.text = ZBLocalized(@"—— 商品详情 ——",nil);
+            //cell.leftLab.text = ZBLocalized(@"—— 商品详情 ——",nil);
             [cell.leftLab mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(cell.contentView);
                 make.centerY.equalTo(cell.contentView);
@@ -156,19 +168,6 @@
             return cell;
         }
         else if (indexPath.row == self.arrForOrderDetail.count + 1){
-            //优惠金额
-            CellForLRtext *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
-            if(cell == nil)
-            {
-                cell = [[CellForLRtext alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
-            }
-            cell.buttomLine.backgroundColor = [UIColor whiteColor];
-            cell.leftLab.text = ZBLocalized(@"优惠金额", nil);
-            cell.rightLab.text = self.orderYhStr;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return cell;
-        }
-        else if (indexPath.row == self.arrForOrderDetail.count + 2){
             //配送费
             CellForLRtext *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
             if(cell == nil)
@@ -179,6 +178,20 @@
             cell.rightLab.text = self.orderPsStr;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
+            
+        }
+        else if (indexPath.row == self.arrForOrderDetail.count + 2){
+            //优惠金额
+            CellForLRtext *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
+            if(cell == nil)
+            {
+                cell = [[CellForLRtext alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
+            }
+            
+            cell.leftLab.text = ZBLocalized(@"优惠金额", nil);
+            cell.rightLab.text = self.orderYhStr;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
         }
         else if (indexPath.row == self.arrForOrderDetail.count + 3){
             //小计
@@ -187,8 +200,31 @@
             {
                 cell = [[CellForLRtext alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
             }
+            cell.leftLab.text = ZBLocalized(@"小计", nil);
             cell.buttomLine.backgroundColor = [UIColor whiteColor];
             cell.rightLab.text = self.orderAllpicStr;
+            cell.rightLab.textColor = [UIColor redColor];
+            cell.rightLab.font = [UIFont systemFontOfSize:18];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }else if (indexPath.row == self.arrForOrderDetail.count + 4){
+            CellForLtextRimg *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
+            if(cell == nil)
+            {
+                cell = [[CellForLtextRimg alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
+            }
+            UIView *line = [[UIView alloc]init];
+            line.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+            [cell addSubview:line];
+            [line mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(cell.contentView);
+                make.width.equalTo(@(SCREEN_WIDTH));
+                make.height.equalTo(@(2));
+                make.top.equalTo(cell.contentView);
+            }];
+            cell.shuxian.hidden = NO;
+            cell.leftLab.text = self.orderUserPhoneStr;
+            cell.rightImg.image = [UIImage imageNamed:@"icon_xingqingdianhuayonghu"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -214,43 +250,51 @@
             {
                 cell = [[CellForLtextRimg alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
             }
-            
-            cell.leftLab.text = self.orderUserPhoneStr;
-            cell.rightImg.image = [UIImage imageNamed:@"电话"];
+            cell.leftLab.font = [UIFont systemFontOfSize:14];
+            cell.leftLab.text = self.orderUserAddStr;
+            cell.leftLab.numberOfLines = 2;
+            [cell.leftLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(cell.contentView);
+                make.left.equalTo(cell.contentView.mas_left).offset(25);
+                make.right.equalTo(cell.contentView.mas_right).offset(-15);
+            }];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
-        else if (indexPath.row == 1) {
+        
+    }
+    else if (indexPath.section == 3){
+        if (indexPath.row == 2) {
             CellForLtextRimg *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
             if(cell == nil)
             {
                 cell = [[CellForLtextRimg alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
             }
             cell.leftLab.font = [UIFont systemFontOfSize:14];
-            cell.leftLab.text = self.orderUserAddStr;
+            cell.leftLab.text = self.orderBzStr;
             cell.leftLab.numberOfLines = 2;
             [cell.leftLab mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(cell.contentView);
-                make.left.equalTo(cell.contentView.mas_left).offset(15);
+                make.left.equalTo(cell.contentView.mas_left).offset(25);
                 make.right.equalTo(cell.contentView.mas_right).offset(-15);
             }];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
-        else if (indexPath.row == 2) {
+        else if (indexPath.row == 0) {
             CellForLtextRimg *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
             if(cell == nil)
             {
                 cell = [[CellForLtextRimg alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
             }
-           
+            
             cell.leftLab.font = [UIFont systemFontOfSize:14];
             cell.leftLab.text = self.orderUserOrderNumStr;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             return cell;
         }
-        else if (indexPath.row == 3) {
+        else if (indexPath.row ==1) {
             CellForLtextRimg *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
             if(cell == nil)
             {
@@ -277,28 +321,33 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
-            return 50;
+            return 0;
         }
         else if (indexPath.row == self.arrForOrderDetail.count + 1){
-            return 40;
+            return 50;
         }
         else if (indexPath.row == self.arrForOrderDetail.count + 2){
-            return 40;
+            return 50;
         }
         else if (indexPath.row == self.arrForOrderDetail.count + 3){
-            return 50;
+            return 60;
+        }
+        else if (indexPath.row == self.arrForOrderDetail.count + 4){
+            return 60;
         }else{
             return 100;
         }
     }
     else if (indexPath.section == 2){
         if (indexPath.row == 0) {
-            return 50;
+            return 60;
         }
         else {
             return 40;
         }
         
+    }else if (indexPath.section == 3){
+        return 40;
     }
     return 50;
 }
@@ -307,8 +356,8 @@
         if (indexPath.row == 0) {
             [self callShop];
         }
-    }else if (indexPath.section == 2){
-        if (indexPath.row == 0) {
+    }else if (indexPath.section == 1){
+        if (indexPath.row == self.arrForOrderDetail.count + 4) {
             [self callUser];
         }
     }
@@ -323,7 +372,7 @@
     self.callUserTel = mod.uphone;
     self.shopNameStr = mod.shopname;
     CGFloat yhF = [mod.orderyhpic floatValue];
-    self.orderYhStr = [NSString stringWithFormat:@"%.2f",yhF];
+    self.orderYhStr = [NSString stringWithFormat:@"-%.2f",yhF];
     
     CGFloat psF = [mod.orderpspic floatValue];
     self.orderPsStr = [NSString stringWithFormat:@"%.2f",psF];
@@ -333,13 +382,13 @@
     if (allF <= 0) {
         allF = 0.01;
     }
-    self.orderAllpicStr = [NSString stringWithFormat:@"%@:%.2f",ZBLocalized(@"小计", nil),allF];
+    self.orderAllpicStr = [NSString stringWithFormat:@"%@%.2f",ZBLocalized(@"￥", nil),allF];
   
     self.orderUserPhoneStr = [NSString stringWithFormat:@"%@  %@",mod.uname,mod.uphone];
-    self.orderUserAddStr = [NSString stringWithFormat:@"%@：%@",ZBLocalized(@"配送地址",nil),mod.uaddr];
-    self.orderUserTimeStr = [NSString stringWithFormat:@"%@：%@",ZBLocalized(@"订单时间",nil),mod.orderdatatime];
-    self.orderUserOrderNumStr = [NSString stringWithFormat:@"%@：%@",ZBLocalized(@"订单号码",nil),mod.ordernum];
-    
+    self.orderUserAddStr = [NSString stringWithFormat:@"%@   %@",ZBLocalized(@"配送地址",nil),mod.uaddr];
+    self.orderUserTimeStr = [NSString stringWithFormat:@"%@   %@",ZBLocalized(@"订单时间",nil),mod.orderdatatime];
+    self.orderUserOrderNumStr = [NSString stringWithFormat:@"%@   %@",ZBLocalized(@"订单号码",nil),mod.ordernum];
+    self.orderBzStr = [NSString stringWithFormat:@"%@   %@",ZBLocalized(@"备注", nil),mod.orderbz];
     NSMutableArray *arr = mod.ordersContexts;
     for (NSMutableDictionary *dic in arr) {
         ModelForOrderDetail *modOrder = [ModelForOrderDetail yy_modelWithDictionary:dic];

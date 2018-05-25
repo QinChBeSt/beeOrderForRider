@@ -12,4 +12,5 @@
 @property (nonatomic , strong)UILabel *leftLab;
 @property (nonatomic , strong)UIImageView *rightImg;
 @property (nonatomic , strong)UIView *buttomLine;
+@property (nonatomic , strong)UIView *shuxian;
 @end

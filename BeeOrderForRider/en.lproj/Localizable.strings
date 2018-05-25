@@ -67,7 +67,7 @@
 "请选择结束时间" = "Please select end time";
 "总计" = "total";
 "元" = "USD";
-"订单编号:" = "Order No.";
+"订单编号: " = "Order No. ";
 "取" = "Take";
 "送" = "Send";
 "商家未接单" = "No orders";
@@ -81,3 +81,8 @@
 "已评价" = "Evaluated";
 "商家已取消" = "The merchant has cancelled";
 "查看今日收益" = "View today's benefits";
+"选择时间" = "Select time";
+"派送时间" = "Delivery Time";
+"送达时间" = "Arrive Time";
+"请选择送达时间" = "Please choose arrive time";
+"￥0" = "$0";

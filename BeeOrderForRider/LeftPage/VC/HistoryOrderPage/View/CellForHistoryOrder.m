@@ -7,7 +7,7 @@
 //
 
 #import "CellForHistoryOrder.h"
-#define lineHeight 50
+#define lineHeight 40
 @implementation CellForHistoryOrder
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -19,25 +19,34 @@
     return self;
 }
 -(void)setupUI{
+    
+    UIView *buttomLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    buttomLine.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+    [self.contentView addSubview:buttomLine];
+    
     __weak typeof(self) ws = self;
-    self.orderNumLab = [[UILabel alloc]init];
-    self.orderNumLab.textColor = [UIColor blackColor];
-    self.orderNumLab.font = [UIFont systemFontOfSize:14];
-    [self.contentView addSubview:self.orderNumLab];
-    [self.orderNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.contentView);
-        make.left.equalTo(ws.contentView.mas_left).offset(20);
-        make.height.equalTo(@(lineHeight));
-    }];
+   
     
     self.orderDateLab = [[UILabel alloc]init];
-    self.orderDateLab.textColor = [UIColor blackColor];
+    self.orderDateLab.textColor = [UIColor colorWithHexString:@"4b4b4b"];
     self.orderDateLab.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:self.orderDateLab];
     [self.orderDateLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.contentView);
+         make.top.equalTo(buttomLine.mas_bottom).offset(0);
         make.right.equalTo(ws.contentView.mas_right).offset(-20);
         make.height.equalTo(@(lineHeight));
+    }];
+    
+    self.orderNumLab = [[UILabel alloc]init];
+    self.orderNumLab.numberOfLines = 2;
+    self.orderNumLab.textColor = [UIColor colorWithHexString:@"fd7625"];
+    self.orderNumLab.font = [UIFont systemFontOfSize:14];
+    [self.contentView addSubview:self.orderNumLab];
+    [self.orderNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(buttomLine.mas_bottom).offset(0);
+        make.left.equalTo(ws.contentView.mas_left).offset(20);
+        make.height.equalTo(@(lineHeight));
+        make.right.equalTo(ws.orderDateLab.mas_left).offset(-10);
     }];
     
     UILabel *get = [[UILabel alloc]init];
@@ -47,20 +56,20 @@
     get.numberOfLines = 0;
     get.textColor = [UIColor colorWithHexString:BaseTextGrayColor];
     get.backgroundColor = [UIColor colorWithHexString:BaseYellow];
-    get.layer.cornerRadius=(lineHeight - 20)/ 2;
+    get.layer.cornerRadius=(lineHeight - 10)/ 2;
     get.clipsToBounds = YES;
     [self.contentView addSubview:get];
     [get mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.orderDateLab.mas_bottom).offset(10);
-        make.height.equalTo(@(lineHeight - 20));
+        make.top.equalTo(ws.orderDateLab.mas_bottom).offset(15);
+        make.height.equalTo(@(lineHeight - 10));
         make.left.equalTo(ws.orderNumLab);
-        make.width.equalTo(@(lineHeight - 20));
+        make.width.equalTo(@(lineHeight - 10));
     }];
     
 
     self.shopNameLab = [[UILabel alloc]init];
     self.shopNameLab.font = [UIFont systemFontOfSize:14];
-    self.shopNameLab.textColor = [UIColor blackColor];
+    self.shopNameLab.textColor = [UIColor colorWithHexString:@"4b4b4b"];
     [self.contentView addSubview:self.shopNameLab];
     [self.shopNameLab setContentCompressionResistancePriority:UILayoutPriorityRequired
                                             forAxis:UILayoutConstraintAxisHorizontal];
@@ -84,13 +93,23 @@
     self.riderStateLabel.textAlignment = NSTextAlignmentRight;
     self.riderStateLabel.numberOfLines = 2;
     self.riderStateLabel.font = [UIFont systemFontOfSize:14];
-    self.riderStateLabel.textColor = [UIColor blackColor];
+    self.riderStateLabel.textColor = [UIColor colorWithHexString:@"4b4b4b"];
     [self.contentView addSubview:self.riderStateLabel];
     [self.riderStateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(get);
         make.height.equalTo(@(lineHeight));
         make.right.equalTo(rightIcon.mas_left).offset(-15);
         make.left.equalTo(ws.shopNameLab.mas_right).offset(20);
+    }];
+    
+    UIView *midLine = [[UIView alloc]init];
+    midLine.backgroundColor = [UIColor colorWithHexString:@"f5f5f5"];
+    [self.contentView addSubview:midLine];
+    [midLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.contentView);
+        make.left.equalTo(ws.contentView.mas_left).offset(15);
+        make.top.equalTo(get.mas_bottom).offset(15);
+        make.height.equalTo(@(1));
     }];
     
     UILabel *put = [[UILabel alloc]init];
@@ -100,19 +119,19 @@
     put.numberOfLines = 0;
     put.textColor = [UIColor whiteColor];
     put.backgroundColor = [UIColor redColor];
-    put.layer.cornerRadius=(lineHeight - 20)/ 2;
+    put.layer.cornerRadius=(lineHeight - 10)/ 2;
     put.clipsToBounds = YES;
     [self.contentView addSubview:put];
     [put mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(get.mas_bottom).offset(20);
-        make.height.equalTo(@(lineHeight - 20));
+        make.top.equalTo(midLine.mas_bottom).offset(15);
+        make.height.equalTo(@(lineHeight - 10));
         make.left.equalTo(ws.orderNumLab);
-        make.width.equalTo(@(lineHeight - 20));
+        make.width.equalTo(@(lineHeight - 10));
     }];
     
     self.userNameLab = [[UILabel alloc]init];
     self.userNameLab.font = [UIFont systemFontOfSize:14];
-    self.userNameLab.textColor = [UIColor blackColor];
+    self.userNameLab.textColor = [UIColor colorWithHexString:@"4b4b4b"];
     [self.contentView addSubview:self.userNameLab];
     [self.userNameLab setContentCompressionResistancePriority:UILayoutPriorityRequired
                                                       forAxis:UILayoutConstraintAxisHorizontal];
@@ -126,7 +145,7 @@
     self.userAddLab.textAlignment = NSTextAlignmentLeft;
     self.userAddLab.numberOfLines = 2;
     self.userAddLab.font = [UIFont systemFontOfSize:14];
-    self.userAddLab.textColor = [UIColor blackColor];
+    self.userAddLab.textColor = [UIColor colorWithHexString:@"4b4b4b"];
     [self.contentView addSubview:self.userAddLab];
     [self.userAddLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(put);
@@ -135,13 +154,19 @@
         make.left.equalTo(ws.userNameLab.mas_right).offset(20);
     }];
     
-    
-    UIView *buttomLine = [[UIView alloc]initWithFrame:CGRectMake(0, lineHeight * 3, SCREEN_WIDTH, 10)];
-    buttomLine.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
-    [self.contentView addSubview:buttomLine];
+    UIView *bottomLine = [[UIView alloc]init];
+    bottomLine.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+    [self.contentView addSubview:bottomLine];
+   bottomLine.sd_layout
+    .leftSpaceToView(self.contentView, 0)
+    .rightSpaceToView(self.contentView,0)
+    .heightIs(0)
+    .topSpaceToView(put, 15);
+    [self setupAutoHeightWithBottomView:bottomLine bottomMargin:0];
+   
 }
 -(void)setMod:(ModelForHistory *)mod{
-    self.orderNumLab.text = [NSString stringWithFormat:@"%@%@",ZBLocalized(@"订单编号:", nil),mod.ordernum];
+    self.orderNumLab.text = [NSString stringWithFormat:@"%@%@",ZBLocalized(@"订单编号: ", nil),mod.ordernum];
     self.orderDateLab.text = [NSString stringWithFormat:@"%@",mod.orderdatatime];
     self.shopNameLab.text = mod.shopname;
     [self setOrderStateStr:mod.ordertype];

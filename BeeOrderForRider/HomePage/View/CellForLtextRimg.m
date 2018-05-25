@@ -26,14 +26,27 @@
     [self.contentView addSubview:self.leftLab];
     [self.leftLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(ws.contentView);
-        make.left.equalTo(ws.contentView.mas_left).offset(15);
+        make.left.equalTo(ws.contentView.mas_left).offset(25);
     }];
     self.rightImg = [[UIImageView alloc]init];
     [self.contentView addSubview:self.rightImg];
     [self.rightImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(ws.contentView.mas_right).offset(-15);
-        make.width.and.height.equalTo(@(20));
+        make.right.equalTo(ws.contentView.mas_right).offset(-25);
+        make.width.equalTo(@(20));
+        make.height.equalTo(@(30));
         make.centerY.equalTo(ws.contentView);
+    }];
+    
+    self.shuxian = [[UIView alloc]init];
+    
+     self.shuxian.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+    self.shuxian.hidden = YES;
+    [self.contentView addSubview: self.shuxian];
+    [ self.shuxian mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(ws.rightImg.mas_left).offset(-20) ;
+        make.width.equalTo(@(1));
+        make.centerY.equalTo(ws.contentView);
+        make.top.equalTo(ws.contentView).offset(5);
     }];
     self.buttomLine = [[UIView alloc]init];
     self.buttomLine.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
