@@ -14,6 +14,9 @@
 #import "ChangelanguageVC.h"
 #import "AboutVC.h"
 #import "ViewMoneyVC.h"
+#import "CellForChooseLag.h"
+#import "QCNavigationController.h"
+#import "HomeVC.h"
 #define headViewHeight SCREENH_HEIGHT * 0.225
 #define buttomViewHeight SCREENH_HEIGHT * 0.150
 @interface LeftPageVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -339,75 +342,118 @@
 #pragma mark- UITabelViewDataSource/delegat
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    if (tableView == self.tableView) {
+        return 6;
+    }else{
+        return 3;
+    }
+    return 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CellForLeftPage *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
-    
-    if(cell == nil)
-    {
-        cell = [[CellForLeftPage alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+    if (tableView == self.tableView) {
+        CellForLeftPage *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+        
+        if(cell == nil)
+        {
+            cell = [[CellForLeftPage alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if (indexPath.row == 0) {
+            cell.img.image = [UIImage imageNamed:@"icon_erjidingdan"];
+            cell.Tlabel.text = ZBLocalized(@"历史订单", nil);
+        }
+        else if (indexPath.row ==2){
+            cell.img.image = [UIImage imageNamed:@"icon_erjimimaxiugai"];
+            cell.Tlabel.text = ZBLocalized(@"修改密码", nil);
+        }else if (indexPath.row == 1){
+            cell.img.image = [UIImage imageNamed:@"icon_erjichakanyeji"];
+            cell.Tlabel.text = ZBLocalized(@"查看今日收益", nil);
+        }
+        else if (indexPath.row == 3){
+            cell.img.image = [UIImage imageNamed:@"icon_erjiyuyanqiehuan"];
+            cell.Tlabel.text = ZBLocalized(@"语言切换", nil);
+        }
+        else if (indexPath.row == 4){
+            cell.img.image = [UIImage imageNamed:@"icon_erjiguanyu"];
+            cell.Tlabel.text = ZBLocalized(@"关于BeeRider骑手", nil);
+        }
+        
+        else if (indexPath.row == 5){
+            cell.img.image = [UIImage imageNamed:@"icon_erjituichu"];
+            cell.Tlabel.text = ZBLocalized(@"退出登录", nil);
+        }
+        return cell;
+    }else{
+        CellForChooseLag *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+        if(cell == nil)
+        {
+            cell = [[CellForChooseLag alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+        }
+        
+        cell.selectionStyle =UITableViewCellSelectionStyleNone;
+        if (indexPath == self.lastIndexPath) {
+            [cell.img setImage:[UIImage imageNamed:@"icon_xuankuang_down"]];
+        }else{
+            [cell.img setImage:[UIImage imageNamed:@"icon_xuankuang"]];
+        }
+        if (indexPath.section == 0) {
+            if (indexPath.row == 0){
+                cell.name.text = @"บทความภาษาไทย";
+            }else if (indexPath.row == 1){
+                cell.name.text = @"简体中文";
+            }else if (indexPath.row == 2){
+                cell.name.text = @"English";
+            }
+        }
+        
+        return cell;
+        
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-   
-    if (indexPath.row == 0) {
-        cell.img.image = [UIImage imageNamed:@"icon_erjidingdan"];
-        cell.Tlabel.text = ZBLocalized(@"历史订单", nil);
-    }
-    else if (indexPath.row ==2){
-        cell.img.image = [UIImage imageNamed:@"icon_erjimimaxiugai"];
-        cell.Tlabel.text = ZBLocalized(@"修改密码", nil);
-    }else if (indexPath.row == 1){
-        cell.img.image = [UIImage imageNamed:@"icon_erjichakanyeji"];
-        cell.Tlabel.text = ZBLocalized(@"查看今日收益", nil);
-    }
-    else if (indexPath.row == 3){
-        cell.img.image = [UIImage imageNamed:@"icon_erjiyuyanqiehuan"];
-        cell.Tlabel.text = ZBLocalized(@"语言切换", nil);
-    }
-    else if (indexPath.row == 4){
-        cell.img.image = [UIImage imageNamed:@"icon_erjiguanyu"];
-        cell.Tlabel.text = ZBLocalized(@"关于BeeRider骑手", nil);
-    }
-    
-    else if (indexPath.row == 5){
-        cell.img.image = [UIImage imageNamed:@"icon_erjituichu"];
-        cell.Tlabel.text = ZBLocalized(@"退出登录", nil);
-    }
-    return cell;
+    return nil;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == self.tableView) {
+        return 50;
+    }else{
+        return 40;
+    }
     return 50;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-        HistoryOrderVC *history = [[HistoryOrderVC alloc]init];
-        [self.navigationController pushViewController:history animated:YES];
-    }else if (indexPath.row == 1){
-        ViewMoneyVC *view = [[ViewMoneyVC alloc]init];
-        [self.navigationController pushViewController:view animated:YES];
+    if (tableView == self.tableView) {
+        if (indexPath.row == 0) {
+            HistoryOrderVC *history = [[HistoryOrderVC alloc]init];
+            [self.navigationController pushViewController:history animated:YES];
+        }else if (indexPath.row == 1){
+            ViewMoneyVC *view = [[ViewMoneyVC alloc]init];
+            [self.navigationController pushViewController:view animated:YES];
+            
+        }
+        else if (indexPath.row == 2){
+            ChangePasswordVC *pasVc = [[ChangePasswordVC alloc]init];
+            [self.navigationController pushViewController:pasVc animated:YES];
+        }
+        else if (indexPath.row == 3){
+            [self createChangeLag];
+            //[self.navigationController pushViewController:lang animated:YES];
+        }
+        else if (indexPath.row == 4){
+            AboutVC *about = [[AboutVC alloc]init];
+            [self.navigationController pushViewController:about animated:YES];
+        }
         
+        else if (indexPath.row == 5){
+            [self creatLogoutAction];
+        }
+        
+    }else{
+        self.lastIndexPath = indexPath;
+        [self.tableViewToChage reloadData];
     }
-    else if (indexPath.row == 2){
-        ChangePasswordVC *pasVc = [[ChangePasswordVC alloc]init];
-        [self.navigationController pushViewController:pasVc animated:YES];
-    }
-    else if (indexPath.row == 3){
-        ChangelanguageVC *lang = [[ChangelanguageVC alloc]init];
-        [self.navigationController presentViewController:lang animated:YES completion:nil];
-        //[self.navigationController pushViewController:lang animated:YES];
-    }
-    else if (indexPath.row == 4){
-        AboutVC *about = [[AboutVC alloc]init];
-        [self.navigationController pushViewController:about animated:YES];
-    }
-    
-    else if (indexPath.row == 5){
-         [self creatLogoutAction];
-    }
-    
+   
 }
 
 #pragma mark - 切换状态点击事件
@@ -594,14 +640,14 @@
     self.changeLagView.backgroundColor = [UIColor whiteColor];
     [self.windowBackView addSubview:self.changeLagView];
     [self.changeLagView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(ws.view);
+        make.centerX.equalTo(ws.windowBackView);
         make.centerY.equalTo(ws.windowBackView);
         make.left.equalTo(ws.view.mas_left).offset(30);
         make.height.equalTo(@(185));
     }];
     
     
-    [self createTableView];
+    [self createTableViewChage];
     UIButton *backBtn =[UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.layer.cornerRadius=15;
     [backBtn setImage:[UIImage imageNamed:@"icon_guanbianniu"] forState:UIControlStateNormal];
@@ -625,7 +671,7 @@
     else if ([language isEqualToString:@"en"]) {
         self.lastIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     }
-    [self.tableView reloadData];
+    [self.tableViewToChage reloadData];
     
     UIButton *okBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [okBtn addTarget:self action:@selector(chooseLugOk) forControlEvents:UIControlEventTouchUpInside];
@@ -637,7 +683,7 @@
     okBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.windowBackView addSubview:okBtn];
     [okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.tableView.mas_bottom).offset(5);
+        make.top.equalTo(ws.tableViewToChage.mas_bottom).offset(5);
         make.bottom.equalTo(ws.changeLagView.mas_bottom).offset(-15);
         make.right.equalTo(ws.changeLagView.mas_centerX).offset(-10);
         make.left.equalTo(ws.changeLagView.mas_left).offset(15);
@@ -655,14 +701,64 @@
     okBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.windowBackView addSubview:cleanBtn];
     [cleanBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.tableView.mas_bottom).offset(5);
+        make.top.equalTo(ws.tableViewToChage.mas_bottom).offset(5);
         make.bottom.equalTo(ws.changeLagView.mas_bottom).offset(-15);
         make.left.equalTo(ws.changeLagView.mas_centerX).offset(10);
         make.right.equalTo(ws.changeLagView.mas_right).offset(-15);
     }];
     
 }
+-(void)closeWindow{
+    [self.windowBackView removeFromSuperview];
+}
+-(void)chooseLugOk{
+    NSIndexPath *indexPath = self.lastIndexPath;
+    if (indexPath.row==0) {
+        
+        [[ZBLocalized sharedInstance]setLanguage:@"th"];
+        
+    }
+    if (indexPath.row==1) {
+        
+        [[ZBLocalized sharedInstance]setLanguage:@"zh-Hans"];
+        
+    }
+    if (indexPath.row==2) {
+        
+        [[ZBLocalized sharedInstance]setLanguage:@"en"];
+    }
+    
+    [self initRootVC];
+    
+    NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
+    NSLog(@"切换后的语言:%@",language);
+}
 
+- (void)initRootVC{
+    HomeVC *home = [[HomeVC alloc]init];
+    home.showLeft = @"1";
+    [UIApplication sharedApplication].keyWindow.rootViewController = [[QCNavigationController alloc] initWithRootViewController:home];
+    
+}
+-(void)createTableViewChage{
+    __weak typeof(self) ws = self;
+    self.tableViewToChage = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.tableViewToChage.delegate = self;
+    self.tableViewToChage.dataSource = self;
+    self.tableViewToChage.scrollEnabled = NO;
+    self.tableViewToChage.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableViewToChage registerClass:[CellForChooseLag class] forCellReuseIdentifier:@"UITableViewCell"];
+    [self.windowBackView addSubview:self.tableViewToChage];
+    [self.tableViewToChage mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(ws.changeLagView);
+        make.top.equalTo(ws.changeLagView).offset(10) ;
+        make.left.equalTo(ws.changeLagView).offset(5);
+        make.bottom.equalTo(ws.changeLagView).offset(-55);
+    }];
+    
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
