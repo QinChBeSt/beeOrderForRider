@@ -28,7 +28,7 @@
 
 //测试
 #define BASEURL @"http://118.24.100.177:8080/spmvc"
-//#define BASEURL @"http://192.168.0.148:8080"
+//#define BASEURL @"http://192.168.0.143:8080/"
 #define IMGBaesURL @"http://118.24.100.177:8080/spmvc/apidocs/upload/"
 
 
@@ -51,6 +51,8 @@
 #define updateOrderStateURL @"/qsapi/uporder"
 //修改密码
 #define changePasswordURL @"/qsapi/workpwd"
+//查看今日收益
+#define watchTodayMoney @"/shoporderapi/getShopOrderList"
 
 #define MainScreenScale [[UIScreen mainScreen]scale] //屏幕的分辨率 当结果为1时，显示的是普通屏幕，结果为2时，显示的是Retian屏幕
 // App Frame Height&Width

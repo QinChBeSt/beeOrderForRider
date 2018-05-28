@@ -199,7 +199,36 @@
 }
 -(void)getNetWorkForDate:(NSString *)dateStr{
     NSString *date = [self pp_formatDateWithArrYMDToMD:dateStr];
-    
+    NSUserDefaults *defaults;
+    defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userId = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
+    NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,watchTodayMoney];
+    NSDictionary *parameters = @{@"date":date,
+                                 @"id":userId,
+                                
+                                 };
+    AFHTTPSessionManager *managers = [AFHTTPSessionManager manager];
+//    [managers GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//
+//
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//
+//    }];
+    //请求的方式：POST
+    [managers POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@,",responseObject);
+        NSString *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
+        if ([code isEqualToString:@"1"]) {
+            NSDictionary *dic = responseObject[@"value"];
+            self.todayMoney.text = [NSString stringWithFormat:@"%@",dic[@"sumPric"]];
+            self.todayCount.text = [NSString stringWithFormat:@"%@",dic[@"sumNum"]];
+        }else{
+            [MBManager showBriefAlert:responseObject[@"msg"]];
+        }
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
+    }];
 }
 
 -(void)createTableView{
