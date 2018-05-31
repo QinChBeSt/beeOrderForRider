@@ -89,3 +89,6 @@
 "取货成功,此订单为待送达状态，右滑查看" = "Successful delivery. This order is pending delivery. Please click right to view";
 "确认送达,此订单已完成" = "Confirm delivery, this order has been completed";
 "接单" = "get Order";
+"发短信给顾客" = "SMS to customers";
+"商家电话" = "shop phone";
+"顾客电话" = "Customer phone";

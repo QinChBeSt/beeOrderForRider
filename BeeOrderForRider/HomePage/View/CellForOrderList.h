@@ -10,9 +10,11 @@
 #import "ModelForHistory.h"
 typedef void (^blockChangeOrderState)(NSDictionary *);
 typedef void (^blocktoMapView)(NSDictionary *);
+typedef void (^blockToCallUser)(NSDictionary *);
 @interface CellForOrderList : UITableViewCell
 @property (nonatomic , copy)blockChangeOrderState blockChangeOrderState;
 @property (nonatomic , copy)blocktoMapView blocktoMapView;
+@property (nonatomic , copy)blockToCallUser blockToCallUser;
 @property (nonatomic , strong)UILabel *orderNumLab;
 @property (nonatomic , strong)UILabel *orderDateLab;
 @property (nonatomic , strong)UILabel *shopNameLab;
@@ -35,5 +37,6 @@ typedef void (^blocktoMapView)(NSDictionary *);
 @property (nonatomic , strong)NSString *latLoc;
 @property (nonatomic , strong)NSString *longLoc;
 @property (nonatomic , strong)NSString *shopPhoneNum;
+@property (nonatomic , strong)NSString *userPhone;
 
 @end

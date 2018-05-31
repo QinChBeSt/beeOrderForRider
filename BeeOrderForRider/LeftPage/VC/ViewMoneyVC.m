@@ -97,7 +97,7 @@
     }];
     
     self.todayMoney = [[UILabel alloc]init];
-    self.todayMoney.text = @"100.00";
+    self.todayMoney.text = @"0";
     self.todayMoney.font = [UIFont systemFontOfSize:24];
     self.todayMoney.textColor = [UIColor whiteColor];
     [headImg addSubview:self.todayMoney];
@@ -115,7 +115,7 @@
         make.centerY.equalTo(headImg.mas_centerY).offset(-SCREEN_WIDTH * 0.387 / 4);
     }];
     self.todayCount = [[UILabel alloc]init];
-    self.todayCount.text = @"100.00";
+    self.todayCount.text = @"0";
     self.todayCount.font = [UIFont systemFontOfSize:24];
     self.todayCount.textColor = [UIColor whiteColor];
     [headImg addSubview:self.todayCount];
@@ -216,7 +216,7 @@
                                 
                                  };
     AFHTTPSessionManager *managers = [AFHTTPSessionManager manager];
-
+    [self.arrForMoneyList removeAllObjects];
     //请求的方式：POST
     [managers POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@,",responseObject);

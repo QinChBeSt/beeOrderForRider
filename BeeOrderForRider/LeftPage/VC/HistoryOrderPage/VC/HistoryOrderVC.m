@@ -53,6 +53,7 @@
     [self createBtnView];
     [self createTopView];
     [self createTableView];
+    [self getFirstNetWORK];
     UIScreenEdgePanGestureRecognizer *leftEdgeGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self
                                                                                                           action:@selector(moveViewWithGesture:)];
     leftEdgeGesture.edges = UIRectEdgeLeft;// 屏幕左侧边缘响应
@@ -62,6 +63,60 @@
     if (panGes.state == UIGestureRecognizerStateEnded) {
         [self back];
     }
+}
+-(void)getFirstNetWORK{
+    NSUserDefaults *defaults;
+    defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userId = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
+    NSDate *now = [NSDate date];
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"yyyy-MM-dd";
+    NSString *nowStr = [fmt stringFromDate:now];
+     NSString *nowStrNet = [self pp_formatDateWithArrYMDToMD:nowStr];
+    NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,GetHistoryURL];
+    NSDictionary *parameters = @{@"stime":nowStrNet,
+                                 @"etime":nowStrNet,
+                                 @"page":@"1",
+                                 @"qsid":userId
+                                 };
+    
+    //请求的方式：POST
+    [self.arrForHistory removeAllObjects];
+    [self.tableView.mj_header setHidden:NO];
+    [MHNetWorkTask getWithURL:url withParameter:parameters withHttpHeader:nil withResponseType:ResponseTypeJSON withSuccess:^(id result) {
+        NSLog(@"%@",result);
+        NSString *code = [NSString stringWithFormat:@"%@",result[@"code"]];
+        if ([code isEqualToString:@"1"]) {
+            NSDictionary *dic = result[@"value"];
+            self.tolitLab.text = [NSString stringWithFormat:@"%@ %@",ZBLocalized(@"￥", nil),dic[@"totalspic"]];
+            NSMutableArray *arr = dic[@"getorderlist"];
+            for (NSMutableDictionary *dicRes in arr) {
+                
+                ModelForHistory *mod = [ModelForHistory yy_modelWithDictionary:dicRes];
+                
+                [self.arrForHistory addObject:mod];
+                
+            }
+            if (self.arrForHistory.count == 0) {
+                [self.tableView.mj_header endRefreshing];
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+                [self.tableView reloadData];
+            }else{
+                [self.tableView.mj_footer resetNoMoreData];
+                [self.tableView.mj_header endRefreshing];
+                [self.tableView reloadData];
+            }
+        }
+        
+        else{
+            [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            [MBManager showBriefAlert:result[@"msg"]];
+        }
+    } withFail:^(NSError *error) {
+        
+    }];
+
 }
 #pragma mark - ui
 -(void)createNaviView{
@@ -150,7 +205,7 @@
     [openView addSubview:openTit];
     openTit.font = [UIFont systemFontOfSize:14];
     openTit.textColor = [UIColor colorWithHexString:@"4b4b4b"];
-    openTit.text = ZBLocalized(@"派送时间", nil);
+    openTit.text = ZBLocalized(@"开始时间", nil);
     [openTit mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(openView);
         make.left.equalTo(openView.mas_left).offset(20);
@@ -189,7 +244,7 @@
     [closeView addSubview:closeTit];
     closeTit.font = [UIFont systemFontOfSize:14];
     closeTit.textColor = [UIColor colorWithHexString:@"4b4b4b"];
-    closeTit.text = ZBLocalized(@"送达时间", nil);
+    closeTit.text = ZBLocalized(@"结束时间", nil);
     [closeTit mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(closeView);
         make.left.equalTo(closeView.mas_left).offset(20);

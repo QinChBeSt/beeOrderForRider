@@ -13,6 +13,8 @@
 #import "OrderDetilVC.h"
 #import "MapVC.h"
 
+#define callLineHeight 40
+
 @interface HomeOrderMissionVC ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
 @property (nonatomic,strong) CLLocationManager * manger;
 
@@ -28,6 +30,11 @@
 
 @property (nonatomic , strong)UIImageView *noDataImg;
 @property (nonatomic , strong)NSString *locationQX;
+
+@property (nonatomic , strong)UIView *windowBackView;
+@property (nonatomic , strong)UIView *callBackView;
+@property (nonatomic , strong)NSString *shopPhone;
+@property (nonatomic , strong)NSString *userPhone;
 @end
 
 @implementation HomeOrderMissionVC
@@ -315,6 +322,10 @@
        
         [self.navigationController pushViewController:map animated:YES];
     };
+    cell.blockToCallUser = ^(NSDictionary *dic) {
+        NSString *shopName = mod.shopname;
+        [self createCallView:dic shopname:shopName];
+    };
     
     return cell;
 }
@@ -328,8 +339,67 @@
     order.mod = mod;
     [self.navigationController pushViewController:order animated:YES];
 }
-
-
+-(void)createwindowBackView{
+    self.windowBackView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT)];
+    self.windowBackView.backgroundColor = [UIColor colorWithHexString:@"363636" alpha:0.3];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.windowBackView];
+    
+}
+-(void)createCallView:(NSDictionary *)phoneDic shopname:(NSString *)shopName{
+    [self createwindowBackView];
+    __weak typeof(self) ws = self;
+    self.callBackView = [[UIView alloc]init];
+    self.callBackView.backgroundColor = [UIColor whiteColor];
+    [self.windowBackView addSubview:self.callBackView];
+    [self.callBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.view);
+        make.centerY.equalTo(ws.view).offset(-SafeAreaTopHeight / 2);
+        make.width.equalTo(@(SCREEN_WIDTH * 0.7));
+        make.height.equalTo(@(callLineHeight * 5 + 10));
+    }];
+    
+    UILabel *shopNameLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.7,callLineHeight)];
+    shopNameLab.text = shopName ;
+    shopNameLab.textAlignment = NSTextAlignmentCenter;
+    shopNameLab.font = [UIFont systemFontOfSize:14];
+    [self.callBackView addSubview:shopNameLab];
+    self.shopPhone = [NSString stringWithFormat:@"%@",phoneDic[@"shop"]];
+    self.userPhone = [NSString stringWithFormat:@"%@",phoneDic[@"user"]];
+    UIButton *shopCallBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    shopCallBtn.frame = CGRectMake(0, callLineHeight, SCREEN_WIDTH * 0.7, callLineHeight);
+    NSString  *shopText  = [NSString stringWithFormat:@"%@:%@",ZBLocalized(@"商家电话", nil),phoneDic[@"shop"]];
+    
+    [shopCallBtn addTarget:self action:@selector(callShop) forControlEvents:UIControlEventTouchUpInside];
+    [shopCallBtn setTitle:shopText forState:UIControlStateNormal];
+    [shopCallBtn setTitleColor:[UIColor colorWithHexString:@"#1E90FF"] forState:UIControlStateNormal];
+    [self.callBackView addSubview:shopCallBtn];
+   
+    UIButton *userCallBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    userCallBtn.frame = CGRectMake(0, callLineHeight * 2, SCREEN_WIDTH * 0.7, callLineHeight);
+    NSString  *userText  = [NSString stringWithFormat:@"%@:%@",ZBLocalized(@"顾客电话", nil),phoneDic[@"user"]];
+    
+    [userCallBtn addTarget:self action:@selector(callUser) forControlEvents:UIControlEventTouchUpInside];
+    [userCallBtn setTitle:userText forState:UIControlStateNormal];
+    [userCallBtn setTitleColor:[UIColor colorWithHexString:@"#1E90FF"] forState:UIControlStateNormal];
+    [self.callBackView addSubview:userCallBtn];
+    
+    UIButton *userMsgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    userMsgBtn.frame = CGRectMake(0, callLineHeight * 3, SCREEN_WIDTH * 0.7, callLineHeight);
+    [userMsgBtn addTarget:self action:@selector(MSGUser) forControlEvents:UIControlEventTouchUpInside];
+    [userMsgBtn setTitle:ZBLocalized(@"发短信给顾客", nil)   forState:UIControlStateNormal];
+    [userMsgBtn setTitleColor:[UIColor colorWithHexString:@"#1E90FF"] forState:UIControlStateNormal];
+    [self.callBackView addSubview:userMsgBtn];
+    
+    UIButton *CleanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    CleanBtn.frame = CGRectMake(0, callLineHeight * 4, SCREEN_WIDTH * 0.7, callLineHeight + 10);
+    [CleanBtn addTarget:self action:@selector(exit) forControlEvents:UIControlEventTouchUpInside];
+    [CleanBtn setTitle:ZBLocalized(@"退出", nil)   forState:UIControlStateNormal];
+    [CleanBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.callBackView addSubview:CleanBtn];
+}
+-(void)exit{
+    [self.windowBackView removeFromSuperview];
+}
 -(void)getNetworkForChangeOrderType: (NSDictionary *)str{
     NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,updateOrderStateURL];
     
@@ -358,6 +428,19 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
+}
+-(void)callShop{
+    
+    NSMutableString *str=[[NSMutableString alloc]initWithFormat:@"tel:%@",self.shopPhone];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+}
+-(void)callUser{
+    NSMutableString *str=[[NSMutableString alloc]initWithFormat:@"tel:%@",self.userPhone];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+}
+-(void)MSGUser{
+    NSMutableString *str=[[NSMutableString alloc]initWithFormat:@"sms://%@",self.userPhone];
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:str]];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

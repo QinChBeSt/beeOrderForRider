@@ -237,8 +237,11 @@
     
     self.longStr = mod.shoplonng;
     self.latStr = mod.shoplat;
+    
     self.userLatStr = mod.ulat;
     self.userLongStr = mod.ulonng;
+    
+    self.userPhone = mod.uphone;
     [self getDissForShop];
 }
 -(void)setRightBtnTit{
@@ -268,8 +271,17 @@
     self.orderDateLab.text = [NSString stringWithFormat:@"%.2lfKm",distance / 1000];//距离
 }
 -(void)callShop{
+    if ([self.orderTypeStr isEqualToString:@"8"]){
+        
+        NSDictionary *dic = @{ @"shop":self.shopPhoneNum,@"user":self.userPhone};
+        if (self.blockToCallUser) {
+            self.blockToCallUser(dic);
+        }
+    }else{
     NSMutableString *str=[[NSMutableString alloc]initWithFormat:@"tel:%@",self.shopPhoneNum];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    
+    }
 }
 -(void)toMapAction{
     NSDictionary * dic2 = @{ @"uLat":self.userLatStr,@"uLong":self.userLongStr,@"sLat":self.latStr,@"sLong":self.longStr};
