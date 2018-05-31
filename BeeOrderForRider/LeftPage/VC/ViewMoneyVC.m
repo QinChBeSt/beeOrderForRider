@@ -9,6 +9,7 @@
 #import "ViewMoneyVC.h"
 #import "CGXPickerView.h"
 #import "CellForTodayMoney.h"
+#import "ModelForViewMoney.h"
 @interface ViewMoneyVC ()<UITableViewDelegate,UITableViewDataSource >
 @property (nonatomic , strong)UIView *naviView;
 @property (nonatomic , strong)UIView *headView;
@@ -17,10 +18,17 @@
 @property (nonatomic , strong)UILabel *todayMoney;
 @property (nonatomic , strong)UILabel *todayCount;
 @property (nonatomic , strong)UITableView *tableView;
+@property (nonatomic , strong)NSMutableArray *arrForMoneyList;
 @end
 
 @implementation ViewMoneyVC
 #pragma mark - ui
+-(NSMutableArray *)arrForMoneyList{
+    if (!_arrForMoneyList) {
+        _arrForMoneyList = [NSMutableArray array];
+    }
+    return _arrForMoneyList;
+}
 -(void)createNaviView{
     self.view.backgroundColor = [UIColor whiteColor];
     self.naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SafeAreaTopHeight )];
@@ -208,24 +216,25 @@
                                 
                                  };
     AFHTTPSessionManager *managers = [AFHTTPSessionManager manager];
-//    [managers GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//
-//
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//
-//    }];
+
     //请求的方式：POST
     [managers POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@,",responseObject);
         NSString *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
         if ([code isEqualToString:@"1"]) {
             NSDictionary *dic = responseObject[@"value"];
+            NSMutableArray *arr = dic[@"list"];
+            for (NSMutableDictionary *dicRes in arr) {
+                ModelForViewMoney *Mod = [[ModelForViewMoney alloc]init];
+                Mod = [ModelForViewMoney yy_modelWithDictionary:dicRes];
+                [self.arrForMoneyList addObject:Mod];
+            }
+            [self.tableView reloadData];
             self.todayMoney.text = [NSString stringWithFormat:@"%@",dic[@"sumPric"]];
             self.todayCount.text = [NSString stringWithFormat:@"%@",dic[@"sumNum"]];
         }else{
             [MBManager showBriefAlert:responseObject[@"msg"]];
         }
-
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 
     }];
@@ -241,7 +250,7 @@
 #pragma mark- UITabelViewDataSource/delegat
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return self.arrForMoneyList.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -251,7 +260,10 @@
     {
         cell = [[CellForTodayMoney alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     }
+    ModelForViewMoney *mod = [[ModelForViewMoney alloc]init];
+    mod =  [self.arrForMoneyList objectAtIndex:indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.Mod = mod;
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -243,7 +243,7 @@
 }
 -(void)setRightBtnTit{
     if ([self.orderTypeStr isEqualToString:@"5"]) {
-        [self.rightButton setTitle:ZBLocalized(@"抢单", nil) forState:UIControlStateNormal];
+        [self.rightButton setTitle:ZBLocalized(@"接单", nil) forState:UIControlStateNormal];
         self.setUpdateOrderStr = @"6";
     }else if ([self.orderTypeStr isEqualToString:@"6"]){
         [self.rightButton setTitle:ZBLocalized(@"上报到店", nil) forState:UIControlStateNormal];

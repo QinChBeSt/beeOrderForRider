@@ -32,7 +32,16 @@
         make.height.equalTo(@(30));
         make.top.equalTo(topLine.mas_bottom);
     }];
+    self.ddStatsLab = [[UILabel alloc]init];
+    self.ddStatsLab.font = [UIFont systemFontOfSize:14];
     
+    self.ddStatsLab.textColor = [UIColor colorWithHexString:@"959595"];
+    [self.contentView addSubview:self.ddStatsLab];
+    [self.ddStatsLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(ws.timeLab.mas_right).offset(10);
+        make.height.equalTo(@(30));
+        make.top.equalTo(topLine.mas_bottom);
+    }];
     self.statsLab = [[UILabel alloc]init];
     self.statsLab.font = [UIFont systemFontOfSize:14];
     self.statsLab.text = @"已交账";
@@ -109,7 +118,15 @@
     [super awakeFromNib];
     // Initialization code
 }
-
+-(void)setMod:(ModelForViewMoney *)Mod{
+    self.timeLab.text = Mod.time;
+    self.ddStatsLab.text = Mod.ddstate;
+    self.shopNameLab.text = Mod.name;
+    
+    self.priceLab.text = Mod.ssprice;
+   
+    self.statsLab.text = Mod.jzstate;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

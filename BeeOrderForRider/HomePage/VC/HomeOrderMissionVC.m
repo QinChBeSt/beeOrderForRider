@@ -27,6 +27,7 @@
 @property (nonatomic , strong)NSString *longLoc;
 
 @property (nonatomic , strong)UIImageView *noDataImg;
+@property (nonatomic , strong)NSString *locationQX;
 @end
 
 @implementation HomeOrderMissionVC
@@ -40,6 +41,9 @@
     [self toSearchHistory];
 }
 -(void)toSearchHistory{
+    if ([self.locationQX isEqualToString:@"no"]) {
+        [self getLocation];
+    }
     self.pageIndex = 1;
    
         self.tableView.mj_header.hidden = NO;
@@ -97,7 +101,7 @@
 }
 -(void)loadMoreBills{
     self.pageIndex ++;
-   
+    
         NSUserDefaults *defaults;
         defaults = [NSUserDefaults standardUserDefaults];
         NSString *userId = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
@@ -174,12 +178,14 @@
     // ios8要定位，要请求定位的权限
     if ([[UIDevice  currentDevice].systemVersion doubleValue] >= 8.0) {
         [manager requestWhenInUseAuthorization];
+       
     }
     
     
     //赋值
     self.manger = manager;
 }
+
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     
     //    CLLocation 是一个位置对象
@@ -193,9 +199,51 @@
     }
     
     // 停止定位
+    self.locationQX = @"yes";
     [manager stopUpdatingLocation];
     [self.tableView reloadData];
     
+}
+#pragma mark CoreLocation delegate (定位失败)
+//定位失败后调用此代理方法
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    if ([CLLocationManager locationServicesEnabled])
+    {
+        //  判断用户是否允许程序获取位置权限
+        if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedWhenInUse||[CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedAlways)
+        {
+            //用户允许获取位置权限
+        }else
+        {
+            self.locationQX = @"no";
+            //用户拒绝开启用户权限
+            [self alertToOpenLocation];
+            
+        }
+        
+    }
+    else
+    {
+        self.locationQX = @"no";
+        [self alertToOpenLocation];
+    }
+    
+    NSLog(@"location Fail");
+}
+-(void)alertToOpenLocation{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:ZBLocalized(@"允许定位提示", nil)  message:ZBLocalized(@"请在设置中打开定位,否则无法提供准确的距离信息", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction =[UIAlertAction actionWithTitle:ZBLocalized(@"打开定位", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if( [[UIApplication sharedApplication]canOpenURL:url] ) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:ZBLocalized(@"取消", nil) style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:okAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 - (id)initWithType:(NSString *)type
 {
@@ -284,13 +332,25 @@
 
 -(void)getNetworkForChangeOrderType: (NSDictionary *)str{
     NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,updateOrderStateURL];
-   
+    
     AFHTTPSessionManager *managers = [AFHTTPSessionManager manager];
     //请求的方式：POST
     [managers POST:url parameters:str progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSString *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
         if ([code isEqualToString:@"1"]) {
-            [MBManager showBriefAlert:ZBLocalized(@"成功", nil)];
+            NSString *typeStr = str[@"flg"];
+            if ([typeStr isEqualToString:@"6"]) {
+                [MBManager showBriefAlert:ZBLocalized(@"接单成功,此订单为待取货状态，右滑查看", nil)];
+            }
+            else if ([typeStr isEqualToString:@"7"]) {
+                [MBManager showBriefAlert:ZBLocalized(@"上报到店成功,此订单为待取货状态", nil)];
+            }
+            else if ([typeStr isEqualToString:@"8"]) {
+                [MBManager showBriefAlert:ZBLocalized(@"取货成功,此订单为待送达状态，右滑查看", nil)];
+            }else if ([typeStr isEqualToString:@"9"]){
+                [MBManager showBriefAlert:ZBLocalized(@"确认送达,此订单已完成", nil)];
+            }
+            
             [self toSearchHistory];
         }else{
             [MBManager showBriefAlert:responseObject[@"msg"]];
