@@ -43,11 +43,11 @@ static const char *offsetSizeKey = "badgeSizeKey";
 
 #pragma mark - 带有数字的
 
-- (void)addNumberBadge:(NSInteger)number badgeOffsetSize:(CGSize)size {
+- (void)addNumberBadge:(NSString *)number badgeOffsetSize:(CGSize)size {
     [self addNumberBadge:number badgeOffsetSize:size color:[UIColor redColor] borderColor:nil];
 }
 
-- (void)addNumberBadge:(NSInteger)number badgeOffsetSize:(CGSize)size color:(UIColor *)color borderColor:(UIColor *)bColor {
+- (void)addNumberBadge:(NSString *)number badgeOffsetSize:(CGSize)size color:(UIColor *)color borderColor:(UIColor *)bColor {
     
     objc_setAssociatedObject(self, offsetSizeKey, [NSValue valueWithCGSize:size], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
@@ -67,17 +67,20 @@ static const char *offsetSizeKey = "badgeSizeKey";
     UILabel *numberLabel = [[UILabel alloc] init];
     numberLabel.font = [UIFont systemFontOfSize:10 weight:10];
     numberLabel.textAlignment = NSTextAlignmentCenter;
-    numberLabel.text = [NSString stringWithFormat:@"%ld",(long)number];
+    numberLabel.text = [NSString stringWithFormat:@"%@",number];
     numberLabel.textColor = [UIColor whiteColor];
     numberLabel.tag = ZWMNumberLabelTag;
     
     CGSize badgeSize = [self caluateSizeWithText:numberLabel.text font:numberLabel.font];
-    badgeView.frame = CGRectMake(s.width - size.width - badgeSize.width / 2, size.height - badgeSize.height / 2, badgeSize.width, badgeSize.height);
+    badgeView.frame = CGRectMake(s.width - size.width - badgeSize.width / 2 + 3, size.height - badgeSize.height / 2, badgeSize.width, badgeSize.height);
     numberLabel.frame = badgeView.bounds;
     
     badgeView.tag = ZWMBadgeTag;
     [badgeView addSubview:numberLabel];
     [self addSubview:badgeView];
+    if ([number isEqualToString:@"0"]) {
+        badgeView.hidden = YES;
+    }
 }
 
 - (void)addNumber_1 {

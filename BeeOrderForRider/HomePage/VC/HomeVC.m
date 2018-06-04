@@ -28,6 +28,11 @@
 @property (nonatomic , strong)UIView *naviView;
 @property (nonatomic , strong)UILabel *titleLabel ;
 @property (nonatomic, strong) ZWMSegmentController *segmentVC;
+
+@property (nonatomic , strong)NSString *WillGetOrderCountStr;
+@property (nonatomic , strong)NSString *willPutOrderCountStr;
+@property (nonatomic , strong)NSString *OrderCountStr;
+
 @end
 
 @implementation HomeVC
@@ -67,12 +72,61 @@
 }
 
 -(void)getNetWork{
+    self.OrderCountStr = @"0";
+    self.WillGetOrderCountStr = @"0";
+    self.willPutOrderCountStr = @"0";
+    [self getNetWorkForWillGet];
+    [self getNewWorkForWillPut];
+    NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
     
+    // 注册一个监听事件。第三个参数的事件名， 系统用这个参数来区别不同事件。
+    [notiCenter addObserver:self selector:@selector(doingNotification:) name:@"DoingOrderCount" object:nil];
+    
+    [notiCenter addObserver:self selector:@selector(finishNotification:) name:@"finishOrderCount" object:nil];
+    
+    [notiCenter addObserver:self selector:@selector(cleanNotification:) name:@"cleanOrderCount" object:nil];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
    
+}- (void)doingNotification:(NSNotification *)noti
+{
+    
+    // NSNotification 有三个属性，name, object, userInfo，其中最关键的object就是从第三个界面传来的数据。name就是通知事件的名字， userInfo一般是事件的信息。
+    
+    self.OrderCountStr = noti.object;
+    
+    [self.segmentVC enumerateBadges:@[ self.OrderCountStr,self.WillGetOrderCountStr,self.willPutOrderCountStr]];
+    
 }
+- (void)finishNotification:(NSNotification *)noti
+{
+    
+    // NSNotification 有三个属性，name, object, userInfo，其中最关键的object就是从第三个界面传来的数据。name就是通知事件的名字， userInfo一般是事件的信息。
+    
+    self.WillGetOrderCountStr = noti.object;
+    [self.segmentVC enumerateBadges:@[ self.OrderCountStr,self.WillGetOrderCountStr,self.willPutOrderCountStr]];
+    
+}
+- (void)cleanNotification:(NSNotification *)noti
+{
+    
+    // NSNotification 有三个属性，name, object, userInfo，其中最关键的object就是从第三个界面传来的数据。name就是通知事件的名字， userInfo一般是事件的信息。
+    
+    self.willPutOrderCountStr = noti.object;
+    [self.segmentVC enumerateBadges:@[ self.OrderCountStr,self.WillGetOrderCountStr,self.willPutOrderCountStr]];
+    
+}
+
+// 第一界面中dealloc中移除监听的事件
+- (void)dealloc
+{
+    // 移除当前对象监听的事件
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    
+}
+
 #pragma mark - ui
 -(void)createNaviView{
     self.view.backgroundColor = [UIColor whiteColor];
@@ -139,8 +193,66 @@
     
 }
 
-
-
+-(void)getNetWorkForWillGet{
+    NSUserDefaults *defaults;
+    defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userId = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
+    
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,GetOrderListURL];
+    NSDictionary *parameters = @{@"flg":@"6",
+                                 @"page":@"1",
+                                 @"qsid":userId
+                                 };
+    [MHNetWorkTask getWithURL:url withParameter:parameters withHttpHeader:nil withResponseType:ResponseTypeJSON withSuccess:^(id result) {
+        NSString *code = [NSString stringWithFormat:@"%@",result[@"code"]];
+        if ([code isEqualToString:@"1"]) {
+             NSMutableArray *arr = result[@"value"];
+            if (arr.count >5) {
+                self.WillGetOrderCountStr = @"5+";
+            }else{
+                self.WillGetOrderCountStr = [NSString stringWithFormat:@"%lu",(unsigned long)arr.count];
+                
+            }
+           [self.segmentVC enumerateBadges:@[self.OrderCountStr,self.WillGetOrderCountStr,self.willPutOrderCountStr]];
+        }else{
+            
+        }
+    } withFail:^(NSError *error) {
+        
+    }];
+}
+-(void)getNewWorkForWillPut{
+    NSUserDefaults *defaults;
+    defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userId = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
+    
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,GetOrderListURL];
+    NSDictionary *parameters = @{@"flg":@"8",
+                                 @"page":@"1",
+                                 @"qsid":userId
+                                 };
+    [MHNetWorkTask getWithURL:url withParameter:parameters withHttpHeader:nil withResponseType:ResponseTypeJSON withSuccess:^(id result) {
+        NSString *code = [NSString stringWithFormat:@"%@",result[@"code"]];
+        if ([code isEqualToString:@"1"]) {
+            NSMutableArray *arr = result[@"value"];
+            if (arr.count >5) {
+                self.willPutOrderCountStr = @"5+";
+            }else{
+                self.willPutOrderCountStr = [NSString stringWithFormat:@"%lu",(unsigned long)arr.count];
+                
+            }
+            [self.segmentVC enumerateBadges:@[self.OrderCountStr,self.WillGetOrderCountStr,self.willPutOrderCountStr]];
+        }else{
+            
+        }
+    } withFail:^(NSError *error) {
+        
+    }];
+}
 
 #pragma mark - 点击事件
 -(void)back{
@@ -207,9 +319,7 @@
     [self.view addSubview:vc.view];
 }
 
--(void)dealloc{
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

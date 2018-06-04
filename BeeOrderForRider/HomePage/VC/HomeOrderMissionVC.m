@@ -83,6 +83,23 @@
                     [self.arrForHistory addObject:mod];
                     
                 }
+                 NSString *willEvaCount =[NSString stringWithFormat:@"%lu",(unsigned long)self.arrForHistory.count];
+                if (self.arrForHistory.count > 5) {
+                    willEvaCount = @"5+";
+                }
+                NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+                
+                if ([self.CountType isEqualToString:@"4"]) {
+                    
+                    [center postNotificationName:@"DoingOrderCount" object:willEvaCount userInfo:nil];
+                }else if([self.CountType isEqualToString:@"6"]){
+                    [center postNotificationName:@"finishOrderCount" object:willEvaCount userInfo:nil];
+                }else{
+                    [center postNotificationName:@"cleanOrderCount" object:willEvaCount userInfo:nil];
+                    
+                }
+                
+                
                 if (self.arrForHistory.count == 0) {
                     [self.tableView.mj_header endRefreshing];
                     [self.tableView.mj_footer endRefreshingWithNoMoreData];

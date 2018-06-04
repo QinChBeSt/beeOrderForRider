@@ -17,8 +17,8 @@
 - (void)addNormalBadgeWithBadgeOffsetSize:(CGSize)size;
 - (void)addNormalBadgeWithColor:(UIColor *)color borderColor:(UIColor *)bColor badgeOffsetSize:(CGSize)size;
 
-- (void)addNumberBadge:(NSInteger)number badgeOffsetSize:(CGSize)size;
-- (void)addNumberBadge:(NSInteger)number badgeOffsetSize:(CGSize)size color:(UIColor *)color borderColor:(UIColor *)bColor;
+- (void)addNumberBadge:(NSString *)number badgeOffsetSize:(CGSize)size;
+- (void)addNumberBadge:(NSString *)number badgeOffsetSize:(CGSize)size color:(UIColor *)color borderColor:(UIColor *)bColor;
 - (void)addNumber_1;
 - (void)reduceNumber_1;
 
