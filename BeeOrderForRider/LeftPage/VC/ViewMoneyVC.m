@@ -84,6 +84,7 @@
     [self.view addSubview:self.headView];
     
     UIImageView *headImg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.387)];
+    headImg.image = [UIImage imageNamed:@"bg_qishouduan"];
     headImg.backgroundColor = [UIColor orangeColor];
     [self.headView addSubview:headImg];
     
@@ -136,6 +137,7 @@
     }];
     
     UIImageView *dataImg = [[UIImageView alloc]init];
+    dataImg.image = [UIImage imageNamed:@"icon_qishoushijiantubiao"];
     dataImg.backgroundColor = [UIColor orangeColor];
     [chooseDate addSubview:dataImg];
     [dataImg mas_makeConstraints:^(MASConstraintMaker *make) {
