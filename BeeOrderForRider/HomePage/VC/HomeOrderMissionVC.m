@@ -179,7 +179,7 @@
     [self createTableView];
     [self getLocation];
     self.noDataImg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT - SafeAreaTopHeight - 45)];
-    self.noDataImg.image = [UIImage imageNamed:@"bg_zanwandingdan"];
+    self.noDataImg.image = [UIImage imageNamed:ZBLocalized(@"bg_zanwandingdan", nil)];
     self.noDataImg.hidden = YES;
     [self.view addSubview:self.noDataImg];
     

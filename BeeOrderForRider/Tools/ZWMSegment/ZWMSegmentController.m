@@ -177,7 +177,7 @@ typedef void(^ZWMViewControllerIndexBlock)(NSUInteger, UIButton *, UIViewControl
         UIButton *button = self.segmentView.buttons[idx];
         if (idx == 0) {
             NSString *ojbStr= [NSString stringWithFormat:@"%@",obj];
-            NSString *tit = [NSString stringWithFormat:@"%@(%@)",ZBLocalized(@"待接单", nil),ojbStr];
+            NSString *tit = [NSString stringWithFormat:@"%@(%@)",ZBLocalized(@"新任务", nil),ojbStr];
             [button setTitle:tit forState:UIControlStateNormal];
         }
         
