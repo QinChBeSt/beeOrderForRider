@@ -73,7 +73,7 @@
     }];
     self.shopNameTit = [[UILabel alloc]init];
     self.shopNameTit.font = [UIFont systemFontOfSize:18];
-    self.shopNameTit.text = ZBLocalized(@"商家名称", nil);
+
     self.shopNameTit.textColor = [UIColor colorWithHexString:@"4b4b4b"];
     [self.contentView addSubview:self.shopNameTit];
     [self.shopNameTit mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -121,11 +121,14 @@
 -(void)setMod:(ModelForViewMoney *)Mod{
     self.timeLab.text = Mod.time;
     self.ddStatsLab.text = Mod.ddstate;
-    self.shopNameLab.text = Mod.name;
+    self.shopNameLab.text = Mod.orderNum;
     
     self.priceLab.text = Mod.ssprice;
    
     self.statsLab.text = Mod.jzstate;
+    
+    self.shopNameTit.text = Mod.name;
+    
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

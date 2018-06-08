@@ -175,8 +175,14 @@ typedef void(^ZWMViewControllerIndexBlock)(NSUInteger, UIButton *, UIViewControl
 - (void)enumerateBadges:(NSArray<NSNumber *> *)badges {
     [badges enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIButton *button = self.segmentView.buttons[idx];
-         NSString *ojbStr= [NSString stringWithFormat:@"%@",obj];
-        [button addNumberBadge:ojbStr badgeOffsetSize:_offsetSize color:[UIColor redColor] borderColor:[UIColor clearColor]];
+        if (idx == 0) {
+            NSString *ojbStr= [NSString stringWithFormat:@"%@",obj];
+            NSString *tit = [NSString stringWithFormat:@"%@(%@)",ZBLocalized(@"待接单", nil),ojbStr];
+            [button setTitle:tit forState:UIControlStateNormal];
+        }
+        
+        
+        //[button addNumberBadge:ojbStr badgeOffsetSize:_offsetSize color:[UIColor redColor] borderColor:[UIColor clearColor]];
     }];
 }
 

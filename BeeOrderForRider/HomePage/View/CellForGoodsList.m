@@ -39,7 +39,7 @@
     }];
     
     self.shopPic = [[UILabel alloc]init];
-    self.shopPic.textColor = [UIColor redColor];
+    //self.shopPic.textColor = [UIColor redColor];
     self.shopPic.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:self.shopPic];
     [self.shopPic mas_makeConstraints:^(MASConstraintMaker *make) {

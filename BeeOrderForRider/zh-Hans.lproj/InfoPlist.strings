@@ -6,3 +6,6 @@
   Copyright © 2018年 QinChBeSt. All rights reserved.
 */
 CFBundleDisplayName = "beeRider";
+NSLocationAlwaysAndWhenInUseUsageDescription = "need use Location，to recommend nearby businesses";
+NSLocationAlwaysUsageDescription = "need use Location,to recommend nearby businesses";
+NSLocationWhenInUseUsageDescription = "need use Location,to recommend nearby businesses";

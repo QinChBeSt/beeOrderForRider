@@ -12,6 +12,7 @@
 		9D1BC66320A0593400AB8F73 /* QCAnimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D1BC66220A0593400AB8F73 /* QCAnimateViewController.m */; };
 		9D24A67B20A3E35C00B149F4 /* HomeOrderMissionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D24A67A20A3E35C00B149F4 /* HomeOrderMissionVC.m */; };
 		9D24A68120A41AE800B149F4 /* CellForOrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D24A68020A41AE800B149F4 /* CellForOrderList.m */; };
+		9D365A2620CA53DF00704BCD /* CellForPSDZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D365A2520CA53DF00704BCD /* CellForPSDZ.m */; };
 		9D3E85DA20B663FA00F21182 /* CellForTodayMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E85D920B663FA00F21182 /* CellForTodayMoney.m */; };
 		9D3F24AE20BF926B0070206F /* ModelForViewMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3F24AD20BF926B0070206F /* ModelForViewMoney.m */; };
 		9D479E9220A6BBA100895F78 /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D479E9120A6BBA100895F78 /* AboutVC.m */; };
@@ -119,6 +120,8 @@
 		9D24A67F20A41AE800B149F4 /* CellForOrderList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForOrderList.h; sourceTree = "<group>"; };
 		9D24A68020A41AE800B149F4 /* CellForOrderList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForOrderList.m; sourceTree = "<group>"; };
 		9D2F370420AA6A2700A916E6 /* BeeOrderForRider.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeeOrderForRider.entitlements; sourceTree = "<group>"; };
+		9D365A2420CA53DF00704BCD /* CellForPSDZ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForPSDZ.h; sourceTree = "<group>"; };
+		9D365A2520CA53DF00704BCD /* CellForPSDZ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForPSDZ.m; sourceTree = "<group>"; };
 		9D3E85D820B663FA00F21182 /* CellForTodayMoney.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForTodayMoney.h; sourceTree = "<group>"; };
 		9D3E85D920B663FA00F21182 /* CellForTodayMoney.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForTodayMoney.m; sourceTree = "<group>"; };
 		9D3F24AC20BF926B0070206F /* ModelForViewMoney.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelForViewMoney.h; sourceTree = "<group>"; };
@@ -366,6 +369,8 @@
 				9D64F39D20A530BE0068AF3D /* CellForGoodsList.m */,
 				9D24A67F20A41AE800B149F4 /* CellForOrderList.h */,
 				9D24A68020A41AE800B149F4 /* CellForOrderList.m */,
+				9D365A2420CA53DF00704BCD /* CellForPSDZ.h */,
+				9D365A2520CA53DF00704BCD /* CellForPSDZ.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1016,6 +1021,7 @@
 				9DDF1B2E20A0499E008A7947 /* QCNavigationController.m in Sources */,
 				9D7E5F8C20B80782006E5CBA /* CellForChooseLag.m in Sources */,
 				9DF31AC120A2989C00572015 /* ChangelanguageVC.m in Sources */,
+				9D365A2620CA53DF00704BCD /* CellForPSDZ.m in Sources */,
 				9D64F39820A530340068AF3D /* CellForLtextRimg.m in Sources */,
 				9DDF1BC620A04A32008A7947 /* ZWMSegmentView.m in Sources */,
 				9D3E85DA20B663FA00F21182 /* CellForTodayMoney.m in Sources */,

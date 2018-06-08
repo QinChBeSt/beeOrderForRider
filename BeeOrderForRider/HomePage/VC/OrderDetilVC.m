@@ -11,6 +11,7 @@
 #import "CellForGoodsList.h"
 #import "CellForLtextRimg.h"
 #import "ModelForOrderDetail.h"
+#import "CellForPSDZ.h"
 @interface OrderDetilVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UIView *naviView;
 @property (nonatomic , strong)UITableView *tableView;
@@ -125,7 +126,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *Identifier = [NSString stringWithFormat:@"cell%ld",(long)indexPath.row];
+    NSString *Identifier = [NSString stringWithFormat:@"cellrow%ldsec%ld",(long)indexPath.row,(long)indexPath.section];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             CellForLtextRimg *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
@@ -204,7 +205,7 @@
             cell.buttomLine.backgroundColor = [UIColor whiteColor];
             cell.rightLab.text = self.orderAllpicStr;
             cell.rightLab.textColor = [UIColor redColor];
-            cell.rightLab.font = [UIFont systemFontOfSize:18];
+            cell.rightLab.font = [UIFont systemFontOfSize:20];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }else if (indexPath.row == self.arrForOrderDetail.count + 4){
@@ -245,19 +246,16 @@
     }
     else if (indexPath.section == 2) {
         if (indexPath.row == 0) {
-            CellForLtextRimg *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
+             CellForPSDZ *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
             if(cell == nil)
             {
-                cell = [[CellForLtextRimg alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
+                cell = [[CellForPSDZ alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
             }
-            cell.leftLab.font = [UIFont systemFontOfSize:14];
-            cell.leftLab.text = self.orderUserAddStr;
-            cell.leftLab.numberOfLines = 2;
-            [cell.leftLab mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.equalTo(cell.contentView);
-                make.left.equalTo(cell.contentView.mas_left).offset(25);
-                make.right.equalTo(cell.contentView.mas_right).offset(-15);
-            }];
+            cell.TIT.font = [UIFont systemFontOfSize:14];
+            cell.TIT.text = ZBLocalized(@"配送地址", nil);
+            cell.SUB.text = self.orderUserAddStr;
+            cell.SUB.numberOfLines = 3;
+            
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -385,7 +383,7 @@
     self.orderAllpicStr = [NSString stringWithFormat:@"%@%.2f",ZBLocalized(@"￥", nil),allF];
   
     self.orderUserPhoneStr = [NSString stringWithFormat:@"%@  %@",mod.uname,mod.uphone];
-    self.orderUserAddStr = [NSString stringWithFormat:@"%@   %@",ZBLocalized(@"配送地址",nil),mod.uaddr];
+    self.orderUserAddStr = [NSString stringWithFormat:@"%@",mod.uaddr];
     self.orderUserTimeStr = [NSString stringWithFormat:@"%@   %@",ZBLocalized(@"订单时间",nil),mod.orderdatatime];
     self.orderUserOrderNumStr = [NSString stringWithFormat:@"%@   %@",ZBLocalized(@"订单号码",nil),mod.ordernum];
     self.orderBzStr = [NSString stringWithFormat:@"%@   %@",ZBLocalized(@"备注", nil),mod.orderbz];
