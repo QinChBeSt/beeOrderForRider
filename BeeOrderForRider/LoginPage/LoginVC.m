@@ -25,6 +25,18 @@
     [self createNaviView];
     [self setUpui];
 }
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    // 禁用iOS7返回手势
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    
+}
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+    // 开启
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    
+}
 #pragma mark - ui
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -148,6 +160,10 @@
     [managers POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSString *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
         if ([code isEqualToString:@"1"]) {
+            if ([responseObject[@"value"]  isEqual:@""]) {
+                [MBManager showBriefAlert:ZBLocalized(@"账号异常", nil)];
+                return ;
+            }
              NSDictionary *dic = responseObject[@"value"];
             NSString *userId = dic[@"id"];
             NSString *userImgUrl = dic[@"originallyLog"];
@@ -184,13 +200,12 @@
             [MBManager showBriefAlert:ZBLocalized(@"登录成功", nil)];
             [self performSelector:@selector(back) withObject:nil/*可传任意类型参数*/ afterDelay:2.0];
         }else{
-            NSString *cedeErr = [NSString stringWithFormat:@"code = %@ ,msg = %@",code,responseObject[@"msg"]];
-            [MBManager showBriefAlert:cedeErr];
+            [MBManager showBriefAlert:ZBLocalized(@"用户名或密码错误", nil)];
         }
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [MBManager showBriefAlert:@"error"];
+       [MBManager showBriefAlert:ZBLocalized(@"服务器异常", nil)];
     }];
 }
 #pragma mark - 监听textFile

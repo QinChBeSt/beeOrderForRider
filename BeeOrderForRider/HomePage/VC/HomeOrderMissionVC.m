@@ -45,6 +45,7 @@
     return _arrForHistory;
 }
 -(void)viewWillAppear:(BOOL)animated{
+    self.noDataImg.hidden = YES;
     [self toSearchHistory];
 }
 -(void)toSearchHistory{
@@ -99,14 +100,18 @@
                     
                 }
                 
-                
+                if (self.arrForHistory.count == 0) {
+                    self.noDataImg.hidden = NO;
+                }else{
+                    self.noDataImg.hidden = YES;
+                }
                 if (self.arrForHistory.count == 0) {
                     [self.tableView.mj_header endRefreshing];
                     [self.tableView.mj_footer endRefreshingWithNoMoreData];
                     [self.tableView reloadData];
-                    self.noDataImg.hidden = NO;
+                    
                 }else{
-                    self.noDataImg.hidden = YES;
+                   
                     [self.tableView.mj_footer resetNoMoreData];
                     [self.tableView.mj_header endRefreshing];
                     [self.tableView reloadData];
@@ -288,6 +293,24 @@
     }
     return self;
 }
+-(void)createAlert:(NSDictionary *)str{
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:ZBLocalized(@"确定", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+       [self getNetworkForChangeOrderType:str];
+       
+    }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:ZBLocalized(@"取消", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:defaultAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 -(void)createTableView{
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT - SafeAreaTopHeight - 45) style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -330,7 +353,7 @@
     cell.mod = mod;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.blockChangeOrderState = ^(NSDictionary *str) {
-        [self getNetworkForChangeOrderType:str];
+        [self createAlert:str];
     };
     cell.blocktoMapView = ^(NSDictionary *dic) {
         MapVC *map = [[MapVC alloc]init];
@@ -428,6 +451,7 @@
             NSString *typeStr = str[@"flg"];
             if ([typeStr isEqualToString:@"6"]) {
                 [MBManager showBriefAlert:ZBLocalized(@"接单成功,此订单为待取货状态，右滑查看", nil)];
+                
             }
             else if ([typeStr isEqualToString:@"7"]) {
                 [MBManager showBriefAlert:ZBLocalized(@"上报到店成功,此订单为待取货状态", nil)];

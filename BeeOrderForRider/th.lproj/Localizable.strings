@@ -97,4 +97,10 @@
 "顾客电话" = "โทรศัพท์​ลูกค้า​";
 "当日总单数" = "ออเดอร์​ต่อวัน";
 "当日总金额" = "ยกรวมต่อวัน";
+
+
+"用户名或密码错误" = "User name or password error";
+"服务器异常" = "Server exception";
+"账号异常" = "Account abnormal";
+//图=======================
 "bg_zanwandingdan" = "bg_zanwandingdan2";

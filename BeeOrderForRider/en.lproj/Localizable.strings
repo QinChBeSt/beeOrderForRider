@@ -103,4 +103,11 @@
 "顾客电话" = "Customer phone";
 "当日总单数" = "Total number of the day";
 "当日总金额" = "Total amount for the day";
+
+
+"用户名或密码错误" = "User name or password error";
+"服务器异常" = "Server exception";
+"账号异常" = "Account abnormal";
+
+//==================图
 "bg_zanwandingdan" = "bg_zanwandingdan2";

@@ -75,16 +75,16 @@
     self.OrderCountStr = @"0";
     self.WillGetOrderCountStr = @"0";
     self.willPutOrderCountStr = @"0";
-    //[self getNetWorkForWillGet];
-    //[self getNewWorkForWillPut];
+//    [self getNetWorkForWillGet];
+//    [self getNewWorkForWillPut];
     NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
     
     // 注册一个监听事件。第三个参数的事件名， 系统用这个参数来区别不同事件。
     [notiCenter addObserver:self selector:@selector(doingNotification:) name:@"DoingOrderCount" object:nil];
     
-   // [notiCenter addObserver:self selector:@selector(finishNotification:) name:@"finishOrderCount" object:nil];
-    
-   // [notiCenter addObserver:self selector:@selector(cleanNotification:) name:@"cleanOrderCount" object:nil];
+//    [notiCenter addObserver:self selector:@selector(finishNotification:) name:@"finishOrderCount" object:nil];
+//    
+//    [notiCenter addObserver:self selector:@selector(cleanNotification:) name:@"cleanOrderCount" object:nil];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];

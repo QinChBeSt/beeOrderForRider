@@ -94,7 +94,7 @@
             
         }else{
             [MBManager showBriefAlert:ZBLocalized(@"账号异常，请重新登录", nil)];
-            //[self logOut];
+            [self logOut];
         }
         
         

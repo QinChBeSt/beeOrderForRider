@@ -176,10 +176,27 @@ typedef void(^ZWMViewControllerIndexBlock)(NSUInteger, UIButton *, UIViewControl
     [badges enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIButton *button = self.segmentView.buttons[idx];
         if (idx == 0) {
+            NSString *tit;
             NSString *ojbStr= [NSString stringWithFormat:@"%@",obj];
-            NSString *tit = [NSString stringWithFormat:@"%@(%@)",ZBLocalized(@"新任务", nil),ojbStr];
+            if([ojbStr isEqualToString:@"0"]){
+                  tit = [NSString stringWithFormat:@"%@",ZBLocalized(@"新任务", nil)];
+            }else{
+                  tit = [NSString stringWithFormat:@"%@(%@)",ZBLocalized(@"新任务", nil),ojbStr];
+            }
+            
+//            NSString *tit = [NSString stringWithFormat:@"%@(%@)",ZBLocalized(@"新任务", nil),ojbStr];
             [button setTitle:tit forState:UIControlStateNormal];
         }
+//        else if(idx == 1){
+//            NSString *ojbStr= [NSString stringWithFormat:@"%@",obj];
+//            NSString *tit = [NSString stringWithFormat:@"%@(%@)",ZBLocalized(@"待取货", nil),ojbStr];
+//            [button setTitle:tit forState:UIControlStateNormal];
+//        }
+//        else{
+//            NSString *ojbStr= [NSString stringWithFormat:@"%@",obj];
+//            NSString *tit = [NSString stringWithFormat:@"%@(%@)",ZBLocalized(@"待送达", nil),ojbStr];
+//            [button setTitle:tit forState:UIControlStateNormal];
+//        }
         
         
         //[button addNumberBadge:ojbStr badgeOffsetSize:_offsetSize color:[UIColor redColor] borderColor:[UIColor clearColor]];

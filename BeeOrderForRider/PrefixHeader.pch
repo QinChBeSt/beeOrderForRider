@@ -24,14 +24,24 @@
 #define UD_USERState @"USERState"
 
 #define JPushKey @"55a1b24234ae5cb7804cecc9"
-#define JPushIsProduction 1   //0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
+#define JPushIsProduction 0  //0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
 
-//测试
-#define BASEURL @"http://beeorder.net:8080/spmvc"
+//#define BASEURL @"http://beeorder.net:8080/spmvc"
+//#define IMGBaesURL @"http://beeorder.net:8080/spmvc/apidocs/upload/"
+//
 //#define BASEURL @"http://118.24.100.177:8080/spmvc"
-//#define BASEURL @"http://192.168.0.143:8080/"
-#define IMGBaesURL @"http://beeorder.net:8080/spmvc/apidocs/upload/"
+//#define IMGBaesURL @"http://118.24.100.177:8080/spmvc/apidocs/upload/"
 
+//
+
+#define BASEURL @"http://150.109.179.93"
+#define IMGBaesURL @"http://150.109.179.93/apidocs/upload/"
+//
+
+//#define BASEURL @"http://192.168.0.143:8080"
+
+//#define BASEURL @"http://192.168.0.143:8080"
+//#define IMGBaesURL @"http://192.168.0.143:8080/apidocs/upload/"
 
 #define BaseYellow @"#ffc235"
 #define BaseBackgroundGray @"f5f5f5"
