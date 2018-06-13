@@ -102,5 +102,10 @@
 "用户名或密码错误" = "User name or password error";
 "服务器异常" = "Server exception";
 "账号异常" = "Account abnormal";
+"确认接单？" = "รับออเดอร์?";
+"确认到店？" = "รายงานถึงร้าน?";
+"确认取货？" = "ยืนยันรับขอล?";
+"确认送达？" = "ยืนยันส่งถึง?";
+
 //图=======================
 "bg_zanwandingdan" = "bg_zanwandingdan2";

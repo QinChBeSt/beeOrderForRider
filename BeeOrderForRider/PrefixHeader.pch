@@ -24,7 +24,7 @@
 #define UD_USERState @"USERState"
 
 #define JPushKey @"55a1b24234ae5cb7804cecc9"
-#define JPushIsProduction 0  //0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
+#define JPushIsProduction 1  //0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
 
 //#define BASEURL @"http://beeorder.net:8080/spmvc"
 //#define IMGBaesURL @"http://beeorder.net:8080/spmvc/apidocs/upload/"
@@ -33,7 +33,7 @@
 //#define IMGBaesURL @"http://118.24.100.177:8080/spmvc/apidocs/upload/"
 
 //
-
+//
 #define BASEURL @"http://150.109.179.93"
 #define IMGBaesURL @"http://150.109.179.93/apidocs/upload/"
 //

@@ -45,8 +45,19 @@
     return _arrForHistory;
 }
 -(void)viewWillAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground)name:UIApplicationWillEnterForegroundNotification object:nil];
+ 
     self.noDataImg.hidden = YES;
     [self toSearchHistory];
+}
+- (void)applicationWillEnterForeground{
+    
+    [self toSearchHistory];
+}
+- (void)viewDidDisappear:(BOOL)animated{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 }
 -(void)toSearchHistory{
     if ([self.locationQX isEqualToString:@"no"]) {
@@ -294,7 +305,24 @@
     return self;
 }
 -(void)createAlert:(NSDictionary *)str{
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+    
+    NSString *typeStr = str[@"flg"];
+    NSString *showMsg ;
+    if ([typeStr isEqualToString:@"6"]) {
+      
+        showMsg = ZBLocalized(@"确认接单？", nil);
+        
+    }
+    else if ([typeStr isEqualToString:@"7"]) {
+        showMsg = ZBLocalized(@"确认到店？", nil);
+    }
+    else if ([typeStr isEqualToString:@"8"]) {
+         showMsg = ZBLocalized(@"确认取货？", nil);
+    }else if ([typeStr isEqualToString:@"9"]){
+        showMsg = ZBLocalized(@"确认送达？", nil);
+    }
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:showMsg
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
@@ -433,7 +461,7 @@
     UIButton *CleanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     CleanBtn.frame = CGRectMake(0, callLineHeight * 4, SCREEN_WIDTH * 0.7, callLineHeight + 10);
     [CleanBtn addTarget:self action:@selector(exit) forControlEvents:UIControlEventTouchUpInside];
-    [CleanBtn setTitle:ZBLocalized(@"退出", nil)   forState:UIControlStateNormal];
+    [CleanBtn setTitle:ZBLocalized(@"取消", nil)   forState:UIControlStateNormal];
     [CleanBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.callBackView addSubview:CleanBtn];
 }
