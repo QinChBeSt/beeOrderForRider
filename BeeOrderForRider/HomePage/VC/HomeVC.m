@@ -39,9 +39,31 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+ 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRe) name:@"needReLoad" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HadRe) name:@"HadReLoad" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toSegment1) name:@"toSegment1" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toSegment2) name:@"toSegment2" object:nil];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self toLogin];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+-(void)toSegment1{
+    [self.segmentVC setSelectedAtIndex:1];
+}
+-(void)toSegment2{
+    [self.segmentVC setSelectedAtIndex:2];
+}
+-(void)needRe{
+    self.segmentVC.segmentView.rediconview.hidden = NO;
+}
+-(void)HadRe{
+     self.segmentVC.segmentView.rediconview.hidden = YES;
 }
 #pragma mark - 点击事件
 -(void)toLogin{

@@ -24,7 +24,8 @@
 #define UD_USERState @"USERState"
 
 #define JPushKey @"55a1b24234ae5cb7804cecc9"
-#define JPushIsProduction 1  //0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
+#define JPushIsProduction 1 //0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
+#define Vsion @"1"      //版本号1.0.0
 
 //#define BASEURL @"http://beeorder.net:8080/spmvc"
 //#define IMGBaesURL @"http://beeorder.net:8080/spmvc/apidocs/upload/"
@@ -36,7 +37,7 @@
 //
 #define BASEURL @"http://150.109.179.93"
 #define IMGBaesURL @"http://150.109.179.93/apidocs/upload/"
-//
+
 
 //#define BASEURL @"http://192.168.0.143:8080"
 
@@ -49,7 +50,8 @@
 
 //上传图片
 #define UpFileURL @"/files/up"
-
+//匹配版本
+#define isappstoreURL @"/xmfapi/vinum"
 //登录
 #define LoginURL @"/qsapi/qslog"
 //修改工作状态

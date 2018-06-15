@@ -122,6 +122,16 @@ int const ZWMSegmentHeight = 45;//可根据项目需求设置高度
             // 添加指示杆
             _indicateView.frame = CGRectMake(_buttonSpace-50, _segmentHeight - _indicateHeight, titleSize.width+50+50, _indicateHeight);
             [_contentView addSubview:_indicateView];
+            
+            self.rediconview = [[UIView alloc]init];
+            self.rediconview.hidden = YES;
+            self.rediconview.backgroundColor = [UIColor redColor];
+            [button addSubview:self.rediconview];
+            [self.rediconview mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.width.and.height.equalTo(@(5));
+                make.left.equalTo(button.titleLabel.mas_right).offset(2);
+                make.top.equalTo(button.titleLabel);
+            }];
         }
     }
     self.contentView.contentSize = CGSizeMake(item_x, _segmentHeight);

@@ -18,7 +18,7 @@ FOUNDATION_EXPORT int const ZWMSegmentHeight;
 @interface ZWMSegmentView : UIView
 + (__nullable instancetype)segmentViewWithFrame:(CGRect)frame titles:(NSArray <NSString *>*)titles;
 - (__nullable instancetype)initWithFrame:(CGRect)frame titles:(NSArray <NSString *>*)titles;
-
+@property (nonatomic , strong)UIView *rediconview;
 @property (nonatomic) ZWMSegmentStyle style;
 @property (nonatomic, strong, nullable) UIImage *backgroundImage;
 @property (nonatomic, strong, nullable) UIColor *segmentTintColor;   /**< 选中时的字体颜色，默认黑色*/

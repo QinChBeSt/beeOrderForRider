@@ -8,6 +8,7 @@
 
 #import "LoginVC.h"
 #import "UserPhotoVC.h"
+#import "RegisVC.h"
 @interface LoginVC ()<UITextFieldDelegate>
 @property (nonatomic , strong)UIView *naviView;
 @property (nonatomic , strong)UITextField *userTextFile;
@@ -16,6 +17,7 @@
 @property (nonatomic , strong)NSString *codeNumStr;
 
 @property (nonatomic , strong)UIButton *loginBtn;
+@property (nonatomic , strong)UIButton *regisBtn;
 @end
 
 @implementation LoginVC
@@ -24,6 +26,12 @@
     [super viewDidLoad];
     [self createNaviView];
     [self setUpui];
+    [self isappstore];
+}
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
+    
+    [self.view endEditing:YES];
+    
 }
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
@@ -124,6 +132,30 @@
         make.top.equalTo(ws.passWordTextFile.mas_bottom).offset(40);
     }];
     
+    self.regisBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.regisBtn.layer.cornerRadius=6;
+    self.regisBtn.clipsToBounds = YES;
+    [self.regisBtn setTitle:ZBLocalized(@"注册", nil) forState:UIControlStateNormal];
+    [self.regisBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.regisBtn.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [self.view addSubview:self.regisBtn];
+    [self.regisBtn addTarget:self action:@selector(regis) forControlEvents:UIControlEventTouchUpInside];
+    [self.regisBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.view);
+        make.left.equalTo(ws.view.mas_left).offset(SCREEN_WIDTH / 7);
+        make.height.equalTo(@(50));
+        make.top.equalTo(ws.loginBtn.mas_bottom).offset(20);
+    }];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy-HHmmss"];
+    NSDate *date = [dateFormatter dateFromString:@"18-06-2018-000000"];
+    int isLate = [self compareOneDay:[self getCurrentTime] withAnotherDay:date];
+    if (isLate < 0) {
+        self.regisBtn.hidden = NO;
+    }else{
+        self.regisBtn.hidden = YES;
+    }
+    
     
     UILabel *hintLabel=[[UILabel alloc]initWithFrame:CGRectMake(30, SCREENH_HEIGHT - TabbarHeight - 30, SCREEN_WIDTH - 60, 50)];
     hintLabel.numberOfLines=0;
@@ -140,6 +172,67 @@
     [self.view addSubview:changeType];
     changeType.frame = CGRectMake(30, SCREENH_HEIGHT - TabbarHeight - 30, SCREEN_WIDTH - 60, 50);
     [changeType addTarget:self action:@selector(toUserProto) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void)isappstore{
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,isappstoreURL];
+    NSDictionary *parameters = @{@"vnum":Vsion,
+                                 @"flg":@"1",
+                                 };
+    AFHTTPSessionManager *managers = [AFHTTPSessionManager manager];
+    [managers POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"is匹配：%@",responseObject);
+        NSString *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
+        if ([code isEqualToString:@"1"]) {
+            NSString *isShow = [NSString stringWithFormat:@"%@",responseObject[@"value"]];
+            if ([isShow isEqualToString:@"1"]) {
+                self.regisBtn.hidden = NO;
+            }else{
+                self.regisBtn.hidden = YES;
+            }
+        }else{
+            [MBManager showBriefAlert:responseObject[@"msg"]];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+    
+}
+#pragma mark -得到当前时间
+- (NSDate *)getCurrentTime{
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"dd-MM-yyyy-HHmmss"];
+    NSString *dateTime=[formatter stringFromDate:[NSDate date]];
+    NSDate *date = [formatter dateFromString:dateTime];
+    
+    NSLog(@"---------- currentDate == %@",date);
+    return date;
+}
+- (int)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy-HHmmss"];
+    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+    NSComparisonResult result = [dateA compare:dateB];
+    NSLog(@"date1 : %@, date2 : %@", oneDay, anotherDay);
+    if (result == NSOrderedDescending) {
+        //NSLog(@"Date1  is in the future");
+        return 1;
+    }
+    else if (result == NSOrderedAscending){
+        //NSLog(@"Date1 is in the past");
+        return -1;
+    }
+    //NSLog(@"Both dates are the same");
+    return 0;
+    
+}
+-(void)regis{
+    RegisVC *regis = [[RegisVC alloc]init];
+    [self.navigationController pushViewController:regis animated:YES];
 }
 -(void)login{
      NSString * md5Code = [MD5encryption MD5ForLower32Bate:self.codeNumStr];
@@ -164,6 +257,7 @@
                 [MBManager showBriefAlert:ZBLocalized(@"账号异常", nil)];
                 return ;
             }
+            NSLog(@"res:%@",responseObject);
              NSDictionary *dic = responseObject[@"value"];
             NSString *userId = dic[@"id"];
             NSString *userImgUrl = dic[@"originallyLog"];

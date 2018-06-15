@@ -112,5 +112,12 @@
 "确认到店？" = "Arrive Shop?";
 "确认取货？" = "Confirm receipt?";
 "确认送达？" = "Have Service?";
+"注册" = "register";
+"请输入手机号" = "Please enter your phone number";
+"请确认密码" = "Please confirm the password";
+"注册成功" = "register success";
+"注册失败" = "register failed";
+"两次密码不相同，请检查输入的密码" = "Two passwords are different. Please check the password";
+
 //==================图
 "bg_zanwandingdan" = "bg_zanwandingdan2";

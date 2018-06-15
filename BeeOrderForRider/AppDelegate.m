@@ -31,7 +31,6 @@
     //国际化===============
     [[ZBLocalized sharedInstance]initLanguage];//放在tabbar前初始化
     
-    
     //极光推送=============
     //初始化APNs
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -110,7 +109,11 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         
         //     前台收到消息后，做的对应页面跳转操作
         
+        NSNotification *notification =[NSNotification notificationWithName:@"needReLoad" object:nil userInfo:nil];
         
+        //通过通知中心发送通知
+        
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
         NSLog(@"前台收到消息");
         
     }
