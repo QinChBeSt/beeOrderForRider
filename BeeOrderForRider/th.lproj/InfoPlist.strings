@@ -5,7 +5,7 @@
   Created by mac on 2018/5/7.
   Copyright © 2018年 QinChBeSt. All rights reserved.
 */
-CFBundleDisplayName = "beeRider";
+CFBundleDisplayName = "BeeRider";
 NSLocationAlwaysAndWhenInUseUsageDescription = "เปิดGPSของมืถือไว้ ไม่นั้นจะไม่ได้ระบุระยะทางที่แน่จัด";
 NSLocationAlwaysUsageDescription  = "เปิดGPSของมืถือไว้ ไม่นั้นจะไม่ได้ระบุระยะทางที่แน่จัด";
 NSLocationWhenInUseUsageDescription =  "เปิดGPSของมืถือไว้ ไม่นั้นจะไม่ได้ระบุระยะทางที่แน่จัด";

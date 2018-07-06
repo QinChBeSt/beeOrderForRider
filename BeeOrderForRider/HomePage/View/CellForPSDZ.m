@@ -27,26 +27,28 @@
         make.centerY.equalTo(ws.contentView);
         make.left.equalTo(ws.contentView.mas_left).offset(25);
     }];
-    
+      
     self.SUB = [[UILabel alloc]init];
     self.SUB.textColor = [UIColor colorWithHexString:BaseTextGrayColor];
     self.SUB.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:self.SUB];
     [self.SUB mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(ws.contentView);
+        //make.centerY.equalTo(ws.contentView);
         make.left.equalTo(ws.TIT.mas_right).offset(10);
         make.right.equalTo(ws.contentView.mas_right).offset(-10);
+        make.top.equalTo(ws.contentView).offset(10);
     }];
     
     self.buttomLine = [[UIView alloc]init];
-    self.buttomLine.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+    self.buttomLine.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:self.buttomLine];
     [self.buttomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(ws.contentView);
-        make.bottom.equalTo(ws.contentView);
+        make.bottom.equalTo(ws.SUB).offset(10);
         make.width.equalTo(@(SCREEN_WIDTH - 30));
-        make.height.equalTo(@(1));
+        make.height.equalTo(@(0.5));
     }];
+    [self setupAutoHeightWithBottomView:self.buttomLine bottomMargin:0];
 }
 - (void)awakeFromNib {
     [super awakeFromNib];

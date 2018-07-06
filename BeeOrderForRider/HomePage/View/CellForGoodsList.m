@@ -73,7 +73,7 @@
     [self.bigImage sd_setImageWithURL:[NSURL URLWithString:mod.ordersGoodsLog] placeholderImage:[UIImage imageNamed:@"xmfLogo"]];
     self.shopName.text = mod.ordersGoodsName;
     CGFloat Fpic = [mod.ordersGoodsPic floatValue];
-    self.shopPic.text = [NSString stringWithFormat:@"%@%.2f",ZBLocalized(@"￥",nil),Fpic];
+    self.shopPic.text = [NSString stringWithFormat:@"%@%.2f",ZBLocalized(@"฿",nil),Fpic];
     self.shopCount.text = [NSString stringWithFormat:@"x %@",mod.ordersGoodsNum];
 }
 - (void)awakeFromNib {

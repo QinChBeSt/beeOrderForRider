@@ -104,7 +104,7 @@
     }];
     
     self.priceLab = [[UILabel alloc]init];
-    self.priceLab.text = @"￥23";
+    self.priceLab.text = @"฿23";
     self.priceLab.textColor = [UIColor redColor];
     self.priceLab.font = [UIFont systemFontOfSize:24];
     [self.contentView addSubview:self.priceLab];

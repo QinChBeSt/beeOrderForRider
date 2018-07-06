@@ -88,7 +88,7 @@
         NSString *code = [NSString stringWithFormat:@"%@",result[@"code"]];
         if ([code isEqualToString:@"1"]) {
             NSDictionary *dic = result[@"value"];
-            self.tolitLab.text = [NSString stringWithFormat:@"%@ %@",ZBLocalized(@"￥", nil),dic[@"totalspic"]];
+            self.tolitLab.text = [NSString stringWithFormat:@"%@ %@",ZBLocalized(@"฿", nil),dic[@"totalspic"]];
             NSMutableArray *arr = dic[@"getorderlist"];
             for (NSMutableDictionary *dicRes in arr) {
                 
@@ -189,7 +189,7 @@
     self.tolitLab = [[UILabel alloc]init];
     self.tolitLab.font = [UIFont systemFontOfSize:14];
     self.tolitLab.textColor = [UIColor colorWithHexString:@"4b4b4b"];
-    self.tolitLab.text = ZBLocalized(@"￥0", nil);
+    self.tolitLab.text = ZBLocalized(@"฿0", nil);
     [totilView addSubview:self.tolitLab];
     [self.tolitLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(totilView);
@@ -444,7 +444,7 @@
             NSString *code = [NSString stringWithFormat:@"%@",result[@"code"]];
             if ([code isEqualToString:@"1"]) {
                 NSDictionary *dic = result[@"value"];
-                self.tolitLab.text = [NSString stringWithFormat:@"%@ %@",ZBLocalized(@"￥", nil),dic[@"totalspic"]];
+                self.tolitLab.text = [NSString stringWithFormat:@"%@ %@",ZBLocalized(@"฿", nil),dic[@"totalspic"]];
                 NSMutableArray *arr = dic[@"getorderlist"];
                 for (NSMutableDictionary *dicRes in arr) {
                     

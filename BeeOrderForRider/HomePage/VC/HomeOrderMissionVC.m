@@ -12,7 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "OrderDetilVC.h"
 #import "MapVC.h"
-
+#import <AVFoundation/AVFoundation.h>
 #define callLineHeight 40
 
 @interface HomeOrderMissionVC ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
@@ -335,9 +335,11 @@
        [self getNetworkForChangeOrderType:str];
        
     }];
+    [defaultAction setValue:[UIColor colorWithHexString:BaseYellow] forKey:@"titleTextColor"];
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:ZBLocalized(@"取消", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         
     }];
+    [cancelAction setValue:[UIColor colorWithHexString:BaseTextGrayColor] forKey:@"titleTextColor"];
     [alert addAction:cancelAction];
     [alert addAction:defaultAction];
     
@@ -386,11 +388,14 @@
     cell.mod = mod;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.blockChangeOrderState = ^(NSDictionary *str) {
+        AVAudioSession *session = [AVAudioSession sharedInstance];
+        [session setActive:NO error:nil];
         [self createAlert:str];
     };
     cell.blocktoMapView = ^(NSDictionary *dic) {
         MapVC *map = [[MapVC alloc]init];
         map.type = self.CountType;
+         map.orderType = mod.ordertype;
         map.dic = dic;
        
         [self.navigationController pushViewController:map animated:YES];
@@ -419,6 +424,7 @@
     
 }
 -(void)createCallView:(NSDictionary *)phoneDic shopname:(NSString *)shopName{
+    
     [self createwindowBackView];
     __weak typeof(self) ws = self;
     self.callBackView = [[UIView alloc]init];

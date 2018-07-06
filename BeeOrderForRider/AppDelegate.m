@@ -9,7 +9,9 @@
 #import "AppDelegate.h"
 #import "QCNavigationController.h"
 #import "HomeVC.h"
-
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"
 // iOS10注册APNs所需头文件
@@ -20,7 +22,11 @@
 #import <AdSupport/AdSupport.h>
 
 @interface AppDelegate ()<UITabBarDelegate,JPUSHRegisterDelegate>
-
+{
+    AVAudioPlayer *avAudioPlayer;   //播放器player
+    
+    
+}
 @end
 
 @implementation AppDelegate
@@ -30,7 +36,12 @@
     // Override point for customization after application launch.
     //国际化===============
     [[ZBLocalized sharedInstance]initLanguage];//放在tabbar前初始化
+    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
     
+    keyboardManager.enable = YES; // 控制整个功能是否启用
+    keyboardManager.shouldResignOnTouchOutside = YES;
+    keyboardManager.shouldToolbarUsesTextFieldTintColor = YES;
+    keyboardManager.enableAutoToolbar = NO;
     //极光推送=============
     //初始化APNs
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -115,13 +126,14 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         
         [[NSNotificationCenter defaultCenter] postNotification:notification];
         NSLog(@"前台收到消息");
+        [self StartSound];
         
+
     }
     
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         
-        [JPUSHService handleRemoteNotification:userInfo];
-        
+       
     }
     
     completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
@@ -133,6 +145,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     // 取得 APNs 标准信息内容
+    [self StartSound];
     NSDictionary *aps = [userInfo valueForKey:@"aps"];
     NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
     NSInteger badge = [[aps valueForKey:@"badge"] integerValue]; //badge数量
@@ -151,7 +164,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [JPUSHService setBadge:0];
     NSDictionary *userInfo = response.notification.request.content.userInfo;
-    
+    [self StartSound];
     if ([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         
         [JPUSHService handleRemoteNotification:userInfo];
@@ -196,6 +209,30 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+-(void)StartSound{
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setActive:YES error:nil];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+    NSString *string = [[NSBundle mainBundle] pathForResource:@"WMDDSOUND" ofType:@"caf"];
+    //把音频文件转换成url格式
+    NSURL *url = [NSURL fileURLWithPath:string];
+    //初始化音频类 并且添加播放文件
+    avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+    
+    //设置代理
+    avAudioPlayer.delegate = self;
+    
+    //设置初始音量大小
+    // avAudioPlayer.volume = 1;
+    
+    //设置音乐播放次数  -1为一直循环
+    avAudioPlayer.numberOfLoops = -1;
+    
+    //预播放
+    [avAudioPlayer prepareToPlay];
+    [avAudioPlayer play];
 }
 
 @end

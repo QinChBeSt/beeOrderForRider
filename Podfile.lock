@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.0)
   - AFNetworking/UIKit (3.2.0):
     - AFNetworking/NSURLSession
+  - IQKeyboardManager (3.3.7)
   - JCore (1.1.9)
   - JPush (3.0.9):
     - JCore (~> 1.1.7)
@@ -31,6 +32,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - IQKeyboardManager
   - JPush (~> 3.0.9)
   - Masonry
   - MBProgressHUD
@@ -43,6 +45,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 8ac6017b94ea105479f7776e5288e48ae9c59bb4
+  IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
   JCore: 27598485098d0db99d2812cba048003457d08cfb
   JPush: 003d9eaef8ba2df76de32573d0c8aa62b92b3c82
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -54,6 +57,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: ce21769a6a91e98bcaab3d7c89ec9bfe22120d46
+PODFILE CHECKSUM: 64df398364e62a8e1d0b9fb41c2851b563157ee8
 
 COCOAPODS: 1.4.0

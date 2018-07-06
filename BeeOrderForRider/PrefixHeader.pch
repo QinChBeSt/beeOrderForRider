@@ -24,30 +24,31 @@
 #define UD_USERState @"USERState"
 
 #define JPushKey @"55a1b24234ae5cb7804cecc9"
-#define JPushIsProduction 1 //0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
+#define JPushIsProduction 0 //0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
 #define Vsion @"1"      //版本号1.0.0
 
 //#define BASEURL @"http://beeorder.net:8080/spmvc"
 //#define IMGBaesURL @"http://beeorder.net:8080/spmvc/apidocs/upload/"
 //
-//#define BASEURL @"http://118.24.100.177:8080/spmvc"
-//#define IMGBaesURL @"http://118.24.100.177:8080/spmvc/apidocs/upload/"
+#define BASEURL @"http://118.24.100.177:8080/spmvc"
+#define IMGBaesURL @"http://118.24.100.177:8080/spmvc/apidocs/upload/"
 
 //
 //
-#define BASEURL @"http://150.109.179.93"
-#define IMGBaesURL @"http://150.109.179.93/apidocs/upload/"
+//#define BASEURL @"http://150.109.179.93"
+//#define IMGBaesURL @"http://150.109.179.93/apidocs/upload/"
 
 
 //#define BASEURL @"http://192.168.0.143:8080"
-
-//#define BASEURL @"http://192.168.0.143:8080"
-//#define IMGBaesURL @"http://192.168.0.143:8080/apidocs/upload/"
+//
+//#define BASEURL @"http://192.168.0.154:8081"
+//#define IMGBaesURL @"http://192.168.0.154:8081/apidocs/upload/"
 
 #define BaseYellow @"#ffc235"
 #define BaseBackgroundGray @"f5f5f5"
 #define BaseTextGrayColor @"4F4F4F"
-
+#define BaseTextBlack @"4b4b4b"
+#define BaseGreen @"26c0c8"
 //上传图片
 #define UpFileURL @"/files/up"
 //匹配版本
@@ -66,6 +67,12 @@
 #define changePasswordURL @"/qsapi/workpwd"
 //查看今日收益
 #define watchTodayMoney @"/qsapi/getShopOrderList"
+//对账-订单详情
+#define historyOrderDetail @"/shoporderapi/getqstOrderlist"
+//对账-每日订单
+#define historyDaysOrderURL @"/shoporderapi/setqstlementReconciliations"
+
+
 
 #define MainScreenScale [[UIScreen mainScreen]scale] //屏幕的分辨率 当结果为1时，显示的是普通屏幕，结果为2时，显示的是Retian屏幕
 // App Frame Height&Width

@@ -10,5 +10,7 @@
 
 @interface MapVC : UIViewController
 @property (nonatomic , strong)NSString *type;
+@property (nonatomic , strong)NSString *orderType;
 @property (nonatomic , strong)NSDictionary *dic;
+
 @end

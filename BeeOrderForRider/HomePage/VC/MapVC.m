@@ -286,12 +286,22 @@
     
 }
 -(void)setDic:(NSDictionary *)dic{
-    if ([ self.typeStr isEqualToString:@"6"]) {
-        self.latStr = dic[@"sLat"];
-        self.longStr = dic[@"sLong"];
+    if ([ self.typeStr isEqualToString:@"6" ]) {
+        if ([self.orderType isEqualToString:@"7"]) {
+            self.latStr = dic[@"uLat"];
+            self.longStr = dic[@"uLong"];
+        }else{
+            self.latStr = dic[@"sLat"];
+            self.longStr = dic[@"sLong"];
+        }
+        
     }else if ([ self.typeStr isEqualToString:@"8"]) {
+        
         self.latStr = dic[@"uLat"];
         self.longStr = dic[@"uLong"];
+    }else if ([ self.typeStr isEqualToString:@"4" ]) {
+        self.latStr = dic[@"sLat"];
+        self.longStr = dic[@"sLong"];
     }
 }
 -(void)back{

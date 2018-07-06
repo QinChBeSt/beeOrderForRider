@@ -13,7 +13,7 @@
 #import "CellForLeftPage.h"
 #import "ChangelanguageVC.h"
 #import "AboutVC.h"
-#import "ViewMoneyVC.h"
+#import "NewWatchMoneyVC.h"
 #import "CellForChooseLag.h"
 #import "QCNavigationController.h"
 #import "HomeVC.h"
@@ -343,7 +343,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.tableView) {
-        return 6;
+        return 5;
     }else{
         return 3;
     }
@@ -376,12 +376,9 @@
             cell.img.image = [UIImage imageNamed:@"icon_erjiyuyanqiehuan"];
             cell.Tlabel.text = ZBLocalized(@"语言切换", nil);
         }
-        else if (indexPath.row == 4){
-            cell.img.image = [UIImage imageNamed:@"icon_erjiguanyu"];
-            cell.Tlabel.text = ZBLocalized(@"关于BeeRider骑手", nil);
-        }
+     
         
-        else if (indexPath.row == 5){
+        else if (indexPath.row == 4){
             cell.img.image = [UIImage imageNamed:@"icon_erjituichu"];
             cell.Tlabel.text = ZBLocalized(@"退出登录", nil);
         }
@@ -401,7 +398,7 @@
         }
         if (indexPath.section == 0) {
             if (indexPath.row == 0){
-                cell.name.text = @"บทความภาษาไทย";
+                cell.name.text = @"ภาษาไทย";
             }else if (indexPath.row == 1){
                 cell.name.text = @"简体中文";
             }else if (indexPath.row == 2){
@@ -428,7 +425,7 @@
             HistoryOrderVC *history = [[HistoryOrderVC alloc]init];
             [self.navigationController pushViewController:history animated:YES];
         }else if (indexPath.row == 1){
-            ViewMoneyVC *view = [[ViewMoneyVC alloc]init];
+            NewWatchMoneyVC *view = [[NewWatchMoneyVC alloc]init];
             [self.navigationController pushViewController:view animated:YES];
             
         }
@@ -440,12 +437,9 @@
             [self createChangeLag];
             //[self.navigationController pushViewController:lang animated:YES];
         }
-        else if (indexPath.row == 4){
-            AboutVC *about = [[AboutVC alloc]init];
-            [self.navigationController pushViewController:about animated:YES];
-        }
         
-        else if (indexPath.row == 5){
+        
+        else if (indexPath.row == 4){
             [self creatLogoutAction];
         }
         
@@ -685,8 +679,9 @@
     [okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(ws.tableViewToChage.mas_bottom).offset(5);
         make.bottom.equalTo(ws.changeLagView.mas_bottom).offset(-15);
-        make.right.equalTo(ws.changeLagView.mas_centerX).offset(-10);
-        make.left.equalTo(ws.changeLagView.mas_left).offset(15);
+        make.left.equalTo(ws.changeLagView.mas_centerX).offset(10);
+        make.right.equalTo(ws.changeLagView.mas_right).offset(-15);
+        
     }];
     
     UIButton *cleanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -701,10 +696,11 @@
     okBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.windowBackView addSubview:cleanBtn];
     [cleanBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
         make.top.equalTo(ws.tableViewToChage.mas_bottom).offset(5);
         make.bottom.equalTo(ws.changeLagView.mas_bottom).offset(-15);
-        make.left.equalTo(ws.changeLagView.mas_centerX).offset(10);
-        make.right.equalTo(ws.changeLagView.mas_right).offset(-15);
+        make.right.equalTo(ws.changeLagView.mas_centerX).offset(-10);
+        make.left.equalTo(ws.changeLagView.mas_left).offset(15);
     }];
     
 }

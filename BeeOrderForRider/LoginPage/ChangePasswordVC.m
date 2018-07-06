@@ -87,6 +87,10 @@
     SUREpasswordBackview.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:SUREpasswordBackview];
     
+    UIView *NewpasswordBackview = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 30 + 60 + 30  + 60 + 30, SCREEN_WIDTH, 60)];
+    NewpasswordBackview.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:NewpasswordBackview];
+    
     self.passWordTextFile = [[UITextField alloc]init];
     self.passWordTextFile.delegate = self;
     self.passWordTextFile.secureTextEntry = YES;
@@ -113,6 +117,20 @@
         make.centerX.equalTo(ws.view);
     }];
     
+    self.passWordTextFile = [[UITextField alloc]init];
+    self.passWordTextFile.delegate = self;
+    self.passWordTextFile.secureTextEntry = YES;
+    self.passWordTextFile.placeholder = ZBLocalized(@"请确认密码",nil);
+    [self.passWordTextFile addTarget:self action:@selector(newpassWordFiledDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.view addSubview:self.passWordTextFile];
+    [self.passWordTextFile mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(NewpasswordBackview);
+        make.left.equalTo(NewpasswordBackview.mas_left).offset(20);
+        make.height.equalTo(@(50));
+        make.centerX.equalTo(ws.view);
+    }];
+    
+    
     self.loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.loginBtn setBackgroundColor:[UIColor grayColor]];
     self.loginBtn.layer.cornerRadius=6;
@@ -127,13 +145,17 @@
         make.centerX.equalTo(ws.view);
         make.left.equalTo(ws.view.mas_left).offset(SCREEN_WIDTH / 7);
         make.height.equalTo(@(50));
-        make.top.equalTo(ws.surePassWordTextFile.mas_bottom).offset(40);
+        make.top.equalTo(ws.passWordTextFile.mas_bottom).offset(40);
     }];
     
     
     
 }
 -(void)login{
+    if (![self.phoneNumStr isEqualToString:self.surePassWordStr]) {
+        [MBManager showBriefAlert:ZBLocalized(@"两次密码不相同，请检查输入的密码", nil)];
+        return;
+    }
     NSString * md5Code = [MD5encryption MD5ForLower32Bate:self.codeNumStr];
     
     NSString * md5CodeNew = [MD5encryption MD5ForLower32Bate:self.surePassWordStr];
@@ -173,7 +195,7 @@
 -(void)passWordFiledDidChange :(UITextField *)theTextField{
     NSLog( @"text changed: %@", theTextField.text);
     self.codeNumStr = theTextField.text;
-    if ( self.codeNumStr != nil &&self.surePassWordStr != nil &&  self.codeNumStr.length != 0&& self.surePassWordStr.length != 0) {
+    if ( self.codeNumStr != nil &&self.surePassWordStr != nil&&self.phoneNumStr != nil &&  self.codeNumStr.length != 0&& self.surePassWordStr.length != 0&&  self.phoneNumStr.length != 0) {
         [self.loginBtn setBackgroundColor:[UIColor colorWithHexString:BaseYellow]];
         self.loginBtn.enabled = YES;
     }else{
@@ -184,7 +206,18 @@
 -(void)SUREpassWordFiledDidChange:(UITextField *)theTextField{
     NSLog( @"text changed: %@", theTextField.text);
     self.surePassWordStr = theTextField.text;
-    if ( self.codeNumStr != nil &&self.surePassWordStr != nil &&  self.codeNumStr.length != 0&& self.surePassWordStr.length != 0) {
+    if ( self.codeNumStr != nil &&self.surePassWordStr != nil&&self.phoneNumStr != nil &&  self.codeNumStr.length != 0&& self.surePassWordStr.length != 0&&  self.phoneNumStr.length != 0) {
+        [self.loginBtn setBackgroundColor:[UIColor colorWithHexString:BaseYellow]];
+        self.loginBtn.enabled = YES;
+    }else{
+        [self.loginBtn setBackgroundColor:[UIColor grayColor]];
+        self.loginBtn.enabled = NO;
+    }
+}
+-(void)newpassWordFiledDidChange:(UITextField *)theTextField{
+    NSLog( @"text changed: %@", theTextField.text);
+    self.phoneNumStr = theTextField.text;
+    if ( self.codeNumStr != nil &&self.surePassWordStr != nil&&self.phoneNumStr != nil &&  self.codeNumStr.length != 0&& self.surePassWordStr.length != 0&&  self.phoneNumStr.length != 0) {
         [self.loginBtn setBackgroundColor:[UIColor colorWithHexString:BaseYellow]];
         self.loginBtn.enabled = YES;
     }else{

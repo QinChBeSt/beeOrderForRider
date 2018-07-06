@@ -148,7 +148,7 @@
     }];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd-MM-yyyy-HHmmss"];
-    NSDate *date = [dateFormatter dateFromString:@"18-06-2018-000000"];
+    NSDate *date = [dateFormatter dateFromString:@"02-07-2018-000000"];
     int isLate = [self compareOneDay:[self getCurrentTime] withAnotherDay:date];
     if (isLate < 0) {
         self.regisBtn.hidden = NO;

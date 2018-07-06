@@ -254,7 +254,7 @@
             cell.TIT.font = [UIFont systemFontOfSize:14];
             cell.TIT.text = ZBLocalized(@"配送地址", nil);
             cell.SUB.text = self.orderUserAddStr;
-            cell.SUB.numberOfLines = 3;
+            cell.SUB.numberOfLines = 0;
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -338,7 +338,7 @@
     }
     else if (indexPath.section == 2){
         if (indexPath.row == 0) {
-            return 60;
+            return [self cellHeightForIndexPath:indexPath cellContentViewWidth:SCREEN_WIDTH tableView:self.tableView];
         }
         else {
             return 40;
@@ -346,6 +346,7 @@
         
     }else if (indexPath.section == 3){
         return 40;
+
     }
     return 50;
 }
@@ -380,7 +381,7 @@
     if (allF <= 0) {
         allF = 0.01;
     }
-    self.orderAllpicStr = [NSString stringWithFormat:@"%@%.2f",ZBLocalized(@"￥", nil),allF];
+    self.orderAllpicStr = [NSString stringWithFormat:@"%@%.2f",ZBLocalized(@"฿", nil),allF];
   
     self.orderUserPhoneStr = [NSString stringWithFormat:@"%@  %@",mod.uname,mod.uphone];
     self.orderUserAddStr = [NSString stringWithFormat:@"%@",mod.uaddr];

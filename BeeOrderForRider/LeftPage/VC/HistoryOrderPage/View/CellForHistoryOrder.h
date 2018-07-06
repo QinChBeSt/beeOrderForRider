@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ModelForHistory.h"
 @interface CellForHistoryOrder : UITableViewCell
+@property (nonatomic , strong)UILabel *orderDayNo;
 @property (nonatomic , strong)UILabel *orderNumLab;
 @property (nonatomic , strong)UILabel *orderDateLab;
 @property (nonatomic , strong)UILabel *shopNameLab;

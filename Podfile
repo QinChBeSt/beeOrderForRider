@@ -10,5 +10,5 @@ pod 'SDCycleScrollView'
 pod 'SVProgressHUD'
 pod 'MJExtension'
  pod 'YYModel'
-
+pod 'IQKeyboardManager'
 end

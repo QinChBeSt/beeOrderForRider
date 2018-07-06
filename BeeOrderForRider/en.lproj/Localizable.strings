@@ -14,7 +14,7 @@
  */
 "主页" = "home";
 "取消" = "Cancel";
-"确定" = "OK";
+"确定" = "conform";
 "成功" = "Successful";
 //=========================登录
 "登录" = "Login";
@@ -45,12 +45,12 @@
 "待取货" = "To be taken";
 "待送达" = "To be served";
 "联系商家" = "call shop";
-"抢单" = "Order Receiving";
+"接单" = "Get order";
 "上报到店" = "Arrive Shop";
 "确认取货" = "Confirm receipt";
 "确认送达" = "Have Service";
 "小计" = "Total";
-"￥" = "$";
+"฿" = "฿";
 "配送费" = "Distribution";
 "优惠金额" = "Preferential amount";
 "配送地址" = "Address";
@@ -66,7 +66,7 @@
 "请选择开始时间" = "Please select start time";
 "请选择结束时间" = "Please select end time";
 "总计" = "total";
-"元" = "USD";
+"元" = "฿";
 "订单编号: " = "Order No. ";
 "取" = "Take";
 "送" = "Send";
@@ -85,7 +85,7 @@
 "派送时间" = "Delivery Time";
 "送达时间" = "Arrive Time";
 "请选择送达时间" = "Please choose arrive time";
-"￥0" = "$0";
+"฿0" = "฿0";
 "备注" = "note";
 
 "打开定位" = "Open Lacation";
@@ -97,7 +97,7 @@
 "上报到店成功,此订单为待取货状态" = "Reported to the store successfully, this order is in the state of pending delivery";
 "取货成功,此订单为待送达状态，右滑查看" = "Successful delivery. This order is pending delivery. Please click right to view";
 "确认送达,此订单已完成" = "Confirm delivery, this order has been completed";
-"接单" = "get Order";
+"接单" = "Get order";
 "发短信给顾客" = "SMS to customers";
 "商家电话" = "shop phone";
 "顾客电话" = "Customer phone";
@@ -119,5 +119,36 @@
 "注册失败" = "register failed";
 "两次密码不相同，请检查输入的密码" = "Two passwords are different. Please check the password";
 
+
+"今日预计收入" = "Estimated income today";
+"历史账单" = "History Order";
+"外卖订单" = "Order";
+"全部历史账单" ="All history order";
+"待交账" = "will account";
+"已交账" = "had account";
+"订单明细" = "Order details";
+"菜品原价" = "Original price";
+"商家活动支出" = "Business activity expenditure";
+"配送费" = "Delivery fee";
+"餐盒费用" = "Box charge";
+"商家名称&订单编号" = "shop name & order number";
+"交易类型" = "Type of transaction";
+"金额" = "money";
+"外卖订单" = "Delivered Order";
+
+"商品" = "goods";
+"活动支出" = "Activity expenditure";
+"用户支付配送费金额" = "User pays the delivery fee amount";
+"结算金额" = "Settlement amount";
+"订单编号" = "Order serial number";
+"订单号" = "order number";
+"下单时间" = "create order time";
+"订单完成时间" = "Order completion time";
+"配送方式" = "Delivery Method";
+"BeeOrder配送" = "BeeOrder Delivery";
+"暂无今日数据" = "No data available today";
+"共" = "Total";
+"笔" = "deal";
+"商家配送" = "Merchant delivery";
 //==================图
 "bg_zanwandingdan" = "bg_zanwandingdan2";

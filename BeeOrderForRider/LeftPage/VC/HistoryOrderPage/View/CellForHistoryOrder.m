@@ -25,7 +25,15 @@
     [self.contentView addSubview:buttomLine];
     
     __weak typeof(self) ws = self;
-   
+    self.orderDayNo = [[UILabel alloc]init];
+    self.orderDayNo.textColor = [UIColor blackColor];
+    self.orderDayNo.font = [UIFont systemFontOfSize:14];
+    [self.contentView addSubview:self.orderDayNo];
+    [self.orderDayNo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(buttomLine.mas_bottom).offset(0);
+        make.left.equalTo(ws.contentView).offset(20);
+        make.height.equalTo(@(lineHeight));
+    }];
     
     self.orderDateLab = [[UILabel alloc]init];
     self.orderDateLab.textColor = [UIColor colorWithHexString:@"4b4b4b"];
@@ -44,7 +52,7 @@
     [self.contentView addSubview:self.orderNumLab];
     [self.orderNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(buttomLine.mas_bottom).offset(0);
-        make.left.equalTo(ws.contentView.mas_left).offset(20);
+        make.left.equalTo(ws.orderDayNo.mas_right).offset(5);
         make.height.equalTo(@(lineHeight));
         make.right.equalTo(ws.orderDateLab.mas_left).offset(-10);
     }];
@@ -166,12 +174,14 @@
    
 }
 -(void)setMod:(ModelForHistory *)mod{
+    self.orderDayNo.text = mod.orderdaynum;
     self.orderNumLab.text = [NSString stringWithFormat:@"%@%@",ZBLocalized(@"订单编号: ", nil),mod.ordernum];
     self.orderDateLab.text = [NSString stringWithFormat:@"%@",mod.orderdatatime];
     self.shopNameLab.text = mod.shopname;
     [self setOrderStateStr:mod.ordertype];
     self.userNameLab.text = mod.uname;
     self.userAddLab.text = mod.uaddr;
+    
 }
 -(void)setOrderStateStr:(NSString *)str{
     NSString *shopStrat = str;
