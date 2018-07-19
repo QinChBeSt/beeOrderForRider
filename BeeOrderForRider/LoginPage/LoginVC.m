@@ -18,6 +18,7 @@
 
 @property (nonatomic , strong)UIButton *loginBtn;
 @property (nonatomic , strong)UIButton *regisBtn;
+@property (nonatomic , strong)UIButton *xuanze;
 @end
 
 @implementation LoginVC
@@ -81,14 +82,25 @@
 }
 -(void)setUpui{
     __weak typeof(self) ws = self;
-    
-    UIView *nameBackView = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 30, SCREEN_WIDTH, 60)];
+    UIView *nameBackView = [[UIView alloc]init];
+    nameBackView.layer.cornerRadius=0;
+    nameBackView.clipsToBounds = YES;
     nameBackView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:nameBackView];
-    
-    UIView *passwordBackview = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 30 + 60 + 30, SCREEN_WIDTH, 60)];
-    passwordBackview.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:passwordBackview];
+    [nameBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(ws.naviView.mas_bottom).offset(kWidthScale(60));
+        make.right.equalTo(ws.view.mas_right).offset(-kWidthScale(50));
+        make.left.equalTo(ws.view.mas_left).offset(kWidthScale(50));
+        make.height.equalTo(@(kWidthScale(100)));
+    }];
+   
+    UIImageView *phoneImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"icon_zhanghap"]];
+    [nameBackView addSubview:phoneImg];
+    [phoneImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(nameBackView);
+        make.left.equalTo(nameBackView.mas_left).offset(kWidthScale(20));
+        make.width.and.height.equalTo(@(kWidthScale(45)));
+    }];
     
     self.userTextFile = [[UITextField alloc]init];
     self.userTextFile.delegate = self;
@@ -96,10 +108,30 @@
     [self.userTextFile addTarget:self action:@selector(phoneTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.userTextFile];
     [self.userTextFile mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(nameBackView);
-        make.left.equalTo(nameBackView.mas_left).offset(20);
-        make.height.equalTo(@(50));
-        make.centerX.equalTo(ws.view);
+   
+        make.top.equalTo(nameBackView.mas_top);
+        make.right.equalTo(nameBackView.mas_right).offset(-kWidthScale(100));
+        make.height.equalTo(nameBackView.mas_height);
+        make.left.equalTo(nameBackView.mas_left).offset(kWidthScale(80));
+    }];
+    
+    UIView *codeBackView = [[UIView alloc]init];
+    codeBackView.layer.cornerRadius=0;
+    codeBackView.clipsToBounds = YES;
+    codeBackView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:codeBackView];
+    [codeBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(nameBackView.mas_bottom).offset(kWidthScale(50));
+        make.left.equalTo(nameBackView.mas_left);
+        make.right.equalTo(nameBackView.mas_right);
+        make.height.equalTo(nameBackView);
+    }];
+    UIImageView *codeImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"icon_mima"]];
+    [codeBackView addSubview:codeImg];
+    [codeImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(codeBackView);
+        make.left.equalTo(codeBackView.mas_left).offset(kWidthScale(20));
+        make.width.and.height.equalTo(@(kWidthScale(45)));
     }];
     
     self.passWordTextFile = [[UITextField alloc]init];
@@ -109,19 +141,34 @@
     [self.passWordTextFile addTarget:self action:@selector(passWordFiledDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.passWordTextFile];
     [self.passWordTextFile mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(passwordBackview);
-        make.left.equalTo(passwordBackview.mas_left).offset(20);
-        make.height.equalTo(@(50));
-        make.centerX.equalTo(ws.view);
+        make.top.equalTo(codeBackView.mas_top);
+        make.right.equalTo(codeBackView.mas_right).offset(-kWidthScale(100));
+        make.height.equalTo(codeBackView.mas_height);
+        make.left.equalTo(codeBackView.mas_left).offset(kWidthScale(80));
+    }];
+    
+    UIButton *seePassWordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [seePassWordBtn setImage:[UIImage imageNamed:@"icon_buchakn"] forState:UIControlStateNormal];
+    [seePassWordBtn setImage:[UIImage imageNamed:@"icon_chakn"] forState:UIControlStateHighlighted];
+    //处理按钮点击事件
+    [seePassWordBtn addTarget:self action:@selector(TouchDown)forControlEvents:UIControlEventTouchDown];
+    //处理按钮松开状态
+    [seePassWordBtn addTarget:self action:@selector(TouchUp)forControlEvents: UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+    [self.view addSubview:seePassWordBtn];
+    [seePassWordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(codeBackView);
+        make.width.equalTo(@(kWidthScale(55)));
+        make.height.equalTo(@(kWidthScale(40)));
+        make.right.equalTo(codeBackView.mas_right).offset(-kWidthScale(20));
     }];
     
     self.loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.loginBtn setBackgroundColor:[UIColor grayColor]];
-    self.loginBtn.layer.cornerRadius=6;
+    [self.loginBtn setBackgroundColor:[UIColor colorWithHexString:BaseYellow]];
+    self.loginBtn.layer.cornerRadius=kWidthScale(5);
     self.loginBtn.clipsToBounds = YES;
-    self.loginBtn.enabled = NO;
+    
     [self.loginBtn setTitle:ZBLocalized(@"登录", nil) forState:UIControlStateNormal];
-    [self.loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.loginBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.loginBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
     [self.view addSubview:self.loginBtn];
     [self.loginBtn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
@@ -133,7 +180,7 @@
     }];
     
     self.regisBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.regisBtn.layer.cornerRadius=6;
+    self.regisBtn.layer.cornerRadius=kWidthScale(5);
     self.regisBtn.clipsToBounds = YES;
     [self.regisBtn setTitle:ZBLocalized(@"注册", nil) forState:UIControlStateNormal];
     [self.regisBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -157,21 +204,6 @@
     }
     
     
-    UILabel *hintLabel=[[UILabel alloc]initWithFrame:CGRectMake(30, SCREENH_HEIGHT - TabbarHeight - 30, SCREEN_WIDTH - 60, 50)];
-    hintLabel.numberOfLines=0;
-    hintLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:hintLabel];
-    hintLabel.font = [UIFont systemFontOfSize:14];
-    NSMutableAttributedString *hintString=[[NSMutableAttributedString alloc]initWithString:ZBLocalized(@"登录代表您已同意《BeeRider用户协议》", nil)];
-    //获取要调整颜色的文字位置,调整颜色
-    NSRange range1=[[hintString string]rangeOfString:ZBLocalized(@"《BeeRider用户协议》", nil)];
-    [hintString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:BaseYellow] range:range1];
-    hintLabel.attributedText=hintString;
-    
-    UIButton *changeType = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.view addSubview:changeType];
-    changeType.frame = CGRectMake(30, SCREENH_HEIGHT - TabbarHeight - 30, SCREEN_WIDTH - 60, 50);
-    [changeType addTarget:self action:@selector(toUserProto) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)isappstore{
     
@@ -235,6 +267,15 @@
     [self.navigationController pushViewController:regis animated:YES];
 }
 -(void)login{
+    
+    if (self.phoneNumStr.length == 0) {
+        [MBManager showBriefAlert:ZBLocalized(@"请输入手机号", nil)];
+        return;
+    }else if (self.codeNumStr.length == 0){
+        [MBManager showBriefAlert:ZBLocalized(@"请输入密码", nil)];
+        return;
+    }
+    
      NSString * md5Code = [MD5encryption MD5ForLower32Bate:self.codeNumStr];
     
     
@@ -306,34 +347,43 @@
 -(void)phoneTextFieldDidChange :(UITextField *)theTextField{
     NSLog( @"text changed: %@", theTextField.text);
     self.phoneNumStr = theTextField.text;
-    if (self.phoneNumStr != nil && self.codeNumStr != nil && self.phoneNumStr.length != 0 && self.codeNumStr.length != 0) {
-        [self.loginBtn setBackgroundColor:[UIColor colorWithHexString:BaseYellow]];
-        self.loginBtn.enabled = YES;
-    }else{
-        [self.loginBtn setBackgroundColor:[UIColor grayColor]];
-        self.loginBtn.enabled = NO;
-    }
+    
 }
 -(void)passWordFiledDidChange :(UITextField *)theTextField{
     NSLog( @"text changed: %@", theTextField.text);
     self.codeNumStr = theTextField.text;
-    if (self.phoneNumStr != nil && self.codeNumStr != nil && self.phoneNumStr.length != 0 && self.codeNumStr.length != 0) {
-        [self.loginBtn setBackgroundColor:[UIColor colorWithHexString:BaseYellow]];
-        self.loginBtn.enabled = YES;
-    }else{
-        [self.loginBtn setBackgroundColor:[UIColor grayColor]];
-        self.loginBtn.enabled = NO;
-    }
+    
 }
 
+- (void)TouchDown
+{
+    self.passWordTextFile.secureTextEntry = NO;
+}
 
+- (void)TouchUp
+{
+    self.passWordTextFile.secureTextEntry = YES;
+}
+-(void)toUserProto{
+    UserPhotoVC *userProto = [[UserPhotoVC alloc]init];
+    [self.navigationController pushViewController:userProto animated:YES];
+}
+-(void)xuanzeAcTION{
+    if (self.xuanze.selected == YES) {
+        self.xuanze.selected = NO;
+    }
+    
+    else if (self.xuanze.selected == NO) {
+        self.xuanze.selected = YES;
+        
+    }
+    
+}
 -(void)back{
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void)toUserProto{
-    UserPhotoVC *user = [[UserPhotoVC alloc]init];
-    [self.navigationController presentViewController:user animated:YES completion:nil];
-}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
