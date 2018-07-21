@@ -13,9 +13,13 @@
 #import "OrderDetilVC.h"
 #import "MapVC.h"
 #import <AVFoundation/AVFoundation.h>
+#import "UIView+HLExtension.h"
+#import "HLAlertView.h"
+#import "HLAlertViewBlock.h"
+#import "HLAlertViewNoMassageBlock.h"
 #define callLineHeight 40
 
-@interface HomeOrderMissionVC ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
+@interface HomeOrderMissionVC ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,HLAlertViewDelegate>
 @property (nonatomic,strong) CLLocationManager * manger;
 
 @property (nonatomic , strong)UITableView *tableView;
@@ -309,41 +313,62 @@
     }
     return self;
 }
--(void)createAlert:(NSDictionary *)str{
+-(void)createAlert:(NSDictionary *)str IndexPath:(NSIndexPath *)indexPath{
     
     NSString *typeStr = str[@"flg"];
     NSString *showMsg ;
-    if ([typeStr isEqualToString:@"6"]) {
+    if ([typeStr isEqualToString:@"9"]){
+        
+        ModelForHistory *mod = [[ModelForHistory alloc]init];
+        mod = [self.arrForHistory objectAtIndex:indexPath.row];
+        CGFloat yhF = [mod.orderyhpic floatValue];
       
-        showMsg = ZBLocalized(@"确认接单？", nil);
-        
-    }
-    else if ([typeStr isEqualToString:@"7"]) {
-        showMsg = ZBLocalized(@"确认到店？", nil);
-    }
-    else if ([typeStr isEqualToString:@"8"]) {
-         showMsg = ZBLocalized(@"确认取货？", nil);
-    }else if ([typeStr isEqualToString:@"9"]){
-        showMsg = ZBLocalized(@"确认送达？", nil);
-    }
-    
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:showMsg
-                                                                   message:nil
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:ZBLocalized(@"确定", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
-       [self getNetworkForChangeOrderType:str];
+        CGFloat psF = [mod.orderpspic floatValue];
        
-    }];
-    [defaultAction setValue:[UIColor colorWithHexString:BaseYellow] forKey:@"titleTextColor"];
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:ZBLocalized(@"取消", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        CGFloat allF = [mod.orderallpic floatValue];
+        allF = allF - yhF + psF;
+        if (allF <= 0) {
+            allF = 0.01;
+        }
+        showMsg = ZBLocalized(@"确认送达并已收款？", nil);
+        NSString *message = [NSString stringWithFormat:@"%.2f฿",allF];
+        //NSString *title = showMsg;
         
-    }];
-    [cancelAction setValue:[UIColor colorWithHexString:BaseTextGrayColor] forKey:@"titleTextColor"];
-    [alert addAction:cancelAction];
-    [alert addAction:defaultAction];
+        HLAlertViewBlock * alertView = [[HLAlertViewBlock alloc] initWithTittle:showMsg message:message block:^(NSInteger index) {
+            if (index == AlertSureButtonClick) {
+                [self getNetworkForChangeOrderType:str];
+            }else{
+                //[self alertCauseButtonClick];
+            }
+        }];
+        [alertView show];
+        
+    }else{
+        if ([typeStr isEqualToString:@"6"]) {
+            
+            showMsg = ZBLocalized(@"确认接单？", nil);
+            
+        }
+        else if ([typeStr isEqualToString:@"7"]) {
+            showMsg = ZBLocalized(@"确认到店？", nil);
+        }
+        else if ([typeStr isEqualToString:@"8"]) {
+            showMsg = ZBLocalized(@"确认检查菜品无异样并取货？", nil);
+        }
+        
+        HLAlertViewNoMassageBlock * alertVew = [[HLAlertViewNoMassageBlock alloc] initWithTittle:showMsg message:nil block:^(NSInteger index) {
+            if (index == AlertSureButtonClick) {
+                [self getNetworkForChangeOrderType:str];
+            }else{
+                //[self alertCauseButtonClick];
+            }
+        }];
+        [alertVew show];
+        
+    }
+   
     
-    [self presentViewController:alert animated:YES completion:nil];
+    
 }
 
 -(void)createTableView{
@@ -390,7 +415,9 @@
     cell.blockChangeOrderState = ^(NSDictionary *str) {
         AVAudioSession *session = [AVAudioSession sharedInstance];
         [session setActive:NO error:nil];
-        [self createAlert:str];
+        ModelForHistory *mod = [[ModelForHistory alloc]init];
+        mod = [self.arrForHistory objectAtIndex:indexPath.row];
+        [self createAlert:str IndexPath:indexPath];
     };
     cell.blocktoMapView = ^(NSDictionary *dic) {
         MapVC *map = [[MapVC alloc]init];

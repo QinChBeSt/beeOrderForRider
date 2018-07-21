@@ -104,7 +104,7 @@
     
     self.userTextFile = [[UITextField alloc]init];
     self.userTextFile.delegate = self;
-    self.userTextFile.placeholder = ZBLocalized(@"请输入BeeRider账号",nil);
+    self.userTextFile.placeholder = ZBLocalized(@"请输入BEERIDER账号",nil);
     [self.userTextFile addTarget:self action:@selector(phoneTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.userTextFile];
     [self.userTextFile mas_makeConstraints:^(MASConstraintMaker *make) {
