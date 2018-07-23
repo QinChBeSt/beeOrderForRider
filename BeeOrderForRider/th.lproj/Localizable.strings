@@ -147,7 +147,8 @@
 "确认检查菜品无异样并取货？" = "Confirm that the inspection menu is no different and pick up the goods?";
 "确认送达并已收款？" = "Confirmed delivery and received payment?";
 "确认检查菜品无异样并取货" = "Confirm that the inspection menu is no different and pick up the goods?";
-"确认送达并已收款" = "Confirmed delivery and received payment";
+"确认送达并已收款" = "Confirmed delivery and received payment"; =
+"账号已在其它设备登录" = "The account has been logged in on another device";
 //图=======================
 "bg_zanwandingdan" = "bg_zanwandingdan2";
 "icon_quhuo" = "icon_quhuoyingwen";
