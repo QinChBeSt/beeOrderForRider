@@ -542,8 +542,24 @@
         self.blockCloceSide(self.workState);
     }
 }
+-(void)LogoutAction{
+    NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,LoginURL];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+  NSString *userId = [defaults objectForKey:UD_USERLogOutID];
+    NSDictionary *parameters = @{@"id":userId,
+                                 };
+    AFHTTPSessionManager *managers = [AFHTTPSessionManager manager];
+    [managers POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self logOut];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBManager showBriefAlert:ZBLocalized(@"服务器异常", nil)];
+    }];
+}
 -(void)logOut{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    
     
     [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
         
@@ -566,6 +582,7 @@
     [defaults setObject:nil forKey:UD_USERAccount];
     [defaults setObject:nil forKey:UD_USERPassword];
     [defaults setObject:nil forKey:UD_USERState];
+    [defaults setObject:nil forKey:UD_USERLogOutID];
     [defaults synchronize];
     
     
@@ -593,7 +610,7 @@
         NSLog(@"点击了取消");
     }];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:ZBLocalized(@"确定", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [self logOut];
+        [self LogoutAction];
     }];
    
     

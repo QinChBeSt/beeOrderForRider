@@ -11,7 +11,7 @@
 "成功" = "สำ  เสร็ฐ";
 //=========================登录
 "登录" = "Login";
-"请输入BeeRider账号" = "ชื่อบัญชี";
+"请输入BEERIDER账号" = "ชื่อบัญชี";
 "请输入密码" = "รหัด";
 "请确认密码" = "ยืนยันรหัด";
 "请输入新密码" = "รหัดใหม่";
@@ -19,8 +19,8 @@
 "密码错误" = "รหัดผิด";
 "登录成功" = "Login successful";
 "用户协议" = "User agreement";
-"登录代表您已同意《BeeRider用户协议》" = "loginหมายถึงคุณได้เข้าใจและเห็นด้วย《BeeRider user agreement》";
-"《BeeRider用户协议》"  =  "《BeeRider user agreement》";
+"登录代表您已同意《BEERIDER用户协议》" = "loginหมายถึงคุณได้เข้าใจและเห็นด้วย《BEERIDER user agreement》";
+"《BEERIDER用户协议》"  =  "《BEERIDER user agreement》";
 "账号异常，请重新登录" = "บัญชีไม่ถูกต้องโปรดทำใหม่";
 
 //=========================主页
@@ -30,7 +30,7 @@
 "历史订单" = "ประวัติ";
 "修改密码" = "เปลี่ยนรหัดผ่าน";
 "语言切换" = "สรับภาษา";
-"关于BeeRider骑手" = "เกี่ยวกับBeeRider";
+"关于BEERIDER骑手" = "เกี่ยวกับBEERIDER";
 "退出登录" = "ออกจากระบบ";
 "是否退出登录?" = "ยืนยันออกจากระบบ?";
 "跟随系统" = "ตามระบบ";
@@ -40,8 +40,7 @@
 "联系商家" = "ติดต่ดร้าน";
 "接单" = "รับ​อเดอ";
 "上报到店" = "รายงานถึงร้าน";
-"确认取货" = "ยืนยันรับขอล";
-"确认送达" = "ยืนยันส่งถึง";
+
 "小计" = "ทั้งหมด";
 "฿" = "฿";
 "配送费" = "ค่าส่ง";
@@ -104,8 +103,7 @@
 "账号异常" = "Account abnormal";
 "确认接单？" = "รับออเดอร์?";
 "确认到店？" = "รายงานถึงร้าน?";
-"确认取货？" = "ยืนยันรับขอล?";
-"确认送达？" = "ยืนยันส่งถึง?";
+
 "注册" = "สมัค";
 "请输入手机号" = "ใส่เบอร์โทร";
 "请确认密码" = "ยืนยันรหัด";
@@ -145,5 +143,13 @@
 "共" = "Total";
 "笔" = "deal";
 "商家配送" = "Merchant delivery";
+"联系客户" = "Contact Customer";
+"确认检查菜品无异样并取货？" = "Confirm that the inspection menu is no different and pick up the goods?";
+"确认送达并已收款？" = "Confirmed delivery and received payment?";
+"确认检查菜品无异样并取货" = "Confirm that the inspection menu is no different and pick up the goods?";
+"确认送达并已收款" = "Confirmed delivery and received payment"; =
+"账号已在其它设备登录" = "The account has been logged in on another device";
 //图=======================
 "bg_zanwandingdan" = "bg_zanwandingdan2";
+"icon_quhuo" = "icon_quhuoyingwen";
+"icon_songhuo" = "icon_songhuoyingwen";

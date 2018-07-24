@@ -54,15 +54,16 @@
     topgrayLine.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
     [self.contentView addSubview:topgrayLine];
     
-    UILabel *get = [[UILabel alloc]init];
-    get.adjustsFontSizeToFitWidth = YES;
-    get.text = ZBLocalized(@"取",nil);
-    get.textAlignment = NSTextAlignmentCenter;
-    get.numberOfLines = 0;
-    get.textColor = [UIColor colorWithHexString:BaseTextGrayColor];
-    get.backgroundColor = [UIColor colorWithHexString:BaseYellow];
-    get.layer.cornerRadius=(lineSmallHeight)/ 2;
-    get.clipsToBounds = YES;
+    UIImageView *get = [[UIImageView alloc]init];
+//    get.adjustsFontSizeToFitWidth = YES;
+//    get.text = ZBLocalized(@"取",nil);
+//    get.textAlignment = NSTextAlignmentCenter;
+//    get.numberOfLines = 0;
+//    get.textColor = [UIColor colorWithHexString:BaseTextGrayColor];
+//    get.backgroundColor = [UIColor colorWithHexString:BaseYellow];
+//    get.layer.cornerRadius=(lineSmallHeight)/ 2;
+//    get.clipsToBounds = YES;
+    get.image = [UIImage imageNamed:ZBLocalized(@"icon_quhuo", nil)];
     [self.contentView addSubview:get];
     [get mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(ws.orderDateLab.mas_bottom).offset(10);
@@ -103,12 +104,12 @@
         make.right.equalTo(ws.contentView.mas_right).offset(-50);
     }];
     UIImageView *rightIcon = [[UIImageView alloc]init];
-    [rightIcon setImage:[UIImage imageNamed:@"右箭头"]];
+    [rightIcon setImage:[UIImage imageNamed:@"icon_daohangtubiao"]];
     [self.contentView addSubview:rightIcon];
     [rightIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(ws.shopAddLab);
         make.right.equalTo(ws.contentView.mas_right).offset(-15);
-        make.width.and.height.equalTo(@(20));
+        make.width.and.height.equalTo(@(30));
     }];
     
     UIImageView *leftIcon = [[UIImageView alloc]init];
@@ -140,15 +141,16 @@
     }];
     
     
-    UILabel *put = [[UILabel alloc]init];
-    put.adjustsFontSizeToFitWidth = YES;
-    put.textAlignment = NSTextAlignmentCenter;
-    put.text = ZBLocalized(@"送",nil);
-    put.numberOfLines = 0;
-    put.textColor = [UIColor whiteColor];
-    put.backgroundColor = [UIColor colorWithHexString:@"fd7625"];
-    put.layer.cornerRadius=(lineHeight - 20)/ 2;
-    put.clipsToBounds = YES;
+    UIImageView *put = [[UIImageView alloc]init];
+//    put.adjustsFontSizeToFitWidth = YES;
+//    put.textAlignment = NSTextAlignmentCenter;
+//    put.text = ZBLocalized(@"送",nil);
+//    put.numberOfLines = 0;
+//    put.textColor = [UIColor whiteColor];
+//    put.backgroundColor = [UIColor colorWithHexString:@"fd7625"];
+//    put.layer.cornerRadius=(lineHeight - 20)/ 2;
+//    put.clipsToBounds = YES;
+    put.image = [UIImage imageNamed:ZBLocalized(@"icon_songhuo", nil)];
     [self.contentView addSubview:put];
     [put mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lineMid.mas_bottom).offset(10);
@@ -192,10 +194,10 @@
     [self.leftButton addTarget:self action:@selector(callShop) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.leftButton];
     [self.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(ws.contentView.mas_centerX).offset(-SCREEN_WIDTH / 4);
-        make.width.equalTo(@(SCREEN_WIDTH / 3));
+        make.centerX.equalTo(ws.contentView.mas_centerX);
+        make.width.equalTo(@(SCREEN_WIDTH * 0.7));
         make.top.equalTo(buttomGrayLine.mas_bottom).offset(0);
-        make.height.equalTo(@(40));
+        make.height.equalTo(@(50));
     }];
     
     self.rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -208,10 +210,10 @@
     [self.rightButton addTarget:self action:@selector(changeOrderTypeAction) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.rightButton];
     [self.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(ws.contentView.mas_centerX).offset(SCREEN_WIDTH / 4);
-        make.width.equalTo(@(SCREEN_WIDTH / 3));
-        make.top.equalTo(buttomGrayLine.mas_bottom).offset(0);
-        make.height.equalTo(@(40));
+        make.centerX.equalTo(ws.contentView.mas_centerX);
+        make.width.equalTo(@(SCREEN_WIDTH * 0.7));
+        make.top.equalTo(ws.leftButton.mas_bottom).offset(10);
+        make.height.equalTo(@(50));
     }];
     
     self.bottomLine = [[UIView alloc]init];
@@ -221,7 +223,7 @@
     .leftSpaceToView(self.contentView, 0)
     .rightSpaceToView(self.contentView,0)
     .heightIs(0)
-    .topSpaceToView(buttomGrayLine, 60);
+    .topSpaceToView(self.rightButton, 10);
     [self setupAutoHeightWithBottomView:self.bottomLine bottomMargin:0];
 }
 -(void)setMod:(ModelForHistory *)mod{
@@ -233,7 +235,7 @@
     self.shopPhoneNum = mod.shopphone;
     self.orderTypeStr = mod.ordertype;
     self.orderNumberStr = mod.ordernum;
-    [self setRightBtnTit];
+    
     
     self.longStr = mod.shoplonng;
     self.latStr = mod.shoplat;
@@ -242,33 +244,51 @@
     self.userLongStr = mod.ulonng;
     
     self.userPhone = mod.uphone;
-    [self getDissForShop];
+    
+    [self setRightBtnTit];
 }
 -(void)setRightBtnTit{
     if ([self.orderTypeStr isEqualToString:@"5"]) {
         [self.rightButton setTitle:ZBLocalized(@"接单", nil) forState:UIControlStateNormal];
+        [self.leftButton setTitle:ZBLocalized(@"联系商家", nil) forState:UIControlStateNormal];
+        self.orderDateLab.text = [self getDissForShop];
         self.setUpdateOrderStr = @"6";
     }else if ([self.orderTypeStr isEqualToString:@"6"]){
         [self.rightButton setTitle:ZBLocalized(@"上报到店", nil) forState:UIControlStateNormal];
+        [self.leftButton setTitle:ZBLocalized(@"联系商家", nil) forState:UIControlStateNormal];
+        self.orderDateLab.text = [self getDissForShop];
         self.setUpdateOrderStr = @"7";
     }
     else if ([self.orderTypeStr isEqualToString:@"7"]){
-        [self.rightButton setTitle:ZBLocalized(@"确认取货", nil) forState:UIControlStateNormal];
+        [self.rightButton setTitle:ZBLocalized(@"确认检查菜品无异样并取货", nil) forState:UIControlStateNormal];
+        [self.leftButton setTitle:ZBLocalized(@"联系客户", nil) forState:UIControlStateNormal];
+        self.orderDateLab.text = [self getDissForuser];
         self.setUpdateOrderStr = @"8";
     }
     else if ([self.orderTypeStr isEqualToString:@"8"]){
-        [self.rightButton setTitle:ZBLocalized(@"确认送达", nil) forState:UIControlStateNormal];
+        [self.rightButton setTitle:ZBLocalized(@"确认送达并已收款", nil) forState:UIControlStateNormal];
+        [self.leftButton setTitle:ZBLocalized(@"联系客户", nil) forState:UIControlStateNormal];
+        self.orderDateLab.text = [self getDissForuser];
         self.setUpdateOrderStr = @"9";
     }
     
 }
 
--(void)getDissForShop{
+-(NSString *)getDissForShop{
      CLLocation *getLocation = [[CLLocation alloc] initWithLatitude:[self.latLoc doubleValue] longitude:[self.longLoc doubleValue]];
     CLLocation *getShop = [[CLLocation alloc] initWithLatitude:[self.latStr doubleValue] longitude:[self.longStr doubleValue]];
     double distance = [getLocation distanceFromLocation:getShop];
     NSLog(@"当前位置距离 %lf M",distance );
-    self.orderDateLab.text = [NSString stringWithFormat:@"%.2lfKm",distance / 1000];//距离
+    //self.orderDateLab.text = [NSString stringWithFormat:@"%.2lfKm",distance / 1000];//距离
+    return [NSString stringWithFormat:@"%.2lfKm",distance / 1000];
+}
+-(NSString *)getDissForuser{
+    CLLocation *getLocation = [[CLLocation alloc] initWithLatitude:[self.userLatStr doubleValue] longitude:[self.userLongStr doubleValue]];
+    CLLocation *getShop = [[CLLocation alloc] initWithLatitude:[self.latStr doubleValue] longitude:[self.longStr doubleValue]];
+    double distance = [getLocation distanceFromLocation:getShop];
+    NSLog(@"当前位置距离 %lf M",distance );
+    //self.orderDateLab.text = [NSString stringWithFormat:@"%.2lfKm",distance / 1000];//距离
+    return [NSString stringWithFormat:@"%.2lfKm",distance / 1000];
 }
 -(void)callShop{
     if ([self.orderTypeStr isEqualToString:@"8"]){
@@ -277,7 +297,11 @@
         if (self.blockToCallUser) {
             self.blockToCallUser(dic);
         }
-    }else{
+    }else if ([self.orderTypeStr isEqualToString:@"7"]){
+        NSMutableString *str=[[NSMutableString alloc]initWithFormat:@"tel:%@",self.userPhone];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    }
+    else{
     NSMutableString *str=[[NSMutableString alloc]initWithFormat:@"tel:%@",self.shopPhoneNum];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     

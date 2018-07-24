@@ -9,6 +9,7 @@
 #import "LoginVC.h"
 #import "UserPhotoVC.h"
 #import "RegisVC.h"
+#import "UUID.h"
 @interface LoginVC ()<UITextFieldDelegate>
 @property (nonatomic , strong)UIView *naviView;
 @property (nonatomic , strong)UITextField *userTextFile;
@@ -104,7 +105,7 @@
     
     self.userTextFile = [[UITextField alloc]init];
     self.userTextFile.delegate = self;
-    self.userTextFile.placeholder = ZBLocalized(@"请输入BeeRider账号",nil);
+    self.userTextFile.placeholder = ZBLocalized(@"请输入BEERIDER账号",nil);
     [self.userTextFile addTarget:self action:@selector(phoneTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.userTextFile];
     [self.userTextFile mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -277,11 +278,12 @@
     }
     
      NSString * md5Code = [MD5encryption MD5ForLower32Bate:self.codeNumStr];
-    
+    NSString * uuidStr= [UUID getUUID];
     
     NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,LoginURL];
     NSDictionary *parameters = @{@"name":self.phoneNumStr,
                                  @"pwd":md5Code,
+                                 @"imei":uuidStr
                                  };
     AFHTTPSessionManager *managers = [AFHTTPSessionManager manager];
     //请求的方式：POST
@@ -298,6 +300,10 @@
                 [MBManager showBriefAlert:ZBLocalized(@"账号异常", nil)];
                 return ;
             }
+            if ([responseObject[@"value"]  isEqual:@"-1"]) {
+                [MBManager showBriefAlert:ZBLocalized(@"账号已在其它设备登录", nil)];
+                return ;
+            }
             NSLog(@"res:%@",responseObject);
              NSDictionary *dic = responseObject[@"value"];
             NSString *userId = dic[@"id"];
@@ -305,11 +311,13 @@
             NSString *userName = dic[@"originallyName"];
             NSString *userPhone = dic[@"originallyPhone"];
             NSString *userState =[NSString stringWithFormat:@"%@",dic[@"originallyState"]];
+            NSString *userlogoutId =[NSString stringWithFormat:@"%@",dic[@"originallyAcid"]];
  
             NSString * md5CodeStr = [MD5encryption MD5ForLower32Bate:self.codeNumStr];
              NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:md5CodeStr forKey:UD_USERPassword];
             [defaults setObject:self.phoneNumStr forKey:UD_USERAccount];
+            [defaults setObject:userlogoutId forKey:UD_USERLogOutID];
             [defaults setObject:userId forKey:UD_USERID];
             if([userImgUrl isEqual:[NSNull null]]) {
 

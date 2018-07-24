@@ -76,8 +76,7 @@
                  apsForProduction:JPushIsProduction
             advertisingIdentifier:advertisingId];
     
-    
-    
+   
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     self.window.backgroundColor =[UIColor whiteColor];

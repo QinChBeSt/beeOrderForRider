@@ -102,6 +102,10 @@
 		9DF31AC720A2F46900572015 /* ModelForOrderDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF31AC620A2F46900572015 /* ModelForOrderDetail.m */; };
 		9DF31ACA20A2F83800572015 /* CellForHistoryOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF31AC920A2F83800572015 /* CellForHistoryOrder.m */; };
 		B23D13BBAF20434AD5B3B7DA /* libPods-BeeOrderForRider.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE746D01E86E78E432131B57 /* libPods-BeeOrderForRider.a */; };
+		D628662A2101E2B20048F9A3 /* HLAlertViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = D62866292101E2B10048F9A3 /* HLAlertViewBlock.m */; };
+		D628662D2101E2BD0048F9A3 /* UIView+HLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D628662B2101E2BD0048F9A3 /* UIView+HLExtension.m */; };
+		D62866302101E35C0048F9A3 /* HLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628662F2101E35C0048F9A3 /* HLAlertView.m */; };
+		D62866332101EA160048F9A3 /* HLAlertViewNoMassageBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = D62866322101EA160048F9A3 /* HLAlertViewNoMassageBlock.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -315,6 +319,14 @@
 		9DF31AC620A2F46900572015 /* ModelForOrderDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelForOrderDetail.m; sourceTree = "<group>"; };
 		9DF31AC820A2F83800572015 /* CellForHistoryOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellForHistoryOrder.h; sourceTree = "<group>"; };
 		9DF31AC920A2F83800572015 /* CellForHistoryOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellForHistoryOrder.m; sourceTree = "<group>"; };
+		D62866282101E2B10048F9A3 /* HLAlertViewBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLAlertViewBlock.h; sourceTree = "<group>"; };
+		D62866292101E2B10048F9A3 /* HLAlertViewBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLAlertViewBlock.m; sourceTree = "<group>"; };
+		D628662B2101E2BD0048F9A3 /* UIView+HLExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLExtension.m"; sourceTree = "<group>"; };
+		D628662C2101E2BD0048F9A3 /* UIView+HLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLExtension.h"; sourceTree = "<group>"; };
+		D628662E2101E35C0048F9A3 /* HLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLAlertView.h; sourceTree = "<group>"; };
+		D628662F2101E35C0048F9A3 /* HLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLAlertView.m; sourceTree = "<group>"; };
+		D62866312101EA160048F9A3 /* HLAlertViewNoMassageBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HLAlertViewNoMassageBlock.h; sourceTree = "<group>"; };
+		D62866322101EA160048F9A3 /* HLAlertViewNoMassageBlock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HLAlertViewNoMassageBlock.m; sourceTree = "<group>"; };
 		E5A06966635082059B36B08F /* Pods-BeeOrderForRider.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeeOrderForRider.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeeOrderForRider/Pods-BeeOrderForRider.debug.xcconfig"; sourceTree = "<group>"; };
 		EE746D01E86E78E432131B57 /* libPods-BeeOrderForRider.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeeOrderForRider.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -578,6 +590,7 @@
 		9DDF1B2F20A04A22008A7947 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				D62866272101E1A60048F9A3 /* AlertBlock */,
 				9DDF1B3320A04A2F008A7947 /* CGXPickerView */,
 				9DDF1B5F20A04A31008A7947 /* CleanCache */,
 				9DDF1B3020A04A2F008A7947 /* CM_InputView */,
@@ -868,6 +881,21 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D62866272101E1A60048F9A3 /* AlertBlock */ = {
+			isa = PBXGroup;
+			children = (
+				D628662C2101E2BD0048F9A3 /* UIView+HLExtension.h */,
+				D628662B2101E2BD0048F9A3 /* UIView+HLExtension.m */,
+				D628662E2101E35C0048F9A3 /* HLAlertView.h */,
+				D628662F2101E35C0048F9A3 /* HLAlertView.m */,
+				D62866282101E2B10048F9A3 /* HLAlertViewBlock.h */,
+				D62866292101E2B10048F9A3 /* HLAlertViewBlock.m */,
+				D62866312101EA160048F9A3 /* HLAlertViewNoMassageBlock.h */,
+				D62866322101EA160048F9A3 /* HLAlertViewNoMassageBlock.m */,
+			);
+			path = AlertBlock;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1098,6 +1126,7 @@
 				9D64F39820A530340068AF3D /* CellForLtextRimg.m in Sources */,
 				9DDF1BC620A04A32008A7947 /* ZWMSegmentView.m in Sources */,
 				9D3E85DA20B663FA00F21182 /* CellForTodayMoney.m in Sources */,
+				D628662D2101E2BD0048F9A3 /* UIView+HLExtension.m in Sources */,
 				9D24A68120A41AE800B149F4 /* CellForOrderList.m in Sources */,
 				9DDF1BA320A04A32008A7947 /* CGXStringPickerView.m in Sources */,
 				9DF31ABE20A2960D00572015 /* ChangePasswordVC.m in Sources */,
@@ -1129,11 +1158,14 @@
 				9D1BC65D20A0539800AB8F73 /* HomeVC.m in Sources */,
 				9DDF1BBA20A04A32008A7947 /* MJRefreshBackStateFooter.m in Sources */,
 				9DDF1AFC20A041D2008A7947 /* AppDelegate.m in Sources */,
+				D62866302101E35C0048F9A3 /* HLAlertView.m in Sources */,
 				9D64F39B20A5305A0068AF3D /* CellForLRtext.m in Sources */,
+				D62866332101EA160048F9A3 /* HLAlertViewNoMassageBlock.m in Sources */,
 				9DDF1BAA20A04A32008A7947 /* UIColor+Hex.m in Sources */,
 				9DDF1B9C20A04A32008A7947 /* CGXAddressModel.m in Sources */,
 				9D24A67B20A3E35C00B149F4 /* HomeOrderMissionVC.m in Sources */,
 				9DF31AB820A2921100572015 /* HistoryOrderVC.m in Sources */,
+				D628662A2101E2B20048F9A3 /* HLAlertViewBlock.m in Sources */,
 				9DDF1BC020A04A32008A7947 /* NSBundle+MJRefresh.m in Sources */,
 				9DDF1BB520A04A32008A7947 /* MJRefreshAutoGifFooter.m in Sources */,
 				9DF31ACA20A2F83800572015 /* CellForHistoryOrder.m in Sources */,
