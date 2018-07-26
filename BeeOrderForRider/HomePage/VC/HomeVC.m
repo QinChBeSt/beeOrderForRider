@@ -92,11 +92,42 @@
        
     }
 }
-
+-(void)isNeedUpdate{
+    NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,isNeedUpDateURL];
+    NSDictionary *parameters = @{@"flg":@"1",
+                                 @"vnum":ICTYPE,
+                                 
+                                 };
+    AFHTTPSessionManager *managers = [AFHTTPSessionManager manager];
+    //请求的方式：POST
+    [managers POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        NSString *code =[NSString stringWithFormat:@"%@",responseObject[@"code"]];
+        if ([code isEqualToString:@"2"]) {
+            
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:ZBLocalized(@"发现新版本", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * ok = [UIAlertAction actionWithTitle:ZBLocalized(@"取消", nil) style:UIAlertActionStyleDefault handler:nil];
+            UIAlertAction * update = [UIAlertAction actionWithTitle:ZBLocalized(@"去更新", nil)  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //跳转到App Store
+                NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/th/app/id1386671232?mt=8"];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+            }];
+            [alert addAction:ok];
+            [alert addAction:update];
+            [self presentViewController:alert animated:YES completion:nil];
+            
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+    
+}
 -(void)getNetWork{
     self.OrderCountStr = @"0";
     self.WillGetOrderCountStr = @"0";
     self.willPutOrderCountStr = @"0";
+    [self isNeedUpdate];
 //    [self getNetWorkForWillGet];
 //    [self getNewWorkForWillPut];
     NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];

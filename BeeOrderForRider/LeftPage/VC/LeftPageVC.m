@@ -50,7 +50,7 @@
 
 @implementation LeftPageVC
 -(void)viewWillAppear:(BOOL)animated{
-    [self getNetWorkForStats];
+    //[self getNetWorkForStats];
     NSUserDefaults *defaults;
     defaults = [NSUserDefaults standardUserDefaults];
     NSString *imgUrl  = [NSString stringWithFormat:@"%@%@",IMGBaesURL,[defaults objectForKey:UD_USERLOGO]];
@@ -59,6 +59,10 @@
     self.userNameLab.text = userName;
     NSString *userPhone  = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERPHONE]];
     self.userPhoneLab.text = userPhone;
+    
+    NSString *userState  = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERState]];
+    [self setWorkStateStr:userState];
+    
 }
 -(void)viewDidAppear:(BOOL)animated{
     [self.navigationController.navigationBar setHidden:YES];
@@ -70,9 +74,11 @@
     [self setWorkStateStr:userState];
     NSString *Account = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERAccount]];
     NSString *Password = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERPassword]];
+     NSString * uuidStr= [UUID getUUID];
     NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,LoginURL];
     NSDictionary *parameters = @{@"name":Account,
                                  @"pwd":Password,
+                                  @"imei":uuidStr
                                  };
     AFHTTPSessionManager *managers = [AFHTTPSessionManager manager];
     //请求的方式：POST
@@ -370,7 +376,7 @@
             cell.Tlabel.text = ZBLocalized(@"修改密码", nil);
         }else if (indexPath.row == 1){
             cell.img.image = [UIImage imageNamed:@"icon_erjichakanyeji"];
-            cell.Tlabel.text = ZBLocalized(@"查看今日收益", nil);
+            cell.Tlabel.text = ZBLocalized(@"全部历史账单", nil);
         }
         else if (indexPath.row == 3){
             cell.img.image = [UIImage imageNamed:@"icon_erjiyuyanqiehuan"];
@@ -543,7 +549,7 @@
     }
 }
 -(void)LogoutAction{
-    NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,LoginURL];
+    NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,qsLogOUTURL];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
   NSString *userId = [defaults objectForKey:UD_USERLogOutID];

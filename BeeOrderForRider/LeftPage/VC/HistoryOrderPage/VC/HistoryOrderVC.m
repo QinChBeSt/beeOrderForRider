@@ -431,8 +431,8 @@
        self.parCloseStr = [self pp_formatDateWithArrYMDToMD:self.closeStr];
         
         NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,GetHistoryURL];
-        NSDictionary *parameters = @{@"stime":self.parOpenStr,
-                                     @"etime":self.parCloseStr,
+        NSDictionary *parameters = @{@"stime":self.openStr,
+                                     @"etime":self.closeStr,
                                      @"page":@"1",
                                      @"qsid":userId
                                      };
