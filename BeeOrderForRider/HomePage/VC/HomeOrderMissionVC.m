@@ -50,6 +50,8 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground)name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRe) name:@"needReLoad" object:nil];
  
     self.noDataImg.hidden = YES;
     [self toSearchHistory];
@@ -62,6 +64,11 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
+}
+-(void)needRe{
+    if ([self.CountType isEqualToString:@"4"]) {
+        [self toSearchHistory];
+    }
 }
 -(void)toSearchHistory{
     if ([self.locationQX isEqualToString:@"no"]) {

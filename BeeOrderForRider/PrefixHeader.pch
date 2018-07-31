@@ -29,17 +29,15 @@
 #define Vsion @"1"      //版本号1.0.0
 #define ICTYPE @"1"         //更新版本号
 
+//==========图片
+#define IMGBaesURL @"http://pcobwjw66.sabkt.gdipper.com/"
 
-//#define BASEURL @"http://beeorder.net:8080/spmvc"
-//#define IMGBaesURL @"http://beeorder.net:8080/spmvc/apidocs/upload/"
-//
-//#define BASEURL @"http://118.24.100.177:8080/spmvc"
-//#define IMGBaesURL @"http://118.24.100.177:8080/spmvc/apidocs/upload/"
+////=================  测试
+#define BASEURL @"http://beeorder.cn:8080/spmvc"
 
-//
-//
-//#define BASEURL @"http://150.109.179.93"
-//#define IMGBaesURL @"http://150.109.179.93/apidocs/upload/"
+
+////=================  正式
+//#define BASEURL @"http://beeorder.net"
 
 
 //#define BASEURL @"http://192.168.0.143:8080"
@@ -49,8 +47,8 @@
 //
 //#define BASEURL @"http://192.168.0.106:8010"
 //#define IMGBaesURL @"http://192.168.0.106:8010/apidocs/upload/"
-#define BASEURL @"http://192.168.0.166:8080/spmvc"
-#define IMGBaesURL @"http://192.168.0.166:8080/spmvc/apidocs/upload/"
+//#define BASEURL @"http://192.168.0.166:8080/spmvc"
+//#define IMGBaesURL @"http://192.168.0.166:8080/spmvc/apidocs/upload/"
 
 
 #define BaseYellow @"#ffc235"

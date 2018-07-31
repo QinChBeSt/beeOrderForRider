@@ -25,22 +25,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeeOrderForRider/LoginPage/LoginVC.m"
-            timestampString = "554265330.6689579"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
-            landmarkName = "-login"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "BeeOrderForRider/LeftPage/VC/HistoryOrderPage/VC/HistoryOrderVC.m"
             timestampString = "554265667.094456"
             startingColumnNumber = "9223372036854775807"
@@ -74,12 +58,12 @@
                   moduleName = "BeeOrderForRider"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a123/Desktop/BeeOrderForRider/BeeOrderForRider/LeftPage/VC/HistoryOrderPage/VC/HistoryOrderVC.m"
-                  timestampString = "554292436.551121"
+                  timestampString = "554364986.067113"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "443"
                   endingLineNumber = "443"
-                  offsetFromSymbolStart = "2459">
+                  offsetFromSymbolStart = "2460">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -89,12 +73,12 @@
                   moduleName = "BeeOrderForRider"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a123/Desktop/BeeOrderForRider/BeeOrderForRider/LeftPage/VC/HistoryOrderPage/VC/HistoryOrderVC.m"
-                  timestampString = "554292436.553857"
+                  timestampString = "554364986.069768"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "444"
                   endingLineNumber = "444"
-                  offsetFromSymbolStart = "86">
+                  offsetFromSymbolStart = "108">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -104,12 +88,12 @@
                   moduleName = "BeeOrderForRider"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a123/Desktop/BeeOrderForRider/BeeOrderForRider/LeftPage/VC/HistoryOrderPage/VC/HistoryOrderVC.m"
-                  timestampString = "554292436.557039"
+                  timestampString = "554364986.072323"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "443"
                   endingLineNumber = "443"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "20">
                </Location>
             </Locations>
          </BreakpointContent>

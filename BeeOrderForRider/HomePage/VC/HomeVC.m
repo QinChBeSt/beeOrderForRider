@@ -40,7 +40,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
  
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRe) name:@"needReLoad" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tongzhi:) name:@"homePageType" object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HadRe) name:@"HadReLoad" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toSegment1) name:@"toSegment1" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toSegment2) name:@"toSegment2" object:nil];

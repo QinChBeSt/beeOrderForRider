@@ -77,6 +77,18 @@
             advertisingIdentifier:advertisingId];
     
    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+   
+    NSString *userID = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
+    if (userID == nil || [userID isEqualToString:@""]) {
+        [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            
+            NSLog(@"删除Alias==%ld",(long)iResCode);
+            
+        } seq:0];
+    }
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     self.window.backgroundColor =[UIColor whiteColor];

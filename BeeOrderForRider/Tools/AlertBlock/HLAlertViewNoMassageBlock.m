@@ -48,14 +48,15 @@
     
     //------- 弹窗主内容 -------//
     self.contentView = [[UIView alloc]init];
-    self.contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 80, 100);
+    self.contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 80, 150);
     self.contentView.center = self.center;
     self.contentView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.85];
     self.contentView.layer.cornerRadius = 6;
     [self addSubview:self.contentView];
     
     // 标题
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, self.contentView.width, 22)];
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, self.contentView.width, 50)];
+    titleLabel.numberOfLines = 0;
     titleLabel.font = [UIFont boldSystemFontOfSize:20];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = self.title;
@@ -65,18 +66,18 @@
     
     // 取消按钮
     UIButton * causeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    causeBtn.frame = CGRectMake(0, self.contentView.height - 40, self.contentView.width/2, 40);
-    causeBtn.backgroundColor = [UIColor clearColor];
-    [causeBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    causeBtn.frame = CGRectMake(0, self.contentView.height - 60, self.contentView.width/2, 60);
+    causeBtn.backgroundColor = [UIColor whiteColor];
+    [causeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [causeBtn setTitle:ZBLocalized(@"取消", nil) forState:UIControlStateNormal];
     [causeBtn addTarget:self action:@selector(causeBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:causeBtn];
     
     // 确认按钮
     UIButton * sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    sureButton.frame = CGRectMake(causeBtn.width, causeBtn.y, causeBtn.width, 40);
-    sureButton.backgroundColor = [UIColor clearColor];
-    [sureButton setTitleColor:[UIColor colorWithHexString:BaseYellow] forState:UIControlStateNormal];
+    sureButton.frame = CGRectMake(causeBtn.width, causeBtn.y, causeBtn.width, 60);
+    sureButton.backgroundColor = [UIColor colorWithHexString:BaseYellow];
+    [sureButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [sureButton setTitle:ZBLocalized(@"确定", nil) forState:UIControlStateNormal];
     [sureButton addTarget:self action:@selector(processSure:) forControlEvents:UIControlEventTouchUpInside];
     

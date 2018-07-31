@@ -9,7 +9,7 @@
 #import "CellForOrderList.h"
 #import <CoreLocation/CoreLocation.h>
 #define lineHeight 50
-#define lineSmallHeight 30
+#define lineSmallHeight 40
 @implementation CellForOrderList
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -72,6 +72,16 @@
         make.width.equalTo(@(lineSmallHeight));
     }];
     
+    UIView *linename = [[UIView alloc]init];
+    linename.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+    [self.contentView addSubview:linename];
+    [linename mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.contentView);
+        make.left.equalTo(ws.contentView.mas_left).offset(15);
+        make.top.equalTo(get.mas_bottom).offset(10);
+        make.height.equalTo(@(1));
+    }];
+    
     //商家名称
     self.shopNameLab = [[UILabel alloc]init];
     self.shopNameLab.font = [UIFont systemFontOfSize:14];
@@ -83,9 +93,17 @@
         make.centerY.equalTo(get);
         make.height.equalTo(@(lineSmallHeight));
         make.left.equalTo(get.mas_right).offset(20);
+        make.right.equalTo(ws.contentView.mas_right).offset(-60);
         
     }];
-    
+    UIImageView *namerightIcon = [[UIImageView alloc]init];
+    [namerightIcon setImage:[UIImage imageNamed:@"右箭头"]];
+    [self.contentView addSubview:namerightIcon];
+    [namerightIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(ws.shopNameLab);
+        make.right.equalTo(ws.contentView.mas_right).offset(-15);
+        make.width.and.height.equalTo(@(30));
+    }];
     
    
     
@@ -100,7 +118,7 @@
     [self.shopAddLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(lineSmallHeight));
         make.left.equalTo(ws.shopNameLab.mas_left);
-        make.top.equalTo(ws.shopNameLab.mas_bottom);
+        make.top.equalTo(linename.mas_bottom);
         make.right.equalTo(ws.contentView.mas_right).offset(-50);
     }];
     UIImageView *rightIcon = [[UIImageView alloc]init];
@@ -154,9 +172,9 @@
     [self.contentView addSubview:put];
     [put mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lineMid.mas_bottom).offset(10);
-        make.height.equalTo(@(lineHeight - 20));
+        make.height.equalTo(@(lineSmallHeight));
         make.left.equalTo(ws.orderNumLab);
-        make.width.equalTo(@(lineHeight - 20));
+        make.width.equalTo(@(lineSmallHeight));
     }];
     
     //用户地址
@@ -206,6 +224,7 @@
     
     self.rightButton.clipsToBounds = YES;
     [self.rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.rightButton.titleLabel.numberOfLines=0; 
     self.rightButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.rightButton addTarget:self action:@selector(changeOrderTypeAction) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.rightButton];
