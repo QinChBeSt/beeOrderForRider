@@ -29,16 +29,18 @@
 #define Vsion @"1"      //版本号1.0.0
 #define ICTYPE @"1"         //更新版本号
 
+
+
 //==========图片
 #define IMGBaesURL @"http://pcobwjw66.sabkt.gdipper.com/"
 
 ////=================  测试
-#define BASEURL @"http://beeorder.cn:8080/spmvc"
+//#define BASEURL @"http://beeorder.cn:8080/spmvc"
+//#define JGPushAlias @"qs"
 
-
-////=================  正式
-//#define BASEURL @"http://beeorder.net"
-
+//=================  正式
+#define BASEURL @"http://beeorder.net/spmvc"
+#define JGPushAlias @"150qs"
 
 //#define BASEURL @"http://192.168.0.143:8080"
 //

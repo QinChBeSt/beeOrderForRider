@@ -84,7 +84,10 @@
     if (userID == nil || [userID isEqualToString:@""]) {
         [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
             
-            NSLog(@"删除Alias==%ld",(long)iResCode);
+            NSLog(@"删除 ==%ld",(long)iResCode);
+            
+        } seq:0];
+        [JPUSHService setTags:nil completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
             
         } seq:0];
     }
@@ -138,6 +141,9 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         [[NSNotificationCenter defaultCenter] postNotification:notification];
         NSLog(@"前台收到消息");
         [self StartSound];
+        HomeVC *home = [[HomeVC alloc]init];
+        home.showLeft = @"2";
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[QCNavigationController alloc] initWithRootViewController:home];
         
 
     }

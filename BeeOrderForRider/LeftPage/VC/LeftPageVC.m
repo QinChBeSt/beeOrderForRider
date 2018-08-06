@@ -574,7 +574,7 @@
     } seq:0];
 
     NSString *userId = [defaults objectForKey:UD_USERID];
-    NSString *strTag = [NSString stringWithFormat:@"qs%@",userId];
+    NSString *strTag = [NSString stringWithFormat:@"%@%@",JGPushAlias,userId];
     NSSet *set = [[NSSet alloc] initWithObjects:strTag,nil];
     [JPUSHService deleteTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
         

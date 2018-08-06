@@ -331,10 +331,10 @@
             [defaults setObject:userState forKey:UD_USERState];
             [defaults synchronize];
             
-            [JPUSHService setAlias:@"qs" completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            [JPUSHService setAlias:JGPushAlias completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
                 NSLog(@"注册Alias==%ld",(long)iResCode);
             } seq:0];
-            NSString *strTag = [NSString stringWithFormat:@"qs%@",userId];
+            NSString *strTag = [NSString stringWithFormat:@"%@%@",JGPushAlias,userId];
             NSSet *set = [[NSSet alloc] initWithObjects:strTag,nil];
             [JPUSHService setTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
                 NSLog(@"注册Tag===%ld",(long)iResCode);
