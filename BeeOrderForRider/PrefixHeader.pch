@@ -38,19 +38,13 @@
 //#define BASEURL @"http://beeorder.cn:8080/spmvc"
 //#define JGPushAlias @"qs"
 
-//=================  正式
-#define BASEURL @"http://beeorder.net/spmvc"
-#define JGPushAlias @"150qs"
+////=================  正式
+//#define BASEURL @"http://beeorder.net/spmvc"
+//#define JGPushAlias @"150qs"
 
-//#define BASEURL @"http://192.168.0.143:8080"
-//
-//#define BASEURL @"http://192.168.0.154:8081"
-//#define IMGBaesURL @"http://192.168.0.154:8081/apidocs/upload/"
-//
-//#define BASEURL @"http://192.168.0.106:8010"
-//#define IMGBaesURL @"http://192.168.0.106:8010/apidocs/upload/"
-//#define BASEURL @"http://192.168.0.166:8080/spmvc"
-//#define IMGBaesURL @"http://192.168.0.166:8080/spmvc/apidocs/upload/"
+
+#define BASEURL @"http://192.168.0.132:8010"
+#define JGPushAlias @"qs"
 
 
 #define BaseYellow @"#ffc235"

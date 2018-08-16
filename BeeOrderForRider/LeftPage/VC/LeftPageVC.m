@@ -335,6 +335,7 @@
     self.tableView.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
     UIView *footView =[[UIView alloc]init];
     footView.backgroundColor = [UIColor colorWithHexString:BaseBackgroundGray];
+    
     self.tableView.tableFooterView = footView;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
@@ -343,6 +344,17 @@
         make.centerX.equalTo(ws.buttomView);
         make.width.equalTo(ws.buttomView);
         make.bottom.equalTo(ws.view);
+    }];
+    
+    UILabel *versonLab = [[UILabel alloc]init];
+    versonLab.font = [UIFont systemFontOfSize:14];
+    versonLab.textColor = [UIColor colorWithHexString:BaseTextGrayColor];
+    [self.view addSubview:versonLab];
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    versonLab.text =[NSString stringWithFormat:@"V %@",[infoDictionary objectForKey:@"CFBundleShortVersionString"]];
+    [versonLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.tableView);
+        make.bottom.equalTo(ws.tableView);
     }];
 }
 #pragma mark- UITabelViewDataSource/delegat
@@ -369,14 +381,14 @@
         
         if (indexPath.row == 0) {
             cell.img.image = [UIImage imageNamed:@"icon_erjidingdan"];
-            cell.Tlabel.text = ZBLocalized(@"历史订单", nil);
+            cell.Tlabel.text = ZBLocalized(@"订单查询", nil);
         }
         else if (indexPath.row ==2){
             cell.img.image = [UIImage imageNamed:@"icon_erjimimaxiugai"];
             cell.Tlabel.text = ZBLocalized(@"修改密码", nil);
         }else if (indexPath.row == 1){
             cell.img.image = [UIImage imageNamed:@"icon_erjichakanyeji"];
-            cell.Tlabel.text = ZBLocalized(@"全部历史账单", nil);
+            cell.Tlabel.text = ZBLocalized(@"历史账单", nil);
         }
         else if (indexPath.row == 3){
             cell.img.image = [UIImage imageNamed:@"icon_erjiyuyanqiehuan"];
@@ -551,8 +563,8 @@
 -(void)LogoutAction{
     NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,qsLogOUTURL];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-  NSString *userId = [defaults objectForKey:UD_USERLogOutID];
+    NSString *userId = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERLogOutID]];
+  //NSString *userId = [defaults objectForKey:UD_USERLogOutID];
     NSDictionary *parameters = @{@"id":userId,
                                  };
     AFHTTPSessionManager *managers = [AFHTTPSessionManager manager];
@@ -573,12 +585,15 @@
         
     } seq:0];
 
-    NSString *userId = [defaults objectForKey:UD_USERID];
+    NSString *userId = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
     NSString *strTag = [NSString stringWithFormat:@"%@%@",JGPushAlias,userId];
     NSSet *set = [[NSSet alloc] initWithObjects:strTag,nil];
     [JPUSHService deleteTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
         
         NSLog(@"删除Tag====%ld",(long)iResCode);
+    } seq:0];
+    [JPUSHService setTags:nil completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+        
     } seq:0];
     [defaults setObject:nil forKey:UD_USERID];
     [defaults setObject:nil forKey:UD_USERNAME];

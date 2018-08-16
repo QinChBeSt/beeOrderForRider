@@ -70,7 +70,7 @@
     // 如需使用IDFA功能请添加此代码并在初始化方法的advertisingIdentifier参数中填写对应值
     NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     NSString *channel = @"iOS";
-    // 初始化JPush====================
+
     [JPUSHService setupWithOption:launchOptions appKey:JPushKey
                           channel:channel
                  apsForProduction:JPushIsProduction
@@ -80,8 +80,8 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
    
-    NSString *userID = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
-    if (userID == nil || [userID isEqualToString:@""]) {
+    NSString *userID =[NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
+    if (userID == nil || [userID isEqualToString:@""]||[self isBlankString:userID]) {
         [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
             
             NSLog(@"删除 ==%ld",(long)iResCode);
@@ -104,7 +104,46 @@
     
 }
 
-
+-(BOOL) isBlankString:(NSString *)string{
+    NSString *str = [NSString stringWithFormat:@"%@",string];
+    
+    if ([str isEqualToString:@""]) {
+        return YES;
+    }
+    
+    if ([str isEqualToString:@"<null>"]) {
+        return YES;
+    }
+    
+    if ([str isEqualToString:@"(null)"]) {
+        return YES;
+    }
+    
+    if ([str isEqualToString:@"<nil>"]) {
+        return YES;
+    }
+    if ([str isEqualToString:@"null"]) {
+        return YES;
+    }
+    if (str == nil || str == NULL) {
+        return YES;
+    }
+    
+    if ([str isKindOfClass:[NSNull class]]) {
+        return YES;
+    }
+    
+    if ([str isEqual:[NSNull null]]) {
+        return YES;
+    }
+    
+    if ([[str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] == 0) {
+        return YES;
+    }
+    
+    
+    return NO;
+}
 #pragma mark - JPushDelegate
 //注册APNs成功并上报DeviceToken
 - (void)application:(UIApplication *)application
@@ -134,16 +173,16 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         
         //     前台收到消息后，做的对应页面跳转操作
         
-        NSNotification *notification =[NSNotification notificationWithName:@"needReLoad" object:nil userInfo:nil];
+        NSNotification *notification =[NSNotification notificationWithName:@" " object:nil userInfo:nil];
         
         //通过通知中心发送通知
         
         [[NSNotificationCenter defaultCenter] postNotification:notification];
         NSLog(@"前台收到消息");
         [self StartSound];
-        HomeVC *home = [[HomeVC alloc]init];
-        home.showLeft = @"2";
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[QCNavigationController alloc] initWithRootViewController:home];
+//        HomeVC *home = [[HomeVC alloc]init];
+//        home.showLeft = @"2";
+//        [UIApplication sharedApplication].keyWindow.rootViewController = [[QCNavigationController alloc] initWithRootViewController:home];
         
 
     }

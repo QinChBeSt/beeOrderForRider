@@ -19,4 +19,5 @@
 @property (nonatomic , strong)NSString *ordersShopName;
 @property (nonatomic , strong)NSString *ordersNumDay;
 @property (nonatomic , strong)NSString *ordersPsPic;
+@property (nonatomic , strong)NSString *shopBoxPic;
 @end

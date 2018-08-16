@@ -40,11 +40,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
  
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doingNotification:) name:@"DoingOrderCount" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishNotification:) name:@"finishOrderCount" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanNotification:) name:@"cleanOrderCount" object:nil];
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tongzhi:) name:@"homePageType" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HadRe) name:@"HadReLoad" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toSegment1) name:@"toSegment1" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toSegment2) name:@"toSegment2" object:nil];
+     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(homeStartNet:) name:@"HOMEStartNet" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(homeStopNet:) name:@"HOMEStopNet" object:nil];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HadRe) name:@"HadReLoad" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toSegment1) name:@"toSegment1" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toSegment2) name:@"toSegment2" object:nil];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self toLogin];
 }
@@ -56,9 +63,11 @@
 }
 -(void)toSegment1{
     [self.segmentVC setSelectedAtIndex:1];
+   
 }
 -(void)toSegment2{
     [self.segmentVC setSelectedAtIndex:2];
+   
 }
 -(void)needRe{
     self.segmentVC.segmentView.rediconview.hidden = NO;
@@ -93,42 +102,13 @@
        
     }
 }
--(void)isNeedUpdate{
-    NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,isNeedUpDateURL];
-    NSDictionary *parameters = @{@"flg":@"1",
-                                 @"vnum":ICTYPE,
-                                 
-                                 };
-    AFHTTPSessionManager *managers = [AFHTTPSessionManager manager];
-    //请求的方式：POST
-    [managers POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
-        NSString *code =[NSString stringWithFormat:@"%@",responseObject[@"code"]];
-        if ([code isEqualToString:@"2"]) {
-            
-            UIAlertController * alert = [UIAlertController alertControllerWithTitle:ZBLocalized(@"发现新版本", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction * ok = [UIAlertAction actionWithTitle:ZBLocalized(@"取消", nil) style:UIAlertActionStyleDefault handler:nil];
-            UIAlertAction * update = [UIAlertAction actionWithTitle:ZBLocalized(@"去更新", nil)  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                //跳转到App Store
-                NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/th/app/id1386671232?mt=8"];
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-            }];
-            [alert addAction:ok];
-            [alert addAction:update];
-            [self presentViewController:alert animated:YES completion:nil];
-            
-            
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
-    
-}
+
 -(void)getNetWork{
     self.OrderCountStr = @"0";
     self.WillGetOrderCountStr = @"0";
     self.willPutOrderCountStr = @"0";
-    [self isNeedUpdate];
+     [self.segmentVC enumerateBadges:@[ self.OrderCountStr,self.WillGetOrderCountStr,self.willPutOrderCountStr]];
+//    [self isNeedUpdate];
 //    [self getNetWorkForWillGet];
 //    [self getNewWorkForWillPut];
     NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
@@ -143,7 +123,18 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
    
-}- (void)doingNotification:(NSNotification *)noti
+}
+
+-(void)homeStartNet:(NSNotification *)noti{
+    self.view.userInteractionEnabled = NO;
+   
+}
+-(void)homeStopNet:(NSNotification *)noti{
+    self.view.userInteractionEnabled = YES;
+    
+    
+}
+- (void)doingNotification:(NSNotification *)noti
 {
     
     // NSNotification 有三个属性，name, object, userInfo，其中最关键的object就是从第三个界面传来的数据。name就是通知事件的名字， userInfo一般是事件的信息。

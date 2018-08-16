@@ -228,6 +228,8 @@ int const ZWMSegmentHeight = 45;//可根据项目需求设置高度
 - (void)setSelectedAtIndex:(NSUInteger)index {
     for (UIView *view in _contentView.subviews) {
         if ([view isKindOfClass:[UIButton class]] && view.tag == index) {
+            
+           
             UIButton *button = (UIButton *)view;
             [self didClickButton:button];
             break;

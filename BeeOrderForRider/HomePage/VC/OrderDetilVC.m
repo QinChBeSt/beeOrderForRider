@@ -31,6 +31,7 @@
 @property (nonatomic , strong)NSString *callUserTel;
 @property (nonatomic , strong)NSString *callShopTel;
 @property (nonatomic , strong)NSString *orderBzStr;
+@property (nonatomic , strong)NSString *boxPicStr;
 @end
 
 @implementation OrderDetilVC
@@ -115,7 +116,7 @@
     if (section == 0) {
         return 1;
     }else if (section == 1){
-        return self.arrForOrderDetail.count + 5;
+        return self.arrForOrderDetail.count + 6;
     }else if (section == 2){
         return 1;
     }else if (section == 3){
@@ -169,6 +170,17 @@
             return cell;
         }
         else if (indexPath.row == self.arrForOrderDetail.count + 1){
+            CellForLRtext *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
+            if(cell == nil)
+            {
+                cell = [[CellForLRtext alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
+            }
+            cell.leftLab.text = ZBLocalized(@"餐盒费", nil);
+            cell.rightLab.text = self.boxPicStr;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }
+        else if (indexPath.row == self.arrForOrderDetail.count + 2){
             //配送费
             CellForLRtext *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
             if(cell == nil)
@@ -181,7 +193,7 @@
             return cell;
             
         }
-        else if (indexPath.row == self.arrForOrderDetail.count + 2){
+        else if (indexPath.row == self.arrForOrderDetail.count + 3){
             //优惠金额
             CellForLRtext *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
             if(cell == nil)
@@ -194,7 +206,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
-        else if (indexPath.row == self.arrForOrderDetail.count + 3){
+        else if (indexPath.row == self.arrForOrderDetail.count + 4){
             //小计
             CellForLRtext *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
             if(cell == nil)
@@ -208,7 +220,7 @@
             cell.rightLab.font = [UIFont systemFontOfSize:20];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
-        }else if (indexPath.row == self.arrForOrderDetail.count + 4){
+        }else if (indexPath.row == self.arrForOrderDetail.count + 5){
             CellForLtextRimg *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
             if(cell == nil)
             {
@@ -376,11 +388,11 @@
     CGFloat psF = [mod.orderpspic floatValue];
     self.orderPsStr = [NSString stringWithFormat:@"%.2f",psF];
    
-    CGFloat allF = [mod.orderallpic floatValue];
-    allF = allF - yhF + psF;
-    if (allF <= 0) {
-        allF = 0.01;
-    }
+    CGFloat allF = [mod.orderrealpic floatValue];
+//    allF = allF - yhF + psF;
+//    if (allF <= 0) {
+//        allF = 0.01;
+//    }
     self.orderAllpicStr = [NSString stringWithFormat:@"%@%.2f",ZBLocalized(@"฿", nil),allF];
   
     self.orderUserPhoneStr = [NSString stringWithFormat:@"%@  %@",mod.uname,mod.uphone];
@@ -388,6 +400,7 @@
     self.orderUserTimeStr = [NSString stringWithFormat:@"%@   %@",ZBLocalized(@"订单时间",nil),mod.orderdatatime];
     self.orderUserOrderNumStr = [NSString stringWithFormat:@"%@   %@",ZBLocalized(@"订单号码",nil),mod.ordernum];
     self.orderBzStr = [NSString stringWithFormat:@"%@   %@",ZBLocalized(@"备注", nil),mod.orderbz];
+    self.boxPicStr = [NSString stringWithFormat:@"%@%.2f",ZBLocalized(@"", nil),[mod.shopboxpic floatValue]];
     NSMutableArray *arr = mod.ordersContexts;
     for (NSMutableDictionary *dic in arr) {
         ModelForOrderDetail *modOrder = [ModelForOrderDetail yy_modelWithDictionary:dic];

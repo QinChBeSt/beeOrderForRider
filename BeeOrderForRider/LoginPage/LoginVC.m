@@ -196,7 +196,7 @@
     }];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd-MM-yyyy-HHmmss"];
-    NSDate *date = [dateFormatter dateFromString:@"12-07-2018-000000"];
+    NSDate *date = [dateFormatter dateFromString:@"30-08-2018-000000"];
     int isLate = [self compareOneDay:[self getCurrentTime] withAnotherDay:date];
     if (isLate < 0) {
         self.regisBtn.hidden = NO;
@@ -208,27 +208,7 @@
 }
 -(void)isappstore{
     
-    NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,isappstoreURL];
-    NSDictionary *parameters = @{@"vnum":Vsion,
-                                 @"flg":@"1",
-                                 };
-    AFHTTPSessionManager *managers = [AFHTTPSessionManager manager];
-    [managers POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"is匹配：%@",responseObject);
-        NSString *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
-        if ([code isEqualToString:@"1"]) {
-            NSString *isShow = [NSString stringWithFormat:@"%@",responseObject[@"value"]];
-            if ([isShow isEqualToString:@"1"]) {
-                self.regisBtn.hidden = NO;
-            }else{
-                self.regisBtn.hidden = YES;
-            }
-        }else{
-            [MBManager showBriefAlert:responseObject[@"msg"]];
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
+    
     
 }
 #pragma mark -得到当前时间

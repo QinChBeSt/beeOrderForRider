@@ -109,11 +109,17 @@ typedef void(^ZWMViewControllerIndexBlock)(NSUInteger, UIButton *, UIViewControl
     [self scrollContainerViewToIndex:index];
     
     UIViewController *targetViewController = self.viewControllers[index];
+    [self updateFrameChildViewController:targetViewController atIndex:index];
+    NSNotification *notification =[NSNotification notificationWithName:@"needReLoad" object:nil userInfo:nil];
+    
+    //通过通知中心发送通知
+    
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
     if ([self.childViewControllers containsObject:targetViewController] || !targetViewController) {
         return;
     }
     
-    [self updateFrameChildViewController:targetViewController atIndex:index];
+    
 }
 
 - (void)selectedAtIndex:(void (^)(NSUInteger, UIButton * _Nonnull, UIViewController * _Nonnull))indexBlock {
@@ -178,13 +184,31 @@ typedef void(^ZWMViewControllerIndexBlock)(NSUInteger, UIButton *, UIViewControl
         if (idx == 0) {
             NSString *tit;
             NSString *ojbStr= [NSString stringWithFormat:@"%@",obj];
-            if([ojbStr isEqualToString:@"0"]){
-                  tit = [NSString stringWithFormat:@"%@",ZBLocalized(@"新任务", nil)];
-            }else{
+         
                   tit = [NSString stringWithFormat:@"%@(%@)",ZBLocalized(@"新任务", nil),ojbStr];
-            }
+           
             
-//            NSString *tit = [NSString stringWithFormat:@"%@(%@)",ZBLocalized(@"新任务", nil),ojbStr];
+
+            [button setTitle:tit forState:UIControlStateNormal];
+        }
+        if (idx == 1) {
+            NSString *tit;
+            NSString *ojbStr= [NSString stringWithFormat:@"%@",obj];
+            
+            tit = [NSString stringWithFormat:@"%@(%@)",ZBLocalized(@"待取货", nil),ojbStr];
+            
+            
+            
+            [button setTitle:tit forState:UIControlStateNormal];
+        }
+        if (idx == 2) {
+            NSString *tit;
+            NSString *ojbStr= [NSString stringWithFormat:@"%@",obj];
+            
+            tit = [NSString stringWithFormat:@"%@(%@)",ZBLocalized(@"待送达", nil),ojbStr];
+            
+            
+            
             [button setTitle:tit forState:UIControlStateNormal];
         }
 //        else if(idx == 1){

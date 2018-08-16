@@ -6,6 +6,8 @@
 //  Copyright © 2018年 QinChBeSt. All rights reserved.
 //
 
+#pragma mark - 每日的订单 二级页面
+
 #import "DateDeatilOrderVC.h"
 #import "CellForDateDetai.h"
 #import "HistoryDetailOrderVC.h"
@@ -195,6 +197,9 @@
     
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.text = ZBLocalized(@"历史账单", nil);
+    if ([self.isToday isEqualToString:@"yes"]) {
+        titleLabel.text = ZBLocalized(@"今日账单", nil);
+    }
     titleLabel.textColor = [UIColor blackColor];
     [self.naviView addSubview:titleLabel];
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -490,7 +495,7 @@
     mod = [self.arrForGoodList objectAtIndex:indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.orderName.text =[NSString stringWithFormat:@"%@#%@", mod.order.ordersShopName,mod.order.ordersNumDay];
-    cell.orderPic.text = [NSString stringWithFormat:@"฿%@",mod.okpic];
+    cell.orderPic.text = [NSString stringWithFormat:@"฿%.2f",[mod.okpic floatValue]];
     //cell.orderCount.text = [NSString stringWithFormat:@"#%@",mod.order.ordersNumDay];
     return cell;
 }

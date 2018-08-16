@@ -33,8 +33,11 @@
         make.top.equalTo(buttomLine.mas_bottom).offset(0);
         make.left.equalTo(ws.contentView).offset(20);
         make.height.equalTo(@(lineHeight));
+        
     }];
-    
+    [self.orderDayNo setContentCompressionResistancePriority:UILayoutPriorityRequired
+                                                  forAxis:UILayoutConstraintAxisHorizontal];
+
     self.orderDateLab = [[UILabel alloc]init];
     self.orderDateLab.textColor = [UIColor colorWithHexString:@"4b4b4b"];
     self.orderDateLab.font = [UIFont systemFontOfSize:12];

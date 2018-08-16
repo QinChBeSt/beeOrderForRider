@@ -66,14 +66,20 @@
     
 }
 -(void)needRe{
-    if ([self.CountType isEqualToString:@"4"]) {
+    //if ([self.CountType isEqualToString:@"4"]) {
         [self toSearchHistory];
-    }
+    //}
 }
 -(void)toSearchHistory{
+    NSNotification *notificationSTART =[NSNotification notificationWithName:@"HOMEStartNet" object:nil userInfo:nil];
+    
+    //通过通知中心发送通知
+   
+    [[NSNotificationCenter defaultCenter] postNotification:notificationSTART];
     if ([self.locationQX isEqualToString:@"no"]) {
         [self getLocation];
     }
+    
     self.pageIndex = 1;
    
         self.tableView.mj_header.hidden = NO;
@@ -82,7 +88,6 @@
         defaults = [NSUserDefaults standardUserDefaults];
         NSString *userId = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
         
-      
         
         NSString *url = [NSString stringWithFormat:@"%@%@",BASEURL,GetOrderListURL];
         NSDictionary *parameters = @{@"flg":self.CountType,
@@ -99,6 +104,11 @@
     
     [[NSNotificationCenter defaultCenter] postNotification:notification];
         [MHNetWorkTask getWithURL:url withParameter:parameters withHttpHeader:nil withResponseType:ResponseTypeJSON withSuccess:^(id result) {
+            NSNotification *notificationSTop =[NSNotification notificationWithName:@"HOMEStopNet" object:nil userInfo:nil];
+            
+            //通过通知中心发送通知
+            
+            [[NSNotificationCenter defaultCenter] postNotification:notificationSTop];
             NSString *code = [NSString stringWithFormat:@"%@",result[@"code"]];
             if ([code isEqualToString:@"1"]) {
                 NSMutableArray *arr = result[@"value"];
@@ -111,10 +121,8 @@
                     [self.arrForHistory addObject:mod];
                     
                 }
-                 NSString *willEvaCount =[NSString stringWithFormat:@"%lu",(unsigned long)self.arrForHistory.count];
-                if (self.arrForHistory.count > 5) {
-                    willEvaCount = @"5+";
-                }
+                 NSString *willEvaCount =[NSString stringWithFormat:@"%@",result[@"msg"]];
+              
                 NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
                 
                 if ([self.CountType isEqualToString:@"4"]) {
@@ -151,7 +159,12 @@
                 [MBManager showBriefAlert:result[@"msg"]];
             }
         } withFail:^(NSError *error) {
+            NSNotification *notificationSTop =[NSNotification notificationWithName:@"HOMEStopNet" object:nil userInfo:nil];
             
+            //通过通知中心发送通知
+         
+            [[NSNotificationCenter defaultCenter] postNotification:notificationSTop];
+           // [MBManager showBriefAlert:@"服务器异常"];
         }];
     
 }
@@ -328,15 +341,15 @@
         
         ModelForHistory *mod = [[ModelForHistory alloc]init];
         mod = [self.arrForHistory objectAtIndex:indexPath.row];
-        CGFloat yhF = [mod.orderyhpic floatValue];
+  //      CGFloat yhF = [mod.orderyhpic floatValue];
       
-        CGFloat psF = [mod.orderpspic floatValue];
+ //       CGFloat psF = [mod.orderpspic floatValue];
        
-        CGFloat allF = [mod.orderallpic floatValue];
-        allF = allF - yhF + psF;
-        if (allF <= 0) {
-            allF = 0.01;
-        }
+        CGFloat allF = [mod.orderrealpic floatValue];
+//        allF = allF - yhF + psF;
+//        if (allF <= 0) {
+//            allF = 0.01;
+//        }
         showMsg = ZBLocalized(@"确认送达并已收款？", nil);
         NSString *message = [NSString stringWithFormat:@"%.2f฿",allF];
         //NSString *title = showMsg;
@@ -523,7 +536,7 @@
         if ([code isEqualToString:@"1"]) {
             NSString *typeStr = str[@"flg"];
             if ([typeStr isEqualToString:@"6"]) {
-                [MBManager showBriefAlert:ZBLocalized(@"接单成功,此订单为待取货状态，右滑查看", nil)];
+                [MBManager showBriefAlert:ZBLocalized(@"接单成功,此订单为待取货状态", nil)];
                 NSNotification *notification =[NSNotification notificationWithName:@"toSegment1" object:nil userInfo:nil];
                 
                 //通过通知中心发送通知
@@ -535,7 +548,7 @@
                 [MBManager showBriefAlert:ZBLocalized(@"上报到店成功,此订单为待取货状态", nil)];
             }
             else if ([typeStr isEqualToString:@"8"]) {
-                [MBManager showBriefAlert:ZBLocalized(@"取货成功,此订单为待送达状态，右滑查看", nil)];
+                [MBManager showBriefAlert:ZBLocalized(@"取货成功,此订单为待送达状态", nil)];
                 NSNotification *notification =[NSNotification notificationWithName:@"toSegment2" object:nil userInfo:nil];
                 
                 //通过通知中心发送通知

@@ -5,6 +5,7 @@
 //  Created by mac on 2018/7/3.
 //  Copyright © 2018年 QinChBeSt. All rights reserved.
 //
+#pragma mark - 全部历史账单 最外面
 
 #import "NewWatchMoneyVC.h"
 #import "DateDeatilOrderVC.h"
@@ -20,7 +21,7 @@
 @property (nonatomic , strong)UILabel *addOrderCountLab;
 @property (nonatomic , strong)UIProgressView *progressView;
 @property (nonatomic , strong)NSMutableArray *arrForHIsDate;
-
+@property (nonatomic , assign)NSInteger todayIndex;
 @property (nonatomic , strong)NSString *isHaveTodayDate;
 
 @end
@@ -34,6 +35,7 @@
     return _arrForHIsDate;
 }
 -(void)getnetwork{
+    self.isHaveTodayDate = @"no";
     NSUserDefaults *defaults;
     defaults = [NSUserDefaults standardUserDefaults];
     NSString *useriD = [NSString stringWithFormat:@"%@",[defaults objectForKey:UD_USERID]];
@@ -47,30 +49,33 @@
            success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                NSString *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
                if ([code isEqualToString:@"1"]) {
+                   int i = 0;
                    for (NSDictionary *dic in responseObject[@"value"]) {
                        ModelForHisDate *mod = [ModelForHisDate yy_modelWithDictionary:dic];
                        [self.arrForHIsDate addObject:mod];
                       
                        
+                       
                        NSDate *now = [NSDate date];
                        NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
                        fmt.dateFormat = @"yyyy-MM-dd";
                        NSString *nowDate = [fmt stringFromDate:now];
-                       if ([mod.cdate isEqualToString:[self pp_NoformatDateWithArrYMDToMD:nowDate]]) {
+                       i++;
+                       if ([mod.cdate isEqualToString:nowDate]) {
                            self.todayMoneyLab.text =[NSString stringWithFormat:@"฿%@",mod.givepic] ;
                            self.addMoeyLab.text =[NSString stringWithFormat:@"฿%@", mod.givepic];
                            self.addOrderCountLab.text = [NSString stringWithFormat:@"%@%@%@",ZBLocalized(@"共", nil),mod.orderallnum,ZBLocalized(@"笔", nil)];
+                           self.todayIndex = i;
                            self.isHaveTodayDate = @"yes";
-                       }else{
-                           self.isHaveTodayDate = @"no";
                        }
+                       
                    }
                   
                }else{
                    [MBManager showBriefAlert:responseObject[@"msg"]];
                }
                NSLog(@"%lu",(unsigned long)self.arrForHIsDate.count);
-               self.arrForHIsDate=(NSMutableArray *)[[self.arrForHIsDate reverseObjectEnumerator] allObjects];
+//               self.arrForHIsDate=(NSMutableArray *)[[self.arrForHIsDate reverseObjectEnumerator] allObjects];
                [self.tableView reloadData];
            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                
@@ -105,7 +110,7 @@
     }];
     
     UILabel *titleLabel = [[UILabel alloc]init];
-    titleLabel.text = ZBLocalized(@"全部历史账单", nil);
+    titleLabel.text = ZBLocalized(@"历史账单", nil);
     titleLabel.textColor = [UIColor blackColor];
     [self.naviView addSubview:titleLabel];
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -261,7 +266,7 @@
     }];
     
     UILabel *hisSub = [[UILabel alloc]init];
-    hisSub.text = ZBLocalized(@"全部历史账单", nil);
+    hisSub.text = ZBLocalized(@"历史账单", nil);
     hisSub.font = [UIFont systemFontOfSize:13];
     hisSub.textColor = [UIColor blackColor];
     [self.headView addSubview:hisSub];
@@ -329,7 +334,7 @@
         cell.orderState.text = ZBLocalized(@"已交账", nil);
     }
     cell.dateLab.text = Mod.cdate;
-    cell.picLab.text = [NSString stringWithFormat:@"฿%@", Mod.givepic];;
+    cell.picLab.text = [NSString stringWithFormat:@"฿%.2f",[ Mod.givepic floatValue]];;
     
     return cell;
 }
@@ -363,8 +368,9 @@
         [MBManager showBriefAlert:ZBLocalized(@"暂无今日数据", nil)];
     }else{
         DateDeatilOrderVC *dateDetaul = [[DateDeatilOrderVC alloc]init];
-        ModelForHisDate *mod = [self.arrForHIsDate objectAtIndex:0];
+        ModelForHisDate *mod = [self.arrForHIsDate objectAtIndex:self.arrForHIsDate.count - self.todayIndex];
         dateDetaul.modHISdate = mod;
+        dateDetaul.isToday = @"yes";
         [self.navigationController pushViewController:dateDetaul animated:YES];
     }
     

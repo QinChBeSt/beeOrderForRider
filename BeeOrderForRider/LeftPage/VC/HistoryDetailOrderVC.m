@@ -6,6 +6,8 @@
 //  Copyright © 2018年 QinChBeSt. All rights reserved.
 //
 
+#pragma mark - 每日订单 每一单的详情 三级
+
 #import "HistoryDetailOrderVC.h"
 #import "CellForHistoryDetailGoodsList.h"
 #import "CellForHistoryLRtext.h"
@@ -31,6 +33,7 @@
 @property (nonatomic , strong)NSString *shopName;
 @property (nonatomic , strong)NSString *zjStr;
 @property (nonatomic , strong)NSString *jsjgStr;
+@property (nonatomic , strong)NSString *boxPicStr;
 @end
 
 @implementation HistoryDetailOrderVC
@@ -156,13 +159,13 @@
         return self.arrForHDlist.count;
     }
     else if (section == 2){
-        return 8;
+        return 9;
     }
     return 0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 2) {
-        if (indexPath.row == 2) {
+        if (indexPath.row == 3) {
             return 10;
         }
         else if (indexPath.row > 2){
@@ -186,7 +189,7 @@
             }
             
             cell.goodsName.text = [NSString stringWithFormat:@"%@",self.arrForGoodList[indexPath.row][@"ordersGoodsName"]];
-            cell.goodsPic.text = [NSString stringWithFormat:@"฿%@",self.arrForGoodList[indexPath.row][@"ordersGoodsPic"]];
+            cell.goodsPic.text = [NSString stringWithFormat:@"฿%.2f",[self.arrForGoodList[indexPath.row][@"ordersGoodsPic"] floatValue]];
             cell.goodsCount.text = [NSString stringWithFormat:@"X%@",self.arrForGoodList[indexPath.row][@"ordersGoodsNum"]];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -250,6 +253,18 @@
             return cell;
         }
         else if (indexPath.row == 2) {
+            CellForHistoryLRtext *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCellText"];
+            if(cell == nil)
+            {
+                cell = [[CellForHistoryLRtext alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCellText"];
+            }
+            
+            cell.leftText.text = ZBLocalized(@"餐盒费", nil);
+            cell.rightText.text = self.boxPicStr;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }
+        else if (indexPath.row == 3) {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCellUITableViewCellNONE"];
             if(cell == nil)
             {
@@ -322,11 +337,11 @@
     }else{
         self.psfsStr = [NSString stringWithFormat:@"%@",ZBLocalized(@"商家配送", nil)];
     }
-    self.psfStr = [NSString stringWithFormat:@"+฿%@",modHis.order.ordersPsPic];
+    self.psfStr = [NSString stringWithFormat:@"+฿%.2f",[modHis.order.ordersPsPic floatValue]];
     
     self.zjStr = [NSString stringWithFormat:@"฿%@",modHis.goodspic];;
-    self.jsjeStr = [NSString stringWithFormat:@"฿%@",modHis.okpic];
-    
+    self.jsjeStr = [NSString stringWithFormat:@"฿%.2f",[modHis.okpic floatValue]];
+    self.boxPicStr = [NSString stringWithFormat:@"฿%.2f",[modHis.order.shopBoxPic floatValue]];
     self.arrForHDlist = modHis.orderYhxEntities;
     
     [self.tableView reloadData];

@@ -92,9 +92,9 @@
 
 "请在设置中打开定位,否则无法提供准确的距离信息" = "Please open the positioning in the Settings, otherwise the accurate distance information cannot be provided";
 
-"接单成功,此订单为待取货状态，右滑查看" = "Order received successfully, this order is in the state of pending delivery, please click right to check.";
+"接单成功,此订单为待取货状态" = "Order received successfully, this order is in the state of pending delivery";
 "上报到店成功,此订单为待取货状态" = "Reported to the store successfully, this order is in the state of pending delivery";
-"取货成功,此订单为待送达状态，右滑查看" = "Successful delivery. This order is pending delivery. Please click right to view";
+"取货成功,此订单为待送达状态" = "Successful delivery. This order is pending delivery";
 "确认送达,此订单已完成" = "Confirm delivery, this order has been completed";
 "接单" = "Get order";
 "发短信给顾客" = "SMS to customers";
@@ -154,6 +154,8 @@
 "确认检查菜品无异样并取货" = "Confirm that the inspection menu is no different and pick up the goods";
 "确认送达并已收款" = "Confirmed delivery and received payment";
 "账号已在其它设备登录" = "The account has been logged in on another device";
+"今日账单" = "Today Order";
+"订单查询" = "Order Tracking";
 //==================图
 "bg_zanwandingdan" = "bg_zanwandingdan2";
 "icon_quhuo" = "icon_quhuoyingwen";

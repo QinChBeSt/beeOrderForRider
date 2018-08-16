@@ -10,4 +10,5 @@
 #import "ModelForHisDate.h"
 @interface DateDeatilOrderVC : UIViewController
 @property (nonatomic , strong)ModelForHisDate *modHISdate;
+@property (nonatomic , strong)NSString *isToday;
 @end

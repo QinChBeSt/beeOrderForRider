@@ -27,5 +27,7 @@
 @property (nonatomic , strong)NSString *ulat;
 @property (nonatomic , strong)NSString *ulonng;
 @property (nonatomic , strong)NSString *uaddr;
+@property (nonatomic , strong)NSString *orderrealpic;
 @property (nonatomic , strong)NSMutableArray *ordersContexts;
+@property (nonatomic , strong)NSString *shopboxpic;
 @end
