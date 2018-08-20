@@ -24,7 +24,7 @@
 #define UD_USERState @"USERState"
 #define UD_USERLogOutID @"USERlogoutId"
 
-#define JPushKey @"55a1b24234ae5cb7804cecc9"
+#define JPushKey @"18c5c8390bc8ea65423f57da"
 #define JPushIsProduction 1 //0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
 #define Vsion @"1"      //版本号1.0.0
 #define ICTYPE @"1"         //更新版本号
@@ -39,12 +39,12 @@
 //#define JGPushAlias @"qs"
 
 ////=================  正式
-//#define BASEURL @"http://beeorder.net/spmvc"
-//#define JGPushAlias @"150qs"
+#define BASEURL @"http://beeorder.net/spmvc"
+#define JGPushAlias @"150qs"
 
 
-#define BASEURL @"http://192.168.0.132:8010"
-#define JGPushAlias @"qs"
+//#define BASEURL @"http://192.168.0.132:8010"
+//#define JGPushAlias @"qs"
 
 
 #define BaseYellow @"#ffc235"

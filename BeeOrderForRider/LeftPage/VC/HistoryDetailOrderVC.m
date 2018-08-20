@@ -240,7 +240,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
-        else if (indexPath.row == 1) {
+        else if (indexPath.row == 2) {
             CellForHistoryLRtext *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCellText"];
             if(cell == nil)
             {
@@ -252,7 +252,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
-        else if (indexPath.row == 2) {
+        else if (indexPath.row == 1) {
             CellForHistoryLRtext *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCellText"];
             if(cell == nil)
             {
