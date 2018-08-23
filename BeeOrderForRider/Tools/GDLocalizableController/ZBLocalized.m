@@ -41,25 +41,25 @@
     NSString *languageCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"][0];
     NSLog(@"系统语言:%@",languageCode);
     if([languageCode hasPrefix:@"zh-Hant"]){
-        languageCode = @"th";//繁体中文
+        languageCode = @"en";//繁体中文
     }else if([languageCode hasPrefix:@"zh-Hans"]){
         languageCode = @"zh-Hans";//简体中文
     }else if([languageCode hasPrefix:@"pt"]){
-        languageCode = @"th";//葡萄牙语
+        languageCode = @"en";//葡萄牙语
     }else if([languageCode hasPrefix:@"es"]){
-        languageCode = @"th";//西班牙语
+        languageCode = @"en";//西班牙语
     }else if([languageCode hasPrefix:@"th"]){
         languageCode = @"th";//泰语
     }else if([languageCode hasPrefix:@"hi"]){
-        languageCode = @"th";//印地语
+        languageCode = @"en";//印地语
     }else if([languageCode hasPrefix:@"ru"]){
-        languageCode = @"th";//俄语
+        languageCode = @"en";//俄语
     }else if([languageCode hasPrefix:@"ja"]){
-        languageCode = @"th";//日语
+        languageCode = @"en";//日语
     }else if([languageCode hasPrefix:@"en"]){
         languageCode = @"en";//英语
     }else{
-        languageCode = @"th";//英语
+        languageCode = @"en";//英语
     }
     [self setLanguage:languageCode];
 }

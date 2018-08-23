@@ -62,8 +62,8 @@
                        NSString *nowDate = [fmt stringFromDate:now];
                        i++;
                        if ([mod.cdate isEqualToString:nowDate]) {
-                           self.todayMoneyLab.text =[NSString stringWithFormat:@"฿%@",mod.givepic] ;
-                           self.addMoeyLab.text =[NSString stringWithFormat:@"฿%@", mod.givepic];
+                           self.todayMoneyLab.text =[NSString stringWithFormat:@"฿%.2f",[mod.givepic floatValue]] ;
+                           self.addMoeyLab.text =[NSString stringWithFormat:@"฿%.2f", [mod.givepic floatValue]];
                            self.addOrderCountLab.text = [NSString stringWithFormat:@"%@%@%@",ZBLocalized(@"共", nil),mod.orderallnum,ZBLocalized(@"笔", nil)];
                            self.todayIndex = i;
                            self.isHaveTodayDate = @"yes";

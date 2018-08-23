@@ -314,6 +314,7 @@
             [JPUSHService setAlias:JGPushAlias completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
                 NSLog(@"注册Alias==%ld",(long)iResCode);
             } seq:0];
+            NSLog(@"===%@",userId);
             NSString *strTag = [NSString stringWithFormat:@"%@%@",JGPushAlias,userId];
             NSSet *set = [[NSSet alloc] initWithObjects:strTag,nil];
             [JPUSHService setTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {

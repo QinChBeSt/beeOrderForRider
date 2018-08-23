@@ -171,19 +171,23 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
         
-        //     前台收到消息后，做的对应页面跳转操作
-        
-        NSNotification *notification =[NSNotification notificationWithName:@" " object:nil userInfo:nil];
-        
-        //通过通知中心发送通知
-        
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
+ 
         NSLog(@"前台收到消息");
         [self StartSound];
 //        HomeVC *home = [[HomeVC alloc]init];
 //        home.showLeft = @"2";
 //        [UIApplication sharedApplication].keyWindow.rootViewController = [[QCNavigationController alloc] initWithRootViewController:home];
+        NSDictionary *aps = [userInfo valueForKey:@"aps"];
+        NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
+        NSInteger badge = [[aps valueForKey:@"badge"] integerValue]; //badge数量
+        NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
         
+        // 取得Extras字段内容
+        NSString *customizeField1 = [userInfo valueForKey:@"customizeExtras"]; //服务端中Extras字段，key是自己定义的
+        NSLog(@"content =[%@], badge=[%d], sound=[%@], customize field  =[%@]",content,badge,sound,customizeField1);
+        
+        // iOS 10 以下 Required
+        [JPUSHService handleRemoteNotification:userInfo];
 
     }
     
@@ -220,11 +224,13 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [JPUSHService setBadge:0];
     NSDictionary *userInfo = response.notification.request.content.userInfo;
+    NSString *type =[NSString stringWithFormat:@"%@",userInfo[@"type"]] ;
     [self StartSound];
     if ([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         
         [JPUSHService handleRemoteNotification:userInfo];
         
+        [self toOrderVC:type];
         //[self SetMainTabbarController2]; //收到推送消息，需要调整的界面
         
         // 消息界面监听刷新
@@ -290,5 +296,13 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [avAudioPlayer prepareToPlay];
     [avAudioPlayer play];
 }
-
+-(void)toOrderVC:(NSString *)TAG{
+   
+    
+    if ([TAG isEqualToString:@"5"]) {
+        HomeVC *home = [[HomeVC alloc]init];
+        home.showLeft = @"0";
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[QCNavigationController alloc] initWithRootViewController:home];
+    }
+}
 @end

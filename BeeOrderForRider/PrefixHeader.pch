@@ -42,9 +42,9 @@
 #define BASEURL @"http://beeorder.net/spmvc"
 #define JGPushAlias @"150qs"
 
-
+//
 //#define BASEURL @"http://192.168.0.132:8010"
-//#define JGPushAlias @"qs"
+//#define JGPushAlias @"150qs"
 
 
 #define BaseYellow @"#ffc235"

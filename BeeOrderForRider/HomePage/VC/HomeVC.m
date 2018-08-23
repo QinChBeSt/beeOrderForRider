@@ -50,8 +50,8 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(homeStopNet:) name:@"HOMEStopNet" object:nil];
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HadRe) name:@"HadReLoad" object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toSegment1) name:@"toSegment1" object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toSegment2) name:@"toSegment2" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toSegment1) name:@"toSegment1" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toSegment2) name:@"toSegment2" object:nil];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self toLogin];
 }
@@ -62,12 +62,18 @@
     
 }
 -(void)toSegment1{
-    [self.segmentVC setSelectedAtIndex:1];
+    self.OrderCountStr =[NSString stringWithFormat:@"%d",[self.OrderCountStr intValue] - 1] ;
+    self.WillGetOrderCountStr = [NSString stringWithFormat:@"%d",[self.WillGetOrderCountStr intValue] + 1];
+    //self.willPutOrderCountStr = @"0";
+    [self.segmentVC enumerateBadges:@[ self.OrderCountStr,self.WillGetOrderCountStr,self.willPutOrderCountStr]];
    
 }
 -(void)toSegment2{
-    [self.segmentVC setSelectedAtIndex:2];
-   
+    //[self.segmentVC setSelectedAtIndex:2];
+    self.WillGetOrderCountStr = [NSString stringWithFormat:@"%d",[self.WillGetOrderCountStr intValue] - 1];
+    self.willPutOrderCountStr = [NSString stringWithFormat:@"%d",[self.willPutOrderCountStr intValue] + 1];
+    [self.segmentVC enumerateBadges:@[ self.OrderCountStr,self.WillGetOrderCountStr,self.willPutOrderCountStr]];
+
 }
 -(void)needRe{
     self.segmentVC.segmentView.rediconview.hidden = NO;
@@ -109,8 +115,8 @@
     self.willPutOrderCountStr = @"0";
      [self.segmentVC enumerateBadges:@[ self.OrderCountStr,self.WillGetOrderCountStr,self.willPutOrderCountStr]];
 //    [self isNeedUpdate];
-//    [self getNetWorkForWillGet];
-//    [self getNewWorkForWillPut];
+    [self getNetWorkForWillGet];
+    [self getNewWorkForWillPut];
     NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
     
     // 注册一个监听事件。第三个参数的事件名， 系统用这个参数来区别不同事件。
@@ -253,13 +259,11 @@
     [MHNetWorkTask getWithURL:url withParameter:parameters withHttpHeader:nil withResponseType:ResponseTypeJSON withSuccess:^(id result) {
         NSString *code = [NSString stringWithFormat:@"%@",result[@"code"]];
         if ([code isEqualToString:@"1"]) {
-             NSMutableArray *arr = result[@"value"];
-            if (arr.count >5) {
-                self.WillGetOrderCountStr = @"5+";
-            }else{
-                self.WillGetOrderCountStr = [NSString stringWithFormat:@"%lu",(unsigned long)arr.count];
+        
+          
+            self.WillGetOrderCountStr = [NSString stringWithFormat:@"%@",result[@"msg"]];
                 
-            }
+           
            [self.segmentVC enumerateBadges:@[self.OrderCountStr,self.WillGetOrderCountStr,self.willPutOrderCountStr]];
         }else{
             
@@ -283,13 +287,9 @@
     [MHNetWorkTask getWithURL:url withParameter:parameters withHttpHeader:nil withResponseType:ResponseTypeJSON withSuccess:^(id result) {
         NSString *code = [NSString stringWithFormat:@"%@",result[@"code"]];
         if ([code isEqualToString:@"1"]) {
-            NSMutableArray *arr = result[@"value"];
-            if (arr.count >5) {
-                self.willPutOrderCountStr = @"5+";
-            }else{
-                self.willPutOrderCountStr = [NSString stringWithFormat:@"%lu",(unsigned long)arr.count];
-                
-            }
+           
+            self.willPutOrderCountStr = [NSString stringWithFormat:@"%@",result[@"msg"]];
+           
             [self.segmentVC enumerateBadges:@[self.OrderCountStr,self.WillGetOrderCountStr,self.willPutOrderCountStr]];
         }else{
             

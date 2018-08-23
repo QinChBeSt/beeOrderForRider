@@ -539,11 +539,11 @@
             NSString *typeStr = str[@"flg"];
             if ([typeStr isEqualToString:@"6"]) {
                 [MBManager showBriefAlert:ZBLocalized(@"接单成功,此订单为待取货状态", nil)];
-//                NSNotification *notification =[NSNotification notificationWithName:@"toSegment1" object:nil userInfo:nil];
-//
-//                //通过通知中心发送通知
-//
-//                [[NSNotificationCenter defaultCenter] postNotification:notification];
+                NSNotification *notification =[NSNotification notificationWithName:@"toSegment1" object:nil userInfo:nil];
+
+                //通过通知中心发送通知
+
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
                 
             }
             else if ([typeStr isEqualToString:@"7"]) {
@@ -551,11 +551,11 @@
             }
             else if ([typeStr isEqualToString:@"8"]) {
                 [MBManager showBriefAlert:ZBLocalized(@"取货成功,此订单为待送达状态", nil)];
-//                NSNotification *notification =[NSNotification notificationWithName:@"toSegment2" object:nil userInfo:nil];
-//
-//                //通过通知中心发送通知
-//
-//                [[NSNotificationCenter defaultCenter] postNotification:notification];
+                NSNotification *notification =[NSNotification notificationWithName:@"toSegment2" object:nil userInfo:nil];
+
+                //通过通知中心发送通知
+
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
             }else if ([typeStr isEqualToString:@"9"]){
                 [MBManager showBriefAlert:ZBLocalized(@"确认送达,此订单已完成", nil)];
             }

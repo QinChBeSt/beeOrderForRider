@@ -507,7 +507,7 @@
     [self.navigationController pushViewController:his animated:YES];
 }
 -(void)setModHISdate:(ModelForHisDate *)modHISdate{
-    self.datePicStr =[NSString stringWithFormat:@"฿%@",modHISdate.givepic] ;
+    self.datePicStr =[NSString stringWithFormat:@"฿%.2f",[modHISdate.givepic floatValue]] ;
 
     self.orderCountStr = [NSString stringWithFormat:@"%@%@%@",ZBLocalized(@"共", nil),modHISdate.orderallnum,ZBLocalized(@"笔", nil)];
     self.dateStr = modHISdate.cdate;
@@ -516,7 +516,7 @@
     }else{
         self.jzztStr = ZBLocalized(@"已交账", nil);
     }
-    self.goodsPicStr =[NSString stringWithFormat:@"+฿%@",modHISdate.goodspic];
+    self.goodsPicStr =[NSString stringWithFormat:@"+฿%.2f",[modHISdate.goodspic floatValue]];
     self.SJHDZCStr = [NSString stringWithFormat:@"-฿%@",modHISdate.acpic];
     self.PSFstr = [NSString stringWithFormat:@"+฿%@",modHISdate.beepic];
     self.boxStr = [NSString stringWithFormat:@"+฿%@",modHISdate.boxpic];

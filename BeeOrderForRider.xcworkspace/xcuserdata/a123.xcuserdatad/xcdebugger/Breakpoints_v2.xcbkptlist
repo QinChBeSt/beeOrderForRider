@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeeOrderForRider/HomePage/VC/HomeOrderMissionVC.m"
-            timestampString = "556274130.995724"
+            timestampString = "556625534.191565"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "356"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeeOrderForRider/LeftPage/VC/HistoryDetailOrderVC.m"
-            timestampString = "556424133.531662"
+            timestampString = "556537205.440273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "316"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeeOrderForRider/LeftPage/VC/NewWatchMoneyVC.m"
-            timestampString = "555921513.769572"
+            timestampString = "556537499.160987"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "50"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeeOrderForRider/AppDelegate.m"
-            timestampString = "556107350.903196"
+            timestampString = "556710146.262766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "162"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeeOrderForRider/LeftPage/VC/LeftPageVC.m"
-            timestampString = "556107350.9033149"
+            timestampString = "556619745.692488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "590"
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeeOrderForRider/LeftPage/VC/LeftPageVC.m"
-            timestampString = "556107350.903423"
+            timestampString = "556619745.692911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "598"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeeOrderForRider/LeftPage/VC/LeftPageVC.m"
-            timestampString = "556107350.903529"
+            timestampString = "556619745.6932091"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "588"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeeOrderForRider/LeftPage/VC/LeftPageVC.m"
-            timestampString = "556107350.903639"
+            timestampString = "556619745.693508"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "577"
@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeeOrderForRider/LeftPage/VC/LeftPageVC.m"
-            timestampString = "556107350.9037499"
+            timestampString = "556619745.693784"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "567"
@@ -186,12 +186,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeeOrderForRider/HomePage/VC/HomeOrderMissionVC.m"
-            timestampString = "556274130.996098"
+            timestampString = "556625534.1920511"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "-viewWillAppear:"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "-toSearchHistory"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -201,13 +201,61 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeeOrderForRider/HomePage/VC/HomeOrderMissionVC.m"
-            timestampString = "556274130.996161"
+            filePath = "BeeOrderForRider/HomePage/VC/HomeVC.m"
+            timestampString = "556680094.39161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "-toSearchHistory"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
+            landmarkName = "-getNetWorkForWillGet"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeeOrderForRider/HomePage/VC/HomeVC.m"
+            timestampString = "556680094.4166991"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "-getNetWork"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeeOrderForRider/HomePage/VC/HomeVC.m"
+            timestampString = "556680094.416962"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "-toSegment1"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeeOrderForRider/LoginPage/LoginVC.m"
+            timestampString = "556625534.192353"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
+            landmarkName = "-login"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
