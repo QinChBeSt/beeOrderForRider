@@ -351,7 +351,7 @@
     versonLab.textColor = [UIColor colorWithHexString:BaseTextGrayColor];
     [self.view addSubview:versonLab];
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    versonLab.text =[NSString stringWithFormat:@"V %@",[infoDictionary objectForKey:@"CFBundleShortVersionString"]];
+    versonLab.text =[NSString stringWithFormat:@"V %@ (%@)",[infoDictionary objectForKey:@"CFBundleShortVersionString"],[infoDictionary objectForKey:@"CFBundleVersion"]];
     [versonLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(ws.tableView);
         make.bottom.equalTo(ws.tableView);

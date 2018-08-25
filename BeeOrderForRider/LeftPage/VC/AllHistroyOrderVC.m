@@ -93,8 +93,7 @@
                }else{
                    [MBManager showBriefAlert:responseObject[@"msg"]];
                }
-               NSLog(@"%lu",(unsigned long)self.arrForHIsDate.count);
-               self.arrForHIsDate=(NSMutableArray *)[[self.arrForHIsDate reverseObjectEnumerator] allObjects];
+              
                
                if (self.arrForHIsDate.count == 0) {
                    [self.tableView.mj_header endRefreshing];
@@ -233,7 +232,7 @@
         cell.orderState.text = ZBLocalized(@"已交账", nil);
     }
     cell.dateLab.text = Mod.cdate;
-    cell.picLab.text = [NSString stringWithFormat:@"฿%@", Mod.givepic];;
+    cell.picLab.text = [NSString stringWithFormat:@"฿%.2f", [Mod.givepic floatValue]];;
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

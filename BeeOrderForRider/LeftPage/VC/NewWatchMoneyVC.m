@@ -23,7 +23,7 @@
 @property (nonatomic , strong)NSMutableArray *arrForHIsDate;
 @property (nonatomic , assign)NSInteger todayIndex;
 @property (nonatomic , strong)NSString *isHaveTodayDate;
-
+@property (nonatomic , strong)NSMutableArray *arrForToday;
 @end
 
 @implementation NewWatchMoneyVC
@@ -33,6 +33,13 @@
         
     }
     return _arrForHIsDate;
+}
+-(NSMutableArray *)arrForToday{
+    if (_arrForToday == nil) {
+        _arrForToday = [NSMutableArray array];
+        
+    }
+    return _arrForToday;
 }
 -(void)getnetwork{
     self.isHaveTodayDate = @"no";
@@ -60,14 +67,18 @@
                        NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
                        fmt.dateFormat = @"yyyy-MM-dd";
                        NSString *nowDate = [fmt stringFromDate:now];
-                       i++;
+                      
                        if ([mod.cdate isEqualToString:nowDate]) {
                            self.todayMoneyLab.text =[NSString stringWithFormat:@"฿%.2f",[mod.givepic floatValue]] ;
                            self.addMoeyLab.text =[NSString stringWithFormat:@"฿%.2f", [mod.givepic floatValue]];
                            self.addOrderCountLab.text = [NSString stringWithFormat:@"%@%@%@",ZBLocalized(@"共", nil),mod.orderallnum,ZBLocalized(@"笔", nil)];
                            self.todayIndex = i;
+                           ModelForHisDate *modtoday = [self.arrForHIsDate objectAtIndex:i];
+                           [self.arrForToday addObject:modtoday];
+                           [self.arrForHIsDate removeObjectAtIndex:i];
                            self.isHaveTodayDate = @"yes";
                        }
+                        i++;
                        
                    }
                   
@@ -368,7 +379,7 @@
         [MBManager showBriefAlert:ZBLocalized(@"暂无今日数据", nil)];
     }else{
         DateDeatilOrderVC *dateDetaul = [[DateDeatilOrderVC alloc]init];
-        ModelForHisDate *mod = [self.arrForHIsDate objectAtIndex:self.arrForHIsDate.count - self.todayIndex];
+        ModelForHisDate *mod = [self.arrForToday objectAtIndex:0];
         dateDetaul.modHISdate = mod;
         dateDetaul.isToday = @"yes";
         [self.navigationController pushViewController:dateDetaul animated:YES];
